@@ -7,6 +7,7 @@ public abstract class Tamagotchi {
 	private int energie ;
 	private int moral;
 	private Lieu lieu ;
+	private Sauvegarde sauvegarde;
 	
 
 	public String getNom() {
