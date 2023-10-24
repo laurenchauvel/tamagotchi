@@ -32,7 +32,7 @@ public abstract class Animal extends Tamagotchi {
 
       //setter nourriture
       public void setNourriture(int n) {
-        nourriture += n;
+        nourriture = n;
       }
 
       //getter toilette
@@ -42,7 +42,7 @@ public abstract class Animal extends Tamagotchi {
 
       //setter toilette
       public void setToilette(int n) {
-        toilette += n;
+        toilette = n;
       }
 
       //getter hygiene
@@ -52,43 +52,59 @@ public abstract class Animal extends Tamagotchi {
 
       //setter hygiene
       public void setHygiene(int n) {
-        hygiene += n;
+        hygiene = n;
+      }
+
+      //methode de mise a jour hygiene
+      public void majHygiene(int n) {
+          if (n > 0) {
+              if (getHygiene() + n <= 100) {
+                  setHygiene(getHygiene() + n);
+              }
+              else {
+                  setHygiene(100);
+              }
+          }
+          else {
+              if (getHygiene() - n >= 0)
+                  setHygiene(getHygiene() - n);
+              else {
+                  setHygiene(0);
+              }
+          }
       }
 
       //methode pour manger
       public void manger(int n) {
         if (getNourriture() + n <= 100) {
-            setNourriture(n);
+            setNourriture(getNourriture() + n);
         }
         else {
-            setNourriture(100 - getNourriture());
+            setNourriture(100);
         }
       }
 
       //methode pour se laver
       public void seLaver(int n) {
-        if (getHygiene() + n <= 100) {
-            setHygiene(n);
-        }
-        else {
-            setHygiene(100 - getHygiene());
-        }
+            majHygiene(n);
       }
 
       //methode pour faire du sport
       public void faireSport(int n) {
-        if (getEnergie() >= 20) {
-            setEnergie(n);
-        }
-        if (getHygiene() >= 20) {
-            setHygiene(n);
-        }
-        if (getMoral() + n <= 100) {
-            setMoral(n);
-        }
-        else {
-            set
-        }
+          if (getEnergie() >= 20) {
+              //maj energie
+              setEnergie(getEnergie() - n);
+              //maj hygiene
+              majHygiene(-n);
+              //maj morale
+              if (super.getMoral() + n <= 100) {
+                  super.setMoral(getMoral() + n);
+              }
+              else {
+                  super.setMoral(100);
+              }
+          }
       }
+
 
 }
