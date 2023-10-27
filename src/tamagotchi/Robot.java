@@ -16,7 +16,7 @@ public class Robot extends Tamagotchi{
   public int getBatterie(int n){
     return batterie;
   }
-  public void setBatterie(){
+  public void setBatterie(int n){
     batterie = n;
   }
 }
