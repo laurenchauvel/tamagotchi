@@ -13,7 +13,7 @@ public class Robot extends Tamagotchi{
   public void enVeille(int n){
     //TODO
   }
-  public int getBatterie(int n){
+  public int getBatterie(){
     return batterie;
   }
   public void setBatterie(int n){
