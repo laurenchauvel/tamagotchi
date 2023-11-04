@@ -50,12 +50,54 @@ public abstract class Tamagotchi {
 		this.lieu = lieu;
 	}
 	
-	public abstract void regarderTV();
+	public abstract void regarderTV(int n);
 	
-	public abstract void jouer();
+	public abstract void jouer(int n);
 	
-	public abstract void jardinage();
+	public abstract void jardinage(int n);
 	
 	public abstract void sauvegarde();
+
+	//=================================================================================================================
+
+	/**
+	 * methode optionnelles
+	 */
+
+	//methode mise a jour de Moral
+	public void majMoral(int n) {
+		if (n > 0) {
+			if (getMoral() + n <= 100) {
+				setMoral(getMoral() + n);
+			} else {
+				setMoral(100);
+			}
+		} else {
+			if (getMoral() - n >= 0) {
+				setMoral(getMoral() - n);
+			} else {
+				setMoral(0);
+			}
+		}
+	}
+
+	//=================================================================================================================
+
+	//methode mise a jour de Energie
+	public void majEnergie(int n) {
+		if (n > 0) {
+			if (getEnergie() + n <= 100) {
+				setEnergie(getEnergie() + n);
+			} else {
+				setEnergie(100);
+			}
+		} else {
+			if (getEnergie() - n >= 0) {
+				setEnergie(getEnergie() - n);
+			} else {
+				setEnergie(0);
+			}
+		}
+	}
 	
 }
