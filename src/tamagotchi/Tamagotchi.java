@@ -2,13 +2,31 @@ package tamagotchi;
 
 public abstract class Tamagotchi {
 
+	/**
+	 * attributs
+	 */
+
 	private String nom ;
 	private int vie;
 	private int energie ;
 	private int moral;
 	private Lieu lieu ;
 	private Sauvegarde sauvegarde;
-	
+
+	//=================================================================================================================
+
+	/**
+	 * le Constructeur
+	 */
+
+	public Tamagotchi(String n , Lieu l) {
+		setNom(n);
+		setVie(100);
+		setEnergie(100);
+		setMoral(100);
+		seDeplacer(l);
+	}
+	//=================================================================================================================
 
 	public String getNom() {
 		return nom;

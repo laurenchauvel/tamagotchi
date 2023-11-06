@@ -11,14 +11,8 @@ public class Oiseau extends Animal {
     /**
      * Constructeur
      */
-    public Oiseau(String n) {
-        setVie(100);
-        setHygiene(100);
-        setEnergie(100);
-        setMoral(100);
-        setNourriture(100);
-        setToilette(100);
-        setNom(n);
+    public Oiseau(String n , Lieu l) {
+        super(n,l);
         setCri(Cri.Chanter);
         setSon(null);
     }

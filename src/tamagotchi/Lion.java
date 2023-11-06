@@ -1,5 +1,4 @@
 package tamagotchi;
-import java.io.*;
 
 public class Lion extends Animal {
 
@@ -12,14 +11,8 @@ public class Lion extends Animal {
     /**
      * Constructeur
      */
-    public Lion(String n) {
-        setVie(100);
-        setHygiene(100);
-        setEnergie(100);
-        setMoral(100);
-        setNourriture(100);
-        setToilette(100);
-        setNom(n);
+    public Lion(String n , Lieu l) {
+        super(n,l);
         setCri(Cri.Rugir);
         setSon(null);
     }

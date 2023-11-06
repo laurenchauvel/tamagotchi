@@ -8,7 +8,7 @@ import java.awt.event.WindowEvent;
 
 public class Sauvegarde {
 
-  public static void sauvegarder(Tamagotchi tamagotchi, String fichier) {
+    public static void sauvegarder(Tamagotchi tamagotchi, String fichier) {
         try {
             //flux de sortie de fichier pour écrire des données dans un fichier
             FileOutputStream fileOutputStream = new FileOutputStream(fichier);
@@ -25,11 +25,13 @@ public class Sauvegarde {
         }
     }
 
-  public static void sauvegardeAutomatique(Tamagotchi tamagotchi, String fichier) {
+    public static void sauvegardeAutomatique(Tamagotchi tamagotchi, String fichier) {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             // exécuté lors de la fermeture de l'application
-            sauvegarderTamagotchi(tamagotchi, fichier);
+            sauvegarder(tamagotchi, fichier);
         }));
     }
+
+
 
 }

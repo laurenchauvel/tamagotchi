@@ -1,5 +1,5 @@
 package tamagotchi;
-import java.io.*;
+
 public class Chien extends Animal {
 
     /**
@@ -12,14 +12,8 @@ public class Chien extends Animal {
      * Cosntructeur
      * @param n
      */
-    public Chien(String n) {
-        setVie(100);
-        setHygiene(100);
-        setEnergie(100);
-        setMoral(100);
-        setNourriture(100);
-        setToilette(100);
-        setNom(n);
+    public Chien(String n , Lieu l) {
+        super(n,l);
         setCri(Cri.Aboyer);
         setSon(null);
     }
@@ -29,6 +23,7 @@ public class Chien extends Animal {
     /**
      * methodes
      */
+
     @Override
     public void sauvegarde() {
 

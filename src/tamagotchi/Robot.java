@@ -12,12 +12,9 @@ public class Robot extends Tamagotchi{
     /**
      * Constructeur
      */
-    public Robot(String n) {
-        setVie(100);
-        setEnergie(100);
-        setMoral(100);
+    public Robot(String n , Lieu l) {
+        super(n,l);
         setBatterie(100);
-        setNom(n);
     }
 
     //=================================================================================================================

@@ -1,4 +1,5 @@
 package tamagotchi;
+
 import java.io.*;
 
 public abstract class Animal extends Tamagotchi {
@@ -24,6 +25,20 @@ public abstract class Animal extends Tamagotchi {
 
     //attribut du fichier son pour le cri
     private File son;
+
+    //=================================================================================================================
+
+    /**
+     * le Constructeur
+     *
+     * @param n
+     */
+    public Animal(String n , Lieu l) {
+        super(n,l);
+        setHygiene(100);
+        setNourriture(100);
+        setToilette(100);
+    }
 
     //=================================================================================================================
 
@@ -248,9 +263,6 @@ public abstract class Animal extends Tamagotchi {
             System.out.println("Ressources insuffisantes");
         }
     }
-
-
-
 
 
 
