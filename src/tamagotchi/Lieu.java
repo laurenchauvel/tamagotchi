@@ -3,10 +3,10 @@ package tamagotchi;
 import java.io.File;
 import java.util.ArrayList;
 
-//Les differentes pieces du jeu
-enum Piece{Chambre, Salon, Cuisine, SDB, Jardin} ;	//SDB = Salle de bain
-
 public class Lieu {
+	
+	//Les differentes pieces du jeu
+	public enum Piece{Chambre, Salon, Cuisine, SDB, Jardin} ;	//SDB = Salle de bain
 	
 	//Piece courante
 	private Piece piece;
