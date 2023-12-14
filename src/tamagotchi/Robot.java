@@ -65,27 +65,12 @@ public class Robot extends Tamagotchi{
     //=================================================================================================================
 
     @Override
-    public void regarderTV(int n) {
-        //maj positive
-        majMoral(n);
-        //maj negative
-        n *= -1;
-        majEnergie(n);
-        majBatterie(n);
-    }
-
-    //=================================================================================================================
-
-    @Override
-    public void jouer(int n) {
-        if (getEnergie() >= n && getBatterie() >- n) {
-            //maj positive
-            majMoral(n);
-            //maj negative
-            n *= -1;
-            majBatterie(n);
-            majEnergie(n);
-        } else {
+    public void regarderTV() {
+    	if (getEnergie() >= 10) {
+	        majMoral(30);
+	        majEnergie(-5);
+	        majBatterie(-10);
+    	} else {
             System.out.println("Ressources insuffisantes");
         }
     }
@@ -93,14 +78,24 @@ public class Robot extends Tamagotchi{
     //=================================================================================================================
 
     @Override
-    public void jardinage(int n) {
-        if (getEnergie() >= n && getBatterie() >- n) {
-            //maj positive
-            majMoral(n);
-            //maj negative
-            n *= -1;
-            majBatterie(n);
-            majEnergie(n);
+    public void jouer() {
+	    if (getEnergie() >= 35 && getBatterie() >= 30) {
+	        majMoral(25);
+	        majEnergie(-30);
+	        majBatterie(-20);
+	    } else {
+	        System.out.println("Ressources insuffisantes");
+	    }
+    }
+
+    //=================================================================================================================
+
+    @Override
+    public void jardinage() {
+    	if (getEnergie() >= 20 && getBatterie() >= 30) {
+            majMoral(15);
+            majEnergie(-10);
+            majBatterie(-20);
         } else {
             System.out.println("Ressources insuffisantes");
         }

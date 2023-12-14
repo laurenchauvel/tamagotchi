@@ -68,11 +68,11 @@ public abstract class Tamagotchi {
 		this.lieu = lieu;
 	}
 	
-	public abstract void regarderTV(int n);
+	public abstract void regarderTV();
 	
-	public abstract void jouer(int n);
+	public abstract void jouer();
 	
-	public abstract void jardinage(int n);
+	public abstract void jardinage();
 	
 	public abstract void sauvegarde();
 

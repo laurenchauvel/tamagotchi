@@ -26,6 +26,13 @@ class TestChien {
 	}
 	
 	@Test
+	void TestDormir() {
+		kengo.setEnergie(0);
+		kengo.dormir();
+		assertEquals(20, kengo.getEnergie());
+	}
+	
+	@Test
 	void TestVaChercher() {
 		kengo.vaChercher();
 		System.out.println(kengo.getHygiene());
