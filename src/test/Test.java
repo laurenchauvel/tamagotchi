@@ -1,10 +1,30 @@
-package test;
+package src.test;
 
 public class Test {
 
-	public static void main(String[] args) {
-		System.out.println("testsss");
+    public static void main(String[] args) {
+        System.out.println("testsss");
 
-	}
+    }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

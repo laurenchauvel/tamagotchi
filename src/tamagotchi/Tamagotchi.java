@@ -1,4 +1,4 @@
-package tamagotchi;
+package src.tamagotchi;
 
 public abstract class Tamagotchi {
 
