@@ -1,4 +1,4 @@
-package src.tamagotchi;
+package tamagotchi;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

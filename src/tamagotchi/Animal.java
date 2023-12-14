@@ -1,4 +1,4 @@
-package src.tamagotchi;
+package tamagotchi;
 
 import java.io.*;
 
@@ -115,8 +115,8 @@ public abstract class Animal extends Tamagotchi {
                 setHygiene(100);
             }
         } else {
-            if (getHygiene() - n >= 0) {
-                setHygiene(getHygiene() - n);
+            if (getHygiene() + n >= 0) {
+                setHygiene(getHygiene() + n);
             } else {
                 setHygiene(0);
             }
@@ -135,8 +135,8 @@ public abstract class Animal extends Tamagotchi {
                 setNourriture(100);
             }
         } else {
-            if (getNourriture() - n >= 0) {
-                setNourriture(getNourriture() - n);
+            if (getNourriture() + n >= 0) {
+                setNourriture(getNourriture() + n);
             } else {
                 setNourriture(0);
             }
@@ -154,8 +154,8 @@ public abstract class Animal extends Tamagotchi {
                 setToilette(100);
             }
         } else {
-            if (getToilette() - n >= 0) {
-                setToilette(getToilette() - n);
+            if (getToilette() + n >= 0) {
+                setToilette(getToilette() + n);
             } else {
                 setToilette(0);
             }

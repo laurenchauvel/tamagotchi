@@ -1,4 +1,4 @@
-package src.tamagotchi;
+package tamagotchi;
 
 public class Robot extends Tamagotchi{
 
@@ -31,8 +31,8 @@ public class Robot extends Tamagotchi{
                 setBatterie(100);
             }
         } else {
-            if (getBatterie() - n >= 0) {
-                setBatterie(getBatterie() - n);
+            if (getBatterie() + n >= 0) {
+                setBatterie(getBatterie() + n);
             } else {
                 setBatterie(0);
             }

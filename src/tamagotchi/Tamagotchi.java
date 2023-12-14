@@ -1,4 +1,4 @@
-package src.tamagotchi;
+package tamagotchi;
 
 public abstract class Tamagotchi {
 
@@ -91,8 +91,8 @@ public abstract class Tamagotchi {
 				setMoral(100);
 			}
 		} else {
-			if (getMoral() - n >= 0) {
-				setMoral(getMoral() - n);
+			if (getMoral() + n >= 0) {
+				setMoral(getMoral() + n);
 			} else {
 				setMoral(0);
 			}
@@ -110,8 +110,8 @@ public abstract class Tamagotchi {
 				setEnergie(100);
 			}
 		} else {
-			if (getEnergie() - n >= 0) {
-				setEnergie(getEnergie() - n);
+			if (getEnergie() + n >= 0) {
+				setEnergie(getEnergie() + n);
 			} else {
 				setEnergie(0);
 			}

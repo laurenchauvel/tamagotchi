@@ -1,4 +1,4 @@
-package src.tamagotchi;
+package tamagotchi;
 
 public class Lion extends Animal {
 

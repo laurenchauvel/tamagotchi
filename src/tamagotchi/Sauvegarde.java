@@ -1,4 +1,4 @@
-package src.tamagotchi;
+package tamagotchi;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
