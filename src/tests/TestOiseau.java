@@ -1,11 +1,8 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.File;
-
 import org.junit.jupiter.api.Test;
-
 import tamagotchi.*;
 import tamagotchi.Lieu.Piece;
 
@@ -20,6 +17,7 @@ class TestOiseau {
 		assertEquals("Bibi", bibi.getNom());
 		assertEquals(l, bibi.getLieu());
 	}
+
 	@Test
 	void TestVoler() {
 		bibi.voler();
@@ -49,71 +47,98 @@ class TestOiseau {
         assertEquals(100, bibi.getHygiene());   
     }
     
-    /*@Test
+    @Test
     void TestDormir() {
     
         bibi.dormir();
         System.out.println("energie" + bibi.getEnergie());
-        //assertEquals(100, bibi.getEnergie());
-    }*/
+        assertEquals(100, bibi.getEnergie());
+    }
     
-    
+    int E = bibi.getEnergie();
+    int M = bibi.getMoral();
+    int N = bibi.getNourriture();
+    int H = bibi.getHygiene();
+   
 
     @Test
-    void TestRegarderTV() {
-    	int E = bibi.getEnergie();
-        int M = bibi.getMoral();
-        int N = bibi.getNourriture();
-        int H = bibi.getHygiene();
-        
+    void TestRegarderTV() {    
+
         bibi.regarderTV();
- 
         
         if (E >= 10) {
-            //assertEquals(M + 30, bibi.getMoral());
+        	assertEquals(100, bibi.getMoral());
             assertEquals(E - 5, bibi.getEnergie());
             assertEquals(N - 10, bibi.getNourriture());
             assertEquals(H - 10, bibi.getHygiene());
         } else {
             
-            assertEquals(M, bibi.getMoral());
+        	assertEquals(M, bibi.getMoral());
             assertEquals(E, bibi.getEnergie());
             assertEquals(N, bibi.getNourriture());
             assertEquals(H, bibi.getHygiene());
         }
     }
-/*
- * @Test
+   
+    @Test
     void TestFaireSport() {
-        bibi.faireSport();
+    	
+    	bibi.faireSport();
         
+        if (E >= 20 && N >= 20) {
+           
+            assertEquals(100, bibi.getMoral());
+            assertEquals(E - 20, bibi.getEnergie());
+            assertEquals(N - 20, bibi.getNourriture());
+            assertEquals(H - 30, bibi.getHygiene());
+        } else {
+            
+        	assertEquals(M, bibi.getMoral());
+            assertEquals(E, bibi.getEnergie());
+            assertEquals(N, bibi.getNourriture());
+            assertEquals(H, bibi.getHygiene());
+        }
     }
+    
+    
     @Test
     void TestJardinage() {
-        bibi.jardinage(10);
-        System.out.println("Jardinage");
-        System.out.println(bibi.getNourriture()+ " "+ bibi.getEnergie() +" "+bibi.getHygiene()+
-        		" "+bibi.getMoral());
-      
-        assertEquals(80, bibi.getNourriture());
-		assertEquals(80, bibi.getEnergie());
-		assertEquals(80, bibi.getHygiene());
-		assertEquals(100, bibi.getMoral());
+    
+        bibi.jardinage();
+        
+        if (E >= 20 && N >= 30) {
+            assertEquals(100, bibi.getMoral());
+            assertEquals(E - 10, bibi.getEnergie());
+            assertEquals(N - 20, bibi.getNourriture());
+            assertEquals(H - 30, bibi.getHygiene());
+            
+        } else {
+            
+        	assertEquals(M, bibi.getMoral());
+            assertEquals(E, bibi.getEnergie());
+            assertEquals(N, bibi.getNourriture());
+            assertEquals(H, bibi.getHygiene());
+        }
     }
 
     @Test
     void TestJouer() {
-        bibi.setEnergie(100);
-        bibi.setNourriture(100);
-        bibi.setHygiene(100);
-        bibi.setMoral(100);
-        bibi.jouer(10);
-        System.out.println(bibi.getNourriture()+ " "+ bibi.getEnergie() +" "+bibi.getHygiene()+
-        		" "+bibi.getMoral());
-        assertEquals(90, bibi.getNourriture());
-		assertEquals(90, bibi.getEnergie());
-		assertEquals(90, bibi.getHygiene());
-		assertEquals(100, bibi.getMoral());
+      
+        bibi.jouer();
+        
+        if (E >= 35 && N >= 30) {
+            assertEquals(100, bibi.getMoral());
+            assertEquals(E - 30, bibi.getEnergie());
+            assertEquals(N - 20, bibi.getNourriture());
+            assertEquals(H - 20, bibi.getHygiene());
+            
+        } else {
+            
+        	assertEquals(M, bibi.getMoral());
+            assertEquals(E, bibi.getEnergie());
+            assertEquals(N, bibi.getNourriture());
+            assertEquals(H, bibi.getHygiene());
+        }
     }
-	*/
+	
 }
