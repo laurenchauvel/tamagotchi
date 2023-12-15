@@ -92,7 +92,7 @@ public class Robot extends Tamagotchi{
 
     @Override
     public void jardinage() {
-    	if (getEnergie() >= 20 && getBatterie() >= 30) {
+    	if (getEnergie() > 10 && getBatterie() > 20) {
             majMoral(15);
             majEnergie(-10);
             majBatterie(-20);
