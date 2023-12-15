@@ -81,6 +81,25 @@ public abstract class Tamagotchi {
 	/**
 	 * methode optionnelles
 	 */
+	
+	//methode mise a jour de la vie
+	public void majVie(int n) {
+		if (n > 0) {
+			if (getVie() + n <= 100) {
+				setVie(getVie() + n);
+			} else {
+				setVie(100);
+			}
+		} else {
+			if (getVie() + n >= 0) {
+				setVie(getVie() + n);
+			} else {
+				setVie(0);
+			}
+		}
+	}
+	
+	//=================================================================================================================
 
 	//methode mise a jour de Moral
 	public void majMoral(int n) {
@@ -99,7 +118,7 @@ public abstract class Tamagotchi {
 		}
 	}
 
-	//=================================================================================================================
+	//==============================false===================================================================================
 
 	//methode mise a jour de Energie
 	public void majEnergie(int n) {
@@ -117,5 +136,101 @@ public abstract class Tamagotchi {
 			}
 		}
 	}
+	
+	//=================================================================================================================
+	
+	/*
+	 * a mettre dans le main
+	 */
+	//methode utile pour la perte de vie progressive
+	public static void wait(int sec) {
+		try {
+			Thread.sleep(sec * 1000);
+		} catch (InterruptedException e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+	//=================================================================================================================
+	
+	//methode de perte de vie
+	/*
+	 * toutes les 180 sec , le tamagotchi perd 1 pv
+	 * si on ne s'occupe pas de lui il meurt au bout de 5h
+	 */
+	public void perteDeVie() {
+		while(!estMort()) {
+			majVie(-1);
+			System.out.println(getNom() + " : " +getVie());
+			wait(180);
+		}
+	}
+	
+	
+	//=================================================================================================================
+	
+	//methode perte de vie progressive
+	public void mourirDeVieillesse() {
+		perteDeVie();
+		if (estMort()) {
+			System.out.println(getNom() + " a succombé au poids de sa pauvre existence");
+		}
+	}
+	
+	//=================================================================================================================
+	
+	//methode qui signale si le tamagotchi est mort
+	public boolean estMort() {
+		if (getVie() == 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	//=================================================================================================================
+	
+	//methode perte de morale progressive
+	public void perteDeMoral() {
+		while(!pasDeMoral()) {
+			majMoral(-2);
+			System.out.println(getNom() + " : " + getMoral());
+			wait(2);
+		}
+		if (pasDeMoral()) {
+			System.out.println(getNom() + " n'est pas de bonne humeur");
+		}
+	}
+	
+	//=================================================================================================================
+	
+	//methode qui signale si le tamagotchi a du morale
+	public boolean pasDeMoral() {
+		if (getMoral() == 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	//=================================================================================================================
+	
+	//methode pour mourir de depression
+	public void mourirDeDepression() {
+		while (pasDeMoral()) {
+			perteDeVie();
+		}
+		if (estMort()) {
+			System.out.println(getNom() + " a succombé face au poids de ses problemes");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

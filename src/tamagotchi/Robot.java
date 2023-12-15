@@ -79,7 +79,7 @@ public class Robot extends Tamagotchi{
 
     @Override
     public void jouer() {
-	    if (getEnergie() >= 35 && getBatterie() >= 30) {
+	    if (getEnergie() > 30 && getBatterie() > 20) {
 	        majMoral(25);
 	        majEnergie(-30);
 	        majBatterie(-20);

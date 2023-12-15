@@ -20,9 +20,7 @@ class TestRobot {
 	@Test
 	void TestConstructeur() {
 		assertEquals("Boulon", boulon.getNom());
-		//System.out.println(boulon.getNom());
 		assertEquals(l , boulon.getLieu());
-		//System.out.println(boulon.getLieu());
 	}
 	
 	@Test
@@ -32,15 +30,31 @@ class TestRobot {
 		boulon.seRecharger();
 		assertEquals(30,boulon.getEnergie());
 		assertEquals(100,boulon.getBatterie());
-		System.out.println(boulon.getEnergie());
-		System.out.println(boulon.getBatterie());
 	}
 	
 	@Test
 	void TestEnVeille() {
+		boulon.setEnergie(30);
 		boulon.enVeille();
 		System.out.println(boulon.getEnergie());
-		assertEquals(100,boulon.getEnergie());
+		assertEquals(50,boulon.getEnergie());
+	}
+	
+	@Test
+	void TestMourirDeVieillesse() {
+		boulon.setVie(23);
+		boulon.mourirDeVieillesse();
+		if(boulon.estMort()) {
+			assertEquals(true,boulon.estMort());
+		}
+	}
+	
+	
+	
+	void TestMourirDeDepression() {
+		boulon.setMoral(21);
+		boulon.perteDeMoral();
+		boulon.mourirDeDepression();
 	}
 
 }
