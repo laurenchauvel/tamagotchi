@@ -42,16 +42,16 @@ public class Robot extends Tamagotchi{
     //=================================================================================================================
     
     //methode equivalente a manger
-    public void seRecharger(int n) {
-        majBatterie(n);
-        majEnergie(n);
+    public void seRecharger() {
+        majBatterie(30);
+        majEnergie(10);
     }
 
     //=================================================================================================================
 
     //methode equivalente a dormir
-    public void enVeille(int n){
-        majEnergie(n);
+    public void enVeille(){
+        majEnergie(20);
     }
 
     //=================================================================================================================
