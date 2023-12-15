@@ -243,7 +243,7 @@ public abstract class Animal extends Tamagotchi {
     }
 
     //=================================================================================================================
-
+    //Méthode jouer
     @Override
     public void jouer() {
         if (getEnergie() >= 35 && getNourriture() >= 30) {
@@ -256,6 +256,8 @@ public abstract class Animal extends Tamagotchi {
             System.out.println("Ressources insuffisantes");
         }
     }
+    
+    
 
 
 
