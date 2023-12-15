@@ -2,6 +2,8 @@ package tamagotchi;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,17 +12,28 @@ public class EcranDemarrage extends JFrame {
     private CardLayout cardLayout = new CardLayout();
     private JPanel cardPanel = new JPanel(cardLayout);
     private Controleur controleur = new Controleur();
-    private ImageIcon iconJouer = new ImageIcon("/chemin/vers/votre/image/jouer.png"); // Assurez-vous que le chemin est correct
-    private ImageIcon iconFond = new ImageIcon("/chemin/vers/votre/image/fond.png"); // Assurez-vous que le chemin est correct
+    private double angle = 0; // L'angle de rotation pour l'icône Tamagotchi
 
     public EcranDemarrage() {
         setTitle("Bienvenue dans Dark Tamagotchi");
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Plein écran
+    
+        // Utilisez les dimensions réelles de votre image ici
+        setSize(new Dimension(1920, 1080)); // Remplacez 800 par la largeur et 600 par la hauteur de votre image
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setUndecorated(true); // Enlève la barre de titre et les bordures
+        
+
         initStartScreen();
+        initMenu();
+        initAnimalRobotSelection();
+        initAnimation(); // Initialiser l'animation
+
         setContentPane(cardPanel);
-        setVisible(true);
+        cardPanel.add(initStartScreen(), "StartScreen");
+        cardPanel.add(initMenu(), "Menu");
+        cardPanel.add(initAnimalRobotSelection(), "AnimalRobotSelection");
+
+        setContentPane(cardPanel);
+        cardLayout.show(cardPanel, "StartScreen"); // Montre l'écran de démarrage en premier
     }
 
 
@@ -51,51 +64,34 @@ public class EcranDemarrage extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(50, 150, 50, 150));
         add(panel);
     }
-    private void initStartScreen() {
-        // Utilisez OverlayLayout pour superposer le bouton sur l'image
-        JPanel startScreen = new JPanel();
-        startScreen.setLayout(new OverlayLayout(startScreen));
-    
-        // Configurez l'image de fond pour remplir la fenêtre
-        ImageIcon backgroundIcon = new ImageIcon("/chemin/vers/votre/image/fullscreen.png");
-        JLabel backgroundLabel = new JLabel(backgroundIcon);
-        // Assurez-vous que l'image est redimensionnée en conséquence
-        backgroundLabel.setSize(getWidth(), getHeight());
-        backgroundLabel.setLayout(null); // Pas de layout pour pouvoir placer le bouton exactement où vous voulez
-    
-        // Configurez le bouton jouer
-        ImageIcon jouerIcon = new ImageIcon("/chemin/vers/votre/image/jouer.png");
-        JButton btnJouer = new JButton(jouerIcon);
-        btnJouer.setBorderPainted(false);
-        btnJouer.setContentAreaFilled(false);
-        btnJouer.setFocusPainted(false);
-        btnJouer.addActionListener(e -> ouvrirJeu());
-        // Calculez la position et la taille après que le composant est ajouté et que la fenêtre est affichée
-        btnJouer.addComponentListener(new ComponentAdapter() {
-        @Override
-        public void componentResized(ComponentEvent e) {
-        int boutonLargeur = jouerIcon.getIconWidth();
-        int boutonHauteur = jouerIcon.getIconHeight();
-        int xPosition = (getWidth() - boutonLargeur) / 2;  // Centré en largeur
-        int yPosition = getHeight() - boutonHauteur - 100; // 100 pixels au-dessus du bas de la fenêtre
-        btnJouer.setBounds(xPosition, yPosition, boutonLargeur, boutonHauteur);
-            }
-            });
-    
-        // Ajoutez le bouton jouer sur l'image de fond
-        backgroundLabel.add(btnJouer);
-        startScreen.add(backgroundLabel);
-    
-        // Ajoutez le startScreen au cardPanel
-        cardPanel.add(startScreen, "StartScreen");
+    private JPanel initStartScreen() {
+        // Créez un JPanel avec BorderLayout pour contenir l'image et le bouton
+        JPanel startScreen = new JPanel(new BorderLayout());
+        
+        // Chargez l'image de fond et ajustez-la à la taille de la fenêtre
+        ImageIcon backgroundIcon = new ImageIcon("/home/salma/Downloads/1_Tama.jpg");
+        Image backgroundImg = backgroundIcon.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
+        JLabel backgroundLabel = new JLabel(new ImageIcon(backgroundImg));
+        
+        // Créez un JPanel transparent pour contenir le bouton "Jouer"
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false); // Rendez-le transparent
+        JButton btnJouer = new JButton("Jouer");
+        btnJouer.addActionListener(e -> cardLayout.show(cardPanel, "Menu"));
+        buttonPanel.add(btnJouer);
+        
+        // Ajoutez le JLabel avec l'image au centre du startScreen
+        startScreen.add(backgroundLabel, BorderLayout.CENTER);
+        
+        // Ajoutez le JPanel avec le bouton au sud du startScreen
+        startScreen.add(buttonPanel, BorderLayout.SOUTH);
+        
+        return startScreen;
     }
+    
+    
     
 
-    private void ouvrirJeu() {
-        InterfaceJeu jeu = new InterfaceJeu(controleur); // Remplacez par votre logique pour ouvrir la nouvelle fenêtre
-        jeu.setVisible(true);
-        this.dispose(); // Fermez l'écran de démarrage
-    }
     
     
     private void initSelectionPanel() {
@@ -140,7 +136,7 @@ public class EcranDemarrage extends JFrame {
     public void changeView(String viewName) {
         cardLayout.show(cardPanel, viewName);
     }
-    private void initMenu() {
+    private JPanel initMenu() {
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
         menuPanel.setBackground(Color.DARK_GRAY);
@@ -166,6 +162,9 @@ public class EcranDemarrage extends JFrame {
         menuPanel.add(btnRegleJeu);
         menuPanel.add(btnQuitter);
         cardPanel.add(menuPanel, "Menu");
+
+        return menuPanel;
+
     }
     private void initTamagotchiSelectionPanel() {
         JPanel tamagotchiSelectionPanel = new JPanel();
@@ -188,7 +187,7 @@ public class EcranDemarrage extends JFrame {
         // Changez de panneau ou effectuez d'autres actions nécessaires
     }
     
-    private void initAnimalRobotSelection() {
+    private JPanel initAnimalRobotSelection() {
         JPanel selectionPanel = new JPanel();
         
         JButton btnAnimal = new JButton("Animal Tamagotchi");
@@ -200,6 +199,9 @@ public class EcranDemarrage extends JFrame {
         selectionPanel.add(btnRobot);
 
         cardPanel.add(selectionPanel, "AnimalRobotSelection");
+
+        return selectionPanel;
+
     }
     private void choisirRobot() {
         // Remplacez avec la logique appropriée pour choisir un robot
@@ -231,13 +233,12 @@ public class EcranDemarrage extends JFrame {
     }
     
     public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            EcranDemarrage frame = new EcranDemarrage();
-            frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Plein écran
-            frame.setUndecorated(true); // Enlève la barre de titre et les bordures
-            frame.setVisible(true);
+        // La méthode main pour exécuter l'application
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new EcranDemarrage().setVisible(true);
+            }
         });
     }
-    
     }
 
