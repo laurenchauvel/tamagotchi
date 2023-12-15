@@ -182,7 +182,7 @@ public abstract class Animal extends Tamagotchi {
     //methode pour faire du sport
     public void faireSport() {
         //maj energie
-        if (getEnergie() >= 20 && getNourriture() >= 20) {
+        if (getEnergie() > 20 && getNourriture() > 20) {
             majMoral(20);
             majNourriture(-20);
             majHygiene(-30);
@@ -201,9 +201,9 @@ public abstract class Animal extends Tamagotchi {
     //=================================================================================================================
 
     public void regarderTV() {
-    	if (getEnergie() >= 10) {
-	        majMoral(30);
-	        majEnergie(-5);
+    	if (getNourriture() > 10) {
+	        majMoral(15);
+	        majEnergie(5);
 	        majNourriture(-10);
 	        majHygiene(-10);
     	} else {
@@ -232,10 +232,10 @@ public abstract class Animal extends Tamagotchi {
 
     @Override
     public void jardinage() {
-        if (getEnergie() >= 20 && getNourriture() >= 30) {
+        if (getEnergie() > 15 && getNourriture() > 20) {
             majMoral(15);
             majNourriture(-20);
-            majEnergie(-10);
+            majEnergie(-15);
             majHygiene(-30);
         } else {
             System.out.println("Ressources insuffisantes");
@@ -246,7 +246,7 @@ public abstract class Animal extends Tamagotchi {
     //Méthode jouer
     @Override
     public void jouer() {
-        if (getEnergie() >= 35 && getNourriture() >= 30) {
+        if (getEnergie() > 30 && getNourriture() > 20) {
             //changement positif
             majMoral(25);
             majNourriture(-20);
