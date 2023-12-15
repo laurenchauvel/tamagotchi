@@ -66,9 +66,9 @@ public class Robot extends Tamagotchi{
 
     @Override
     public void regarderTV() {
-    	if (getEnergie() >= 10) {
-	        majMoral(30);
-	        majEnergie(-5);
+    	if (getBatterie() > 10) {
+	        majMoral(15);
+	        majEnergie(5);
 	        majBatterie(-10);
     	} else {
             System.out.println("Ressources insuffisantes");
