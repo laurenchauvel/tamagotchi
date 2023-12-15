@@ -30,12 +30,33 @@ class TestChien {
 		kengo.setEnergie(0);
 		kengo.dormir();
 		assertEquals(20, kengo.getEnergie());
+		
+		kengo.setEnergie(90);
+		kengo.dormir();
+		assertEquals(100, kengo.getEnergie());
+		
+	}
+	
+	@Test
+	void TestRegarderTv() {
+		kengo.setEnergie(5);
+		kengo.regarderTV();
+		assertEquals(5, kengo.getEnergie());
+		
+		kengo.setEnergie(20);
+		kengo.setMoral(5);
+		kengo.setNourriture(5);
+		kengo.setHygiene(5);
+		kengo.regarderTV();
+		assertEquals(0, kengo.getNourriture());
+		assertEquals(0, kengo.getHygiene());
+		assertEquals(35, kengo.getMoral());
+		assertEquals(15, kengo.getEnergie());
 	}
 	
 	@Test
 	void TestVaChercher() {
 		kengo.vaChercher();
-		System.out.println(kengo.getHygiene());
 		assertEquals(90, kengo.getHygiene());
 		assertEquals(100, kengo.getMoral());
 		assertEquals(90, kengo.getEnergie());

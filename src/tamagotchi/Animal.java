@@ -165,31 +165,28 @@ public abstract class Animal extends Tamagotchi {
     //=================================================================================================================
 
     //methode pour manger
-    public void manger(int n) {
-        majNourriture(n);
-        majEnergie(n);
+    public void manger() {
+        majNourriture(30);
+        majEnergie(10);
     }
 
     //=================================================================================================================
 
     //methode pour se laver
-    public void seLaver(int n) {
-        majHygiene(n);
+    public void seLaver() {
+        majHygiene(60);
     }
 
     //=================================================================================================================
 
     //methode pour faire du sport
-    public void faireSport(int n) {
+    public void faireSport() {
         //maj energie
-        if (getEnergie() >= n && getNourriture() >= n) {
-            //changement positif
-            majMoral(n);
-            //changement negatif
-            n *= -1;
-            majNourriture(n);
-            majHygiene(n);
-            majEnergie(n);
+        if (getEnergie() >= 20 && getNourriture() >= 20) {
+            majMoral(20);
+            majNourriture(20);
+            majHygiene(30);
+            majEnergie(20);
         } else {
             System.out.println("Ressources insuffisantes");
         }
@@ -197,27 +194,28 @@ public abstract class Animal extends Tamagotchi {
 
     //=================================================================================================================
 
-    public void brosserDent(int n) {
-        majHygiene(n);
+    public void brosserDent() {
+        majHygiene(40);
     }
 
     //=================================================================================================================
 
-    public void regarderTV(int n) {
-        //changement positif
-        majMoral(n);
-        //changement negatif
-        n *= -1;
-        majEnergie(n/7);
-        majNourriture(n/10);
-        majHygiene(n/10);
+    public void regarderTV() {
+    	if (getEnergie() >= 10) {
+	        majMoral(30);
+	        majEnergie(-5);
+	        majNourriture(-10);
+	        majHygiene(-10);
+    	} else {
+            System.out.println("Ressources insuffisantes");
+        }
     }
 
     //=================================================================================================================
 
     //methode pour dormir
-    public void dormir(int n) {
-        majEnergie(n);
+    public void dormir() {
+    	majEnergie(20);
     }
 
     //=================================================================================================================
@@ -233,15 +231,12 @@ public abstract class Animal extends Tamagotchi {
     //=================================================================================================================
 
     @Override
-    public void jardinage(int n) {
-        if (getEnergie() >= n && getNourriture() >= n) {
-            //changement positif
-            majMoral(n);
-            //changement negatif
-            n *= -1;
-            majNourriture(n);
-            majEnergie(n);
-            majHygiene(n);
+    public void jardinage() {
+        if (getEnergie() >= 20 && getNourriture() >= 30) {
+            majMoral(15);
+            majNourriture(-20);
+            majEnergie(-10);
+            majHygiene(-30);
         } else {
             System.out.println("Ressources insuffisantes");
         }
@@ -250,15 +245,13 @@ public abstract class Animal extends Tamagotchi {
     //=================================================================================================================
 
     @Override
-    public void jouer(int n) {
-        if (getEnergie() >= n && getNourriture() >= n) {
+    public void jouer() {
+        if (getEnergie() >= 35 && getNourriture() >= 30) {
             //changement positif
-            majMoral(n);
-            //changement negatif
-            n *= -1;
-            majNourriture(n);
-            majEnergie(n);
-            majHygiene(n);
+            majMoral(25);
+            majNourriture(-20);
+            majEnergie(-30);
+            majHygiene(-20);
         } else {
             System.out.println("Ressources insuffisantes");
         }
