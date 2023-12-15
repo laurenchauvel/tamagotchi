@@ -39,25 +39,44 @@ class TestChien {
 	
 	@Test
 	void TestRegarderTv() {
-		//Test qui doit renvoyer ressources insuffisantes car energie <
-		kengo.setEnergie(5);
+		//Nourriture insuffisante
+		kengo.setNourriture(5);
 		kengo.regarderTV();
-		assertEquals(5, kengo.getEnergie());
+		assertEquals(5, kengo.getNourriture());
 		
 		kengo.setEnergie(20);
 		kengo.setMoral(5);
-		kengo.setNourriture(5);
+		kengo.setNourriture(15);
 		kengo.setHygiene(5);
 		kengo.regarderTV();
-		assertEquals(0, kengo.getNourriture());
+		assertEquals(5, kengo.getNourriture());
 		assertEquals(0, kengo.getHygiene());
-		assertEquals(35, kengo.getMoral());
-		assertEquals(15, kengo.getEnergie());
+		assertEquals(20, kengo.getMoral());
+		assertEquals(25, kengo.getEnergie());
 	}
 	
 	@Test
 	void TestJouer() {
-		//TODO
+		//Pas assez d'energie
+		kengo.setEnergie(20);
+		kengo.jouer();
+		assertEquals(20, kengo.getEnergie());
+		
+		//Trop faim
+		kengo.setNourriture(20);
+		kengo.jouer();
+		assertEquals(20, kengo.getNourriture());
+		
+		kengo.setEnergie(40);
+		kengo.setNourriture(80);
+		kengo.setHygiene(10);
+		kengo.setMoral(50);
+		kengo.jouer();
+		assertEquals(60, kengo.getNourriture());
+		assertEquals(0, kengo.getHygiene());
+		assertEquals(75, kengo.getMoral());
+		assertEquals(10, kengo.getEnergie());
+		
 	}
 	
 	@Test
@@ -73,14 +92,31 @@ class TestChien {
 	
 	@Test
 	void TestFaireSport() {
-		//TODO
+		//Pas assez d'energie
+		kengo.setEnergie(20);
+		kengo.faireSport();
+		assertEquals(20, kengo.getEnergie());
+		
+		//Trop faim
+		kengo.setNourriture(20);
+		kengo.faireSport();
+		assertEquals(20, kengo.getNourriture());
+		
+		kengo.setEnergie(40);
+		kengo.setNourriture(80);
+		kengo.setHygiene(10);
+		kengo.setMoral(50);
+		kengo.faireSport();
+		assertEquals(60, kengo.getNourriture());
+		assertEquals(0, kengo.getHygiene());
+		assertEquals(70, kengo.getMoral());
+		assertEquals(20, kengo.getEnergie());
 	}
 	
 	@Test
 	void TestBrosserDents() {
 		kengo.setHygiene(20);
 		kengo.brosserDent();
-		System.out.println("h : " +kengo.getHygiene());
 		assertEquals(60, kengo.getHygiene());
 		
 		kengo.setHygiene(80);
@@ -90,7 +126,25 @@ class TestChien {
 	
 	@Test
 	void TestJardinage() {
-		//TODO
+		//Pas assez d'energie
+		kengo.setEnergie(15);
+		kengo.jardinage();
+		assertEquals(15, kengo.getEnergie());
+		
+		//Trop faim
+		kengo.setNourriture(20);
+		kengo.jardinage();
+		assertEquals(20, kengo.getNourriture());
+		
+		kengo.setEnergie(40);
+		kengo.setNourriture(80);
+		kengo.setHygiene(10);
+		kengo.setMoral(50);
+		kengo.jardinage();
+		assertEquals(60, kengo.getNourriture());
+		assertEquals(0, kengo.getHygiene());
+		assertEquals(65, kengo.getMoral());
+		assertEquals(25, kengo.getEnergie());
 	}
 	
 	@Test
