@@ -184,9 +184,9 @@ public abstract class Animal extends Tamagotchi {
         //maj energie
         if (getEnergie() >= 20 && getNourriture() >= 20) {
             majMoral(20);
-            majNourriture(20);
-            majHygiene(30);
-            majEnergie(20);
+            majNourriture(-20);
+            majHygiene(-30);
+            majEnergie(-20);
         } else {
             System.out.println("Ressources insuffisantes");
         }
