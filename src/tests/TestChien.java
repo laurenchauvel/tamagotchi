@@ -39,6 +39,7 @@ class TestChien {
 	
 	@Test
 	void TestRegarderTv() {
+		//Test qui doit renvoyer ressources insuffisantes car energie <
 		kengo.setEnergie(5);
 		kengo.regarderTV();
 		assertEquals(5, kengo.getEnergie());
@@ -52,6 +53,44 @@ class TestChien {
 		assertEquals(0, kengo.getHygiene());
 		assertEquals(35, kengo.getMoral());
 		assertEquals(15, kengo.getEnergie());
+	}
+	
+	@Test
+	void TestJouer() {
+		//TODO
+	}
+	
+	@Test
+	void TestSeLaver() {
+		kengo.setHygiene(20);
+		kengo.seLaver();
+		assertEquals(80, kengo.getHygiene());
+		
+		kengo.setHygiene(60);
+		kengo.seLaver();
+		assertEquals(100, kengo.getHygiene());
+	}
+	
+	@Test
+	void TestFaireSport() {
+		//TODO
+	}
+	
+	@Test
+	void TestBrosserDents() {
+		kengo.setHygiene(20);
+		kengo.brosserDent();
+		System.out.println("h : " +kengo.getHygiene());
+		assertEquals(60, kengo.getHygiene());
+		
+		kengo.setHygiene(80);
+		kengo.brosserDent();
+		assertEquals(100, kengo.getHygiene());
+	}
+	
+	@Test
+	void TestJardinage() {
+		//TODO
 	}
 	
 	@Test
