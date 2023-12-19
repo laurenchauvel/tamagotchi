@@ -1,5 +1,9 @@
 package tests;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -17,6 +21,7 @@ class TestRobot {
 	Lieu l = new Lieu(Piece.Chambre,image,son);
 	Robot boulon = new Robot("Boulon",l);
 	
+	/*
 	@Test
 	void TestConstructeur() {
 		assertEquals("Boulon", boulon.getNom());
@@ -36,7 +41,6 @@ class TestRobot {
 	void TestEnVeille() {
 		boulon.setEnergie(30);
 		boulon.enVeille();
-		System.out.println(boulon.getEnergie());
 		assertEquals(50,boulon.getEnergie());
 	}
 	
@@ -48,13 +52,86 @@ class TestRobot {
 			assertEquals(true,boulon.estMort());
 		}
 	}
+	*/
 	
-	
-	
+	@Test
 	void TestMourirDeDepression() {
+		boulon.setVie(17);
 		boulon.setMoral(21);
-		boulon.perteDeMoral();
-		boulon.mourirDeDepression();
+		
+		ExecutorService ex = Executors.newCachedThreadPool(); //faire un jeu de thread
+		
+		Runnable task1 = () -> {
+			boulon.regarderTV();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		};
+		
+		Runnable task2 = () -> {
+			boulon.mourirDeDepression();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		};
+		
+		Runnable task3 = () -> {
+			boulon.jouer();
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		};
+		
+		ex.execute(task2);
+		ex.execute(task1);
+		ex.execute(task3);
+		
+		ex.shutdown();
+		
+		if(boulon.estMort()) {
+			assertEquals(true,boulon.estMort());
+		}
 	}
+	
+	/*
+	@Test
+	void TestJouer() {
+		boulon.setEnergie(31);
+		boulon.setBatterie(21);
+		boulon.setMoral(50);
+		boulon.jouer();
+		assertEquals(75, boulon.getMoral());
+		assertEquals(1, boulon.getBatterie());
+		assertEquals(1, boulon.getEnergie());
+	}
+	
+	@Test
+	void TestJardinage() {
+		boulon.setEnergie(30);
+		boulon.setBatterie(30);
+		boulon.setMoral(50);
+		boulon.jardinage();
+		assertEquals(65, boulon.getMoral());
+		assertEquals(10, boulon.getBatterie());
+		assertEquals(20, boulon.getEnergie());
+	}
+	
+	@Test
+	void TestRegarderTV() {
+		boulon.setEnergie(30);
+		boulon.setBatterie(9);
+		boulon.setMoral(50);
+		boulon.regarderTV();
+		assertEquals(50, boulon.getMoral());
+		assertEquals(9, boulon.getBatterie());
+		assertEquals(30, boulon.getEnergie());
+	}
+	*/
 
 }

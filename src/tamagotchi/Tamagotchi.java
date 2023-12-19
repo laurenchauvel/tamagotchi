@@ -156,14 +156,14 @@ public abstract class Tamagotchi {
 	
 	//methode de perte de vie
 	/*
-	 * toutes les 180 sec , le tamagotchi perd 1 pv
-	 * si on ne s'occupe pas de lui il meurt au bout de 5h
+	 * p le nombre de pv perdu
+	 * s l'intervalle entre deux pertes
 	 */
-	public void perteDeVie() {
+	public void perteDeVie(int p , int s) {
 		while(!estMort()) {
-			majVie(-1);
-			System.out.println(getNom() + " : " +getVie());
-			wait(180);
+			majVie(p);
+			System.out.println(getNom() + " vie : " +getVie());
+			wait(s);
 		}
 	}
 	
@@ -171,8 +171,12 @@ public abstract class Tamagotchi {
 	//=================================================================================================================
 	
 	//methode perte de vie progressive
+	/*
+	 *toutes les 180 sec , le tamagotchi perd 1 pv
+	 * si on ne s'occupe pas de lui il meurt au bout de 5h
+	 */
 	public void mourirDeVieillesse() {
-		perteDeVie();
+		perteDeVie(-3,2);
 		if (estMort()) {
 			System.out.println(getNom() + " a succombé au poids de sa pauvre existence");
 		}
@@ -191,15 +195,16 @@ public abstract class Tamagotchi {
 	//=================================================================================================================
 	
 	//methode perte de morale progressive
-	public void perteDeMoral() {
+	/*
+	 * m le nombre de points de morale qui baissent toutes les s secondes
+	 */
+	public void perteDeMoral(int m , int s) {
 		while(!pasDeMoral()) {
-			majMoral(-2);
-			System.out.println(getNom() + " : " + getMoral());
-			wait(2);
+			majMoral(m);
+			System.out.println(getNom() + " moral : " + getMoral());
+			wait(s);
 		}
-		if (pasDeMoral()) {
-			System.out.println(getNom() + " n'est pas de bonne humeur");
-		}
+		
 	}
 	
 	//=================================================================================================================
@@ -215,12 +220,18 @@ public abstract class Tamagotchi {
 	//=================================================================================================================
 	
 	//methode pour mourir de depression
+	/*
+	 * perte de 1 pv par minute
+	 * perte de 1 pm toutes les 2 secondes
+	 */
 	public void mourirDeDepression() {
-		while (pasDeMoral()) {
-			perteDeVie();
+		perteDeMoral(-2,2);
+		if (pasDeMoral()) {
+			System.out.println(getNom() + " n'est pas de bonne humeur");
+			perteDeVie(-3,2);
 		}
 		if (estMort()) {
-			System.out.println(getNom() + " a succombé face au poids de ses problemes");
+			System.out.println(getNom() + " a succombé face à problèmes");
 		}
 	}
 	

@@ -243,6 +243,7 @@ public abstract class Animal extends Tamagotchi {
     }
 
     //=================================================================================================================
+    
     //Méthode jouer
     @Override
     public void jouer() {
@@ -256,6 +257,32 @@ public abstract class Animal extends Tamagotchi {
             System.out.println("Ressources insuffisantes");
         }
     }
+    
+    //=================================================================================================================
+    
+    //methode qui signale si le tamagotchi est sale
+    public boolean estSale() {
+    	if (getHygiene() == 0) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    //=================================================================================================================
+    
+    //methode pour perde des points d'hygiene
+    /*
+	 * h le nombre de points d'hygiene qui baissent toutes les s secondes
+	 */
+    public void perteHygiene(int h, int s) {
+    	while(estSale()) {
+    		majHygiene(h);
+    		wait(s);
+    	}
+    }
+    
+  
+    
     
     
 
