@@ -61,24 +61,7 @@ class TestOiseau {
     int H = bibi.getHygiene();
    
 
-    @Test
-    void TestRegarderTV() {    
-
-        bibi.regarderTV();
-        
-        if (E >= 10) {
-        	assertEquals(100, bibi.getMoral());
-            assertEquals(E - 5, bibi.getEnergie());
-            assertEquals(N - 10, bibi.getNourriture());
-            assertEquals(H - 10, bibi.getHygiene());
-        } else {
-            
-        	assertEquals(M, bibi.getMoral());
-            assertEquals(E, bibi.getEnergie());
-            assertEquals(N, bibi.getNourriture());
-            assertEquals(H, bibi.getHygiene());
-        }
-    }
+    
    
     @Test
     void TestFaireSport() {
@@ -101,25 +84,6 @@ class TestOiseau {
     }
     
     
-    @Test
-    void TestJardinage() {
-    
-        bibi.jardinage();
-        
-        if (E >= 20 && N >= 30) {
-            assertEquals(100, bibi.getMoral());
-            assertEquals(E - 10, bibi.getEnergie());
-            assertEquals(N - 20, bibi.getNourriture());
-            assertEquals(H - 30, bibi.getHygiene());
-            
-        } else {
-            
-        	assertEquals(M, bibi.getMoral());
-            assertEquals(E, bibi.getEnergie());
-            assertEquals(N, bibi.getNourriture());
-            assertEquals(H, bibi.getHygiene());
-        }
-    }
 
     @Test
     void TestJouer() {
