@@ -1,10 +1,13 @@
 package tamagotchi;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Maison { //public class maison
+public class Maison implements Serializable { //public class maison
 	
+	private static final long serialVersionUID = 1L; //inutile
+
 	//Les differentes pieces du jeu
 	public enum Piece{
 		Salon(new File("../media/salon-image.avif"), new File("../media/menu-musique.wav")),

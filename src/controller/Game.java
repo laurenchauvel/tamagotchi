@@ -1,7 +1,9 @@
-package tamagotchi;
+package controller;
 
 import java.util.Scanner;
+
 import java.io.*;
+import tamagotchi.*;
 import tamagotchi.Maison.Piece;
 import java.util.concurrent.Executors;
 //import java.util.concurrent.Executor; //inutile avec serivce qui est plus complet

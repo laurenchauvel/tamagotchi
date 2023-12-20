@@ -1,6 +1,10 @@
 package tamagotchi;
 
-public abstract class Tamagotchi {
+import java.io.Serializable;
+
+public abstract class Tamagotchi implements Serializable {
+
+	private static final long serialVersionUID = 1L; //inutile
 
 	/**
 	 * attributs
