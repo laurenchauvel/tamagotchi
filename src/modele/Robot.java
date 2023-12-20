@@ -1,4 +1,4 @@
-package tamagotchi;
+package modele;
 
 public class Robot extends Tamagotchi{
 
@@ -23,6 +23,7 @@ public class Robot extends Tamagotchi{
      * les methodes
      * @param n
      */
+    
     public void majBatterie(int n) {
         if (n > 0) {
             if (getBatterie() + n <= 100) {
@@ -103,10 +104,6 @@ public class Robot extends Tamagotchi{
 
     //=================================================================================================================
 
-    @Override
-    public void sauvegarde() {
-
-    }
 
 
 }

@@ -3,23 +3,29 @@ package controller;
 import java.util.Scanner;
 
 import java.io.*;
-import tamagotchi.*;
-import tamagotchi.Maison.Piece;
+
+import view.MenuView;
+
 import java.util.concurrent.Executors;
 //import java.util.concurrent.Executor; //inutile avec serivce qui est plus complet
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future; //peut servir plus tard
 
-public class Game {
+import modele.*;
+import modele.Maison.Piece;
+
+public class Controller {
 	
 	
-	private Tamagotchi tamagotchi;
+	private Tamagotchi tamagotchi; //modele
+	
+	private MenuView view; //view
 	
 	private boolean enCours;
 	
 	private Scanner scan;
 	
-	public Game()  {
+	public Controller()  {
 		enCours = true;
 		scan = new Scanner(System.in);
 		switch(scan.nextInt()) {
@@ -48,29 +54,6 @@ public class Game {
 	
 	public void play() {
 		
-		/*
-			//lancer la perte de vie
-			new Thread(new Runnable() {
-				public void run() {
-					while(enCours) {
-						tamagotchi.mourirDeVieillesse();
-						if (tamagotchi.estMort()) {
-							enCours = false;
-						}
-					}
-				}
-			}).start();
-			
-			//lancer la perte de morale
-			new Thread(new Runnable() {
-				public void run() {
-					while(enCours) {
-						tamagotchi.mourirDeDepression();
-					}
-				}
-			}).start();
-			*/
-		
 			ExecutorService ex = Executors.newCachedThreadPool();
 			
 			//lancer la perte de vie
@@ -98,6 +81,10 @@ public class Game {
 			
 	}
 	
+	public void newGame() {
+		enCours = true;
+	}
+	
 	
 	
     public static void main(String[] args) {
@@ -112,7 +99,7 @@ public class Game {
 
         //int choix = scanner.nextInt();
         
-        Game test = new Game();
+        Controller test = new Controller();
         
 
         System.out.println("Vous avez choisi: " + test.tamagotchi.getNom());
@@ -143,13 +130,6 @@ public class Game {
         	}
         	line = test.scan.next();
         	
-        	/*
-        	try {
-        		Thread.sleep(5000);
-        	} catch (InterruptedException e) {
-        		line = null;
-        	}
-        	*/
         }
        
         test.scan.close();

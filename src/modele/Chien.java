@@ -1,4 +1,4 @@
-package tamagotchi;
+package modele;
 
 public class Chien extends Animal {
 
@@ -22,13 +22,6 @@ public class Chien extends Animal {
     /**
      * methodes
      */
-
-    @Override
-    public void sauvegarde() {
-
-    }
-
-    //=================================================================================================================
 
     //action specifique au chien
     public void vaChercher() {

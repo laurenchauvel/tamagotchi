@@ -1,4 +1,4 @@
-package tamagotchi;
+package modele;
 
 public class Lion extends Animal {
 
@@ -17,16 +17,10 @@ public class Lion extends Animal {
     }
 
     //=================================================================================================================
-
+    
     /**
      * methodes
      */
-    @Override
-    public void sauvegarde() {
-
-    }
-
-    //=================================================================================================================
 
     //action specifique au lion
     public void sauter() {

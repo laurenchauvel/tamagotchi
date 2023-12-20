@@ -4,8 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import tamagotchi.Maison;
-import tamagotchi.Oiseau;
+import modele.Animal;
+import modele.Maison;
+import modele.Oiseau;
 
 class TestOiseau {
 	//intialisation des attributs
@@ -14,6 +15,7 @@ class TestOiseau {
 	void TestConstructeur() {
 		assertEquals("Bibi", bibi.getNom());
 		assertEquals(Maison.Piece.Salon , bibi.getMaison().getPiece());
+		assertEquals(Animal.Cri.Chanter, bibi.getCri());
 	}
 
 	@Test

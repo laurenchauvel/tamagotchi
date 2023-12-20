@@ -1,4 +1,4 @@
-package tamagotchi;
+package modele;
 
 import java.io.Serializable;
 
@@ -27,9 +27,6 @@ public abstract class Tamagotchi implements Serializable {
 	
 	//attribut representant la maison de chaque tamagotchi
 	private Maison maison ;
-	
-	//
-	private Sauvegarde sauvegarde;
 
 	//=================================================================================================================
 
@@ -113,6 +110,26 @@ public abstract class Tamagotchi implements Serializable {
 	}
 	
 	//=================================================================================================================
+    
+    public String getEspece() {
+    	String result = null;
+    	if (this instanceof Animal) {
+    		if (this instanceof Chien) {
+    			result = "Chien";
+    			}
+    		else if (this instanceof Lion) {
+    			result = "Lion";
+    			}
+    		else if (this instanceof Oiseau) {
+    			result = "Oiseau";
+    		}
+    	} else {
+    		result = "Robot";
+    	}
+    	return result;
+    }
+	
+	//=================================================================================================================
 	
 	public abstract void regarderTV();
 	
@@ -120,8 +137,6 @@ public abstract class Tamagotchi implements Serializable {
 	
 	public abstract void jardinage();
 	
-	public abstract void sauvegarde();
-
 	//=================================================================================================================
 
 	/**

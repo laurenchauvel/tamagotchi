@@ -10,8 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 
 import org.junit.jupiter.api.Test;
-import tamagotchi.Maison.Piece;
-import tamagotchi.*;
+
+import modele.*;
+import modele.Maison.Piece;
 
 class TestRobot {
 	
@@ -137,6 +138,12 @@ class TestRobot {
 	void TestSeDeplacer() {
 		boulon.seDeplacer(Maison.Piece.Chambre);
 		assertEquals(Maison.Piece.Chambre , boulon.getMaison().getPiece());
+	}
+	
+	@Test
+	void TestGetEspece() {
+		System.out.println(boulon.getEspece());
+		assertEquals("Robot", boulon.getEspece());
 	}
 	
 

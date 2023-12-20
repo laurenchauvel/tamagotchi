@@ -1,4 +1,4 @@
-package tamagotchi;
+package modele;
 
 import java.io.*;
 

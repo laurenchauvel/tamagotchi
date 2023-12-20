@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import tamagotchi.Lion;
-import tamagotchi.Maison;
+import modele.Lion;
+import modele.Maison;
 
 class TestLion {
 

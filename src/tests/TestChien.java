@@ -6,9 +6,9 @@ import java.io.File;
 
 import org.junit.jupiter.api.Test;
 
-import tamagotchi.Chien;
-import tamagotchi.Maison;
-import tamagotchi.Maison.Piece;
+import modele.Chien;
+import modele.Maison;
+import modele.Maison.Piece;
 
 class TestChien {
 	
