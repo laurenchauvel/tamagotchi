@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -27,7 +30,15 @@ public class CreateTamagotchiView extends JPanel {
 		this.add(submit);
 		this.add(retour);
 		
-		submit.addActionListener(e -> System.out.println("Bouton 'Créer Tamagotchi' cliqué"));
+		submit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		retour.addActionListener(e -> frame.getLayout().show(frame.getPanel(), frame.getMenu()));
 		
 	}
