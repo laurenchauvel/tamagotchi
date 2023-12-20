@@ -12,10 +12,9 @@ public class Chien extends Animal {
      * Cosntructeur
      * @param n
      */
-    public Chien(String n , Lieu l) {
-        super(n,l);
+    public Chien(String n) {
+        super(n);
         setCri(Cri.Aboyer);
-        setSon(null);
     }
 
     //=================================================================================================================

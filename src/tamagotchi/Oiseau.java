@@ -11,10 +11,9 @@ public class Oiseau extends Animal {
     /**
      * Constructeur
      */
-    public Oiseau(String n , Lieu l) {
-        super(n,l);
+    public Oiseau(String n) {
+        super(n);
         setCri(Cri.Chanter);
-        setSon(null);
     }
 
     //=================================================================================================================

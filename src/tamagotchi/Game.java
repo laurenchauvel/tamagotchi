@@ -2,7 +2,7 @@ package tamagotchi;
 
 import java.util.Scanner;
 import java.io.*;
-import tamagotchi.Lieu.Piece;
+import tamagotchi.Maison.Piece;
 import java.util.concurrent.Executors;
 //import java.util.concurrent.Executor; //inutile avec serivce qui est plus complet
 import java.util.concurrent.ExecutorService;
@@ -10,36 +10,38 @@ import java.util.concurrent.Future; //peut servir plus tard
 
 public class Game {
 	
-	private int choix;
 	
 	private Tamagotchi tamagotchi;
 	
-	private static boolean enCours;
+	private boolean enCours;
 	
-	public Game(int c) {
+	private Scanner scan;
+	
+	public Game()  {
 		enCours = true;
-		choix = c;
-		switch(choix) {
+		scan = new Scanner(System.in);
+		switch(scan.nextInt()) {
 		case 1:
-			tamagotchi = new Chien("Chien",new Lieu(Piece.Chambre,null,null));
+			tamagotchi = new Chien("Chien");
 			break;
 			
 		case 2:
-			tamagotchi = new Chien("Lion",new Lieu(Piece.Chambre,null,null));
+			tamagotchi = new Lion("Lion");
 			break;
 			
 		case 3:
-			tamagotchi = new Chien("Oiseau",new Lieu(Piece.Chambre,null,null));
+			tamagotchi = new Oiseau("Oiseau");
 			break;
 			
 		case 4:
-			tamagotchi = new Chien("Robot",new Lieu(Piece.Chambre,null,null));
+			tamagotchi = new Robot("Robot");
 			break;
 			
 		default:
             System.out.println("Choix non valide.");
             System.exit(0);
 		}
+		
 	}
 	
 	public void play() {
@@ -69,6 +71,7 @@ public class Game {
 		
 			ExecutorService ex = Executors.newCachedThreadPool();
 			
+			//lancer la perte de vie
 			Runnable pv = () -> {
 				while(enCours) {
 					tamagotchi.mourirDeVieillesse();
@@ -78,6 +81,7 @@ public class Game {
 				}
 			};
 			
+			//lancer la perte des points de moral
 			Runnable pm = () -> {
 				while (enCours) {
 					tamagotchi.mourirDeDepression();
@@ -96,7 +100,6 @@ public class Game {
 	
     public static void main(String[] args) {
     	
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Bienvenue dans le jeu Tamagotchi!");
         System.out.println("Veuillez choisir un Tamagotchi:");
         System.out.println("1. Chien");
@@ -105,28 +108,27 @@ public class Game {
         System.out.println("4. Robot");
       
 
-        int choix = scanner.nextInt();
+        //int choix = scanner.nextInt();
         
-        Game test = new Game(choix);
+        Game test = new Game();
         
 
-        System.out.println("V"
-        		+ "ous avez choisi: " + test.tamagotchi.getClass());
+        System.out.println("Vous avez choisi: " + test.tamagotchi.getNom());
         
        
         System.out.println("Entrez le nom de votre Tamagotchi");
-        String nom = scanner.next();
+        String nom = test.scan.next();
         test.tamagotchi.setNom(nom);
         System.out.println("Le Tamagotchi s'appelle desormais: " + test.tamagotchi.getNom());
         
         
         test.play(); //lancement du jeu
         
-        String line = scanner.next();
+        String line = test.scan.next();
         	
         while(!line.equals(".") && line != null) {
         	switch(line) {
-        	case "jouer":
+        	case "j":
         		test.tamagotchi.jouer();
         		System.out.println(test.tamagotchi.getEnergie());
         		break;
@@ -137,15 +139,18 @@ public class Game {
         		break;
         		
         	}
-        	line = scanner.next();
+        	line = test.scan.next();
+        	
+        	/*
         	try {
         		Thread.sleep(5000);
         	} catch (InterruptedException e) {
         		line = null;
         	}
+        	*/
         }
        
-        scanner.close();
+        test.scan.close();
         
         
         

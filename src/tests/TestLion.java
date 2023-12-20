@@ -1,23 +1,20 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.File;
 import org.junit.jupiter.api.Test;
-import tamagotchi.*;
-import tamagotchi.Lieu.Piece;
+
+import tamagotchi.Lion;
+import tamagotchi.Maison;
 
 class TestLion {
 
-	//intialisation des attributs
-			File image;
-			File son ;
-			Lieu l = new Lieu(Piece.Chambre, image, son);
-			Lion bibi = new Lion("Bibi", l);
+		//intialisation des attributs
+		Lion bibi = new Lion("Bibi");
 		@Test
 		void TestConstructeur() {
 			assertEquals("Bibi", bibi.getNom());
-			assertEquals(l, bibi.getLieu());
+			assertEquals(Maison.Piece.Salon , bibi.getMaison().getPiece());
 		}
 		
 		@Test

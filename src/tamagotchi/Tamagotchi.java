@@ -5,12 +5,26 @@ public abstract class Tamagotchi {
 	/**
 	 * attributs
 	 */
-
+	
+	//attribut pour le nom
 	private String nom ;
+	
+	//attribut hygiene
+    private int hygiene;
+    
+    //attribut pour la vie
 	private int vie;
+	
+	//attribut pour l'energie
 	private int energie ;
+	
+	//attribut pour le moral
 	private int moral;
-	private Lieu lieu ;
+	
+	//attribut representant la maison de chaque tamagotchi
+	private Maison maison ;
+	
+	//
 	private Sauvegarde sauvegarde;
 
 	//=================================================================================================================
@@ -19,13 +33,14 @@ public abstract class Tamagotchi {
 	 * le Constructeur
 	 */
 
-	public Tamagotchi(String n , Lieu l) {
+	public Tamagotchi(String n) {
 		setNom(n);
 		setVie(100);
 		setEnergie(100);
 		setMoral(100);
-		seDeplacer(l);
+		maison = new Maison();
 	}
+	
 	//=================================================================================================================
 
 	public String getNom() {
@@ -35,6 +50,8 @@ public abstract class Tamagotchi {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
+	//=================================================================================================================
 
 	public int getVie() {
 		return vie;
@@ -43,6 +60,8 @@ public abstract class Tamagotchi {
 	public void setVie(int vie) {
 		this.vie = vie;
 	}
+	
+	//=================================================================================================================
 
 	public int getEnergie() {
 		return energie;
@@ -51,6 +70,8 @@ public abstract class Tamagotchi {
 	public void setEnergie(int energie) {
 		this.energie = energie;
 	}
+	
+	//=================================================================================================================
 
 	public int getMoral() {
 		return moral;
@@ -59,14 +80,35 @@ public abstract class Tamagotchi {
 	public void setMoral(int moral) {
 		this.moral = moral;
 	}
+	
+	//=================================================================================================================
 
-	public Lieu getLieu() {
-		return lieu;
+    //getter hygiene
+    public int getHygiene() {
+        return hygiene;
+    }
+
+    //setter hygiene
+    public void setHygiene(int n) {
+        hygiene = n;
+    }
+	
+	//=================================================================================================================
+
+	public Maison getMaison() {
+		return maison;
 	}
 
-	public void seDeplacer(Lieu lieu) {
-		this.lieu = lieu;
+	public void seDeplacer(Maison.Piece p) {
+		//a verifier , surement inutile
+		for (Maison.Piece val : maison.getToutesLesPieces()) {
+			if (val == p) {
+				this.maison.setPiece(p); //plus simple de juste garder cette ligne
+			}
+		}
 	}
+	
+	//=================================================================================================================
 	
 	public abstract void regarderTV();
 	
@@ -138,6 +180,25 @@ public abstract class Tamagotchi {
 	}
 	
 	//=================================================================================================================
+
+    //methode de mise a jour hygiene
+    public void majHygiene(int n) {
+        if (n > 0) {
+            if (getHygiene() + n <= 100) {
+                setHygiene(getHygiene() + n);
+            } else {
+                setHygiene(100);
+            }
+        } else {
+            if (getHygiene() + n >= 0) {
+                setHygiene(getHygiene() + n);
+            } else {
+                setHygiene(0);
+            }
+        }
+    }
+    
+    //=================================================================================================================
 	
 	/*
 	 * a mettre dans le main
@@ -201,7 +262,7 @@ public abstract class Tamagotchi {
 	public void perteDeMoral(int m , int s) {
 		while(!pasDeMoral()) {
 			majMoral(m);
-			System.out.println(getNom() + " moral : " + getMoral());
+			//System.out.println(getNom() + " moral : " + getMoral());
 			wait(s);
 		}
 		
@@ -231,9 +292,77 @@ public abstract class Tamagotchi {
 			perteDeVie(-3,2);
 		}
 		if (estMort()) {
-			System.out.println(getNom() + " a succombé face à problèmes");
+			System.out.println(getNom() + " a succombé face à ses problèmes");
 		}
 	}
+	
+	//=================================================================================================================
+    
+    //methode qui signale si le tamagotchi est sale
+    public boolean estSale() {
+    	if (getHygiene() == 0) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    //=================================================================================================================
+    
+    //methode pour perde des points d'hygiene
+    /*
+	 * h le nombre de points d'hygiene qui baissent toutes les s secondes
+	 */
+    public void perteHygiene(int h, int s) {
+    	while(!estSale()) {
+    		majHygiene(h);
+    		wait(s);
+    	}
+    }
+    
+    //=================================================================================================================
+    
+    //methode pour mourir de manque d'hygiene
+    /*
+     * perte de 1 ph toutes les 5 secondes
+     * pere de 1 pv toutes les 60 secondes
+     */
+    public void mourirParHygiene() {
+    	perteHygiene(-1, 5);
+    	if (estSale()) {
+			System.out.println(getNom() + " est tout crade");
+			perteDeVie(-1,60);
+		}
+		if (estMort()) {
+			System.out.println(getNom() + " a succombé face à son insalubrité maladive");
+		}
+    }
+    
+//=================================================================================================================
+    
+    //methode qui signale si le tamagotchi est sale
+    public boolean estFatigue() {
+    	if (getEnergie() < 10) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    //=================================================================================================================
+    
+    //methode pour perde des points d'hygiene
+    /*
+	 * e le nombre de points d'hygiene qui baissent toutes les s secondes
+	 */
+    public void perteEnergie(int h, int s) {
+    	while(!estFatigue()) {
+    		majHygiene(h);
+    		wait(s);
+    	}
+    	if (estFatigue()) {
+    		System.out.println(getNom() + " est KO");
+    	}
+    }
+    
 	
 	
 	

@@ -7,22 +7,19 @@ import java.io.File;
 import org.junit.jupiter.api.Test;
 
 import tamagotchi.Chien;
-import tamagotchi.Lieu;
-import tamagotchi.Lieu.Piece;
+import tamagotchi.Maison;
+import tamagotchi.Maison.Piece;
 
 class TestChien {
 	
 	//intialisation des attributs
-	File image;
-	File son ;
-	Lieu l = new Lieu(Piece.Chambre, image, son);
-	Chien kengo = new Chien("Kengo", l);
+	Chien kengo = new Chien("Kengo");
 	
 	
 	@Test
 	void TestConstructeur() {
 		assertEquals("Kengo", kengo.getNom());
-		assertEquals(l, kengo.getLieu());
+		assertEquals(Maison.Piece.Salon , kengo.getMaison().getPiece());
 	}
 	
 	@Test

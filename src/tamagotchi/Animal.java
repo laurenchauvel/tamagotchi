@@ -8,9 +8,6 @@ public abstract class Animal extends Tamagotchi {
      * les attributs
      */
 
-    //attribut hygiene
-    private int hygiene;
-
     //attribut toielette
     private int toilette;
 
@@ -18,13 +15,32 @@ public abstract class Animal extends Tamagotchi {
     private int nourriture;
 
     //enum avec les differents cris
-    public enum Cri {Aboyer , Rugir , Chanter};
+    public enum Cri {
+    	Aboyer(new File("../media/cri-chien.wav")),
+    	Rugir(new File("../media/cri-lion.wav")),
+    	Chanter(new File("../media/cri-oiseau-2.wav"));
+    	
+    	//attribut du fichier son pour le cri
+        private File son;
+        
+        //=================================================================================================================
+        
+        /*
+         * constructeur
+         */
+    	private Cri(File s) {
+    		son = s;
+    	}
+    	
+    	//=================================================================================================================
+    	
+    	public File getSon() {
+    		return son;
+    	}
+    };
 
     //attribut du cri de l'animal
     private Cri cri;
-
-    //attribut du fichier son pour le cri
-    private File son;
 
     //=================================================================================================================
 
@@ -33,8 +49,8 @@ public abstract class Animal extends Tamagotchi {
      *
      * @param n
      */
-    public Animal(String n , Lieu l) {
-        super(n,l);
+    public Animal(String n) {
+        super(n);
         setHygiene(100);
         setNourriture(100);
         setToilette(100);
@@ -45,18 +61,6 @@ public abstract class Animal extends Tamagotchi {
     /**
      * les methodes
      */
-
-    //getter fichier son
-    public File getSon() {
-        return son;
-    }
-
-    //setter fichier son
-    public void setSon(File s) {
-        this.son = s;
-    }
-
-    //=================================================================================================================
 
     //getter nourriture
     public int getNourriture() {
@@ -82,18 +86,6 @@ public abstract class Animal extends Tamagotchi {
 
     //=================================================================================================================
 
-    //getter hygiene
-    public int getHygiene() {
-        return hygiene;
-    }
-
-    //setter hygiene
-    public void setHygiene(int n) {
-        hygiene = n;
-    }
-
-    //=================================================================================================================
-
     //getter cri
     public Cri getCri() {
         return cri;
@@ -102,25 +94,6 @@ public abstract class Animal extends Tamagotchi {
     //setter cri
     public void setCri(Cri cri) {
         this.cri = cri;
-    }
-
-    //=================================================================================================================
-
-    //methode de mise a jour hygiene
-    public void majHygiene(int n) {
-        if (n > 0) {
-            if (getHygiene() + n <= 100) {
-                setHygiene(getHygiene() + n);
-            } else {
-                setHygiene(100);
-            }
-        } else {
-            if (getHygiene() + n >= 0) {
-                setHygiene(getHygiene() + n);
-            } else {
-                setHygiene(0);
-            }
-        }
     }
 
     //=================================================================================================================
@@ -260,9 +233,9 @@ public abstract class Animal extends Tamagotchi {
     
     //=================================================================================================================
     
-    //methode qui signale si le tamagotchi est sale
-    public boolean estSale() {
-    	if (getHygiene() == 0) {
+    //methode qui signale si le tamagotchi a faim
+    public boolean estAffame() {
+    	if (getNourriture() < 15) {
     		return true;
     	}
     	return false;
@@ -270,17 +243,61 @@ public abstract class Animal extends Tamagotchi {
     
     //=================================================================================================================
     
-    //methode pour perde des points d'hygiene
+    //methode pour la perte de nutrition
     /*
-	 * h le nombre de points d'hygiene qui baissent toutes les s secondes
+	 * n le nombre de points de nutrition qui baissent toutes les s secondes
 	 */
-    public void perteHygiene(int h, int s) {
-    	while(estSale()) {
-    		majHygiene(h);
+    public void perteNourriture(int n, int s) {
+    	while(!estAffame()) {
+    		majNourriture(n);
     		wait(s);
     	}
     }
     
+    //=================================================================================================================
+    
+    //methode pour mourir de malnutrition
+    /*
+     * perte de 1 pn toutes les 5 secondes
+     * pere de 5 pv toutes les 180 secondes
+     */
+    public void mourirDeMalNutrition() {
+    	perteNourriture(-1, 5);
+    	if (estAffame()) {
+			System.out.println(getNom() + " est affamé");
+			perteDeVie(-5,180);
+		}
+    	if (estMort()) {
+			System.out.println(getNom() + " a succombé face à la brutalité du manque soudain de vivres !!!!");
+		}
+    	
+    }
+    
+    //=================================================================================================================
+    
+    //methode qui signale si le tamagotchi veut se soulager
+    public boolean doitSeSoulager() {
+    	if (getToilette() < 5) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    //=================================================================================================================
+     
+    //methode pour la perte de la reserve des toilettes
+    /*
+	 * t la decrementaion des toilettes toutes les s secondes
+	 */
+    public void perteToilette(int t, int s) {
+    	while(!doitSeSoulager()) {
+    		majToilette(t);
+    		wait(s);
+    	}
+    	if (doitSeSoulager()) {
+			System.out.println(getNom() + " sens que sa vessie va exploser");
+		}
+    }
   
     
     

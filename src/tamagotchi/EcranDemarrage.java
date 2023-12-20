@@ -182,7 +182,7 @@ public class EcranDemarrage extends JFrame {
     }
         private void choisirAnimal() {
         // Remplacez avec la logique appropriée pour choisir un animal
-        Tamagotchi animal = new Chien("NomChien", new Lieu(Piece.JARDIN, new File("chemin/vers/image.jpg"), new File("chemin/vers/son.mp3")));
+        Tamagotchi animal = new Chien("NomChien", new Maison(Piece.JARDIN, new File("chemin/vers/image.jpg"), new File("chemin/vers/son.mp3")));
         controleur.addTamagotchi(animal);
         // Changez de panneau ou effectuez d'autres actions nécessaires
     }
@@ -205,7 +205,7 @@ public class EcranDemarrage extends JFrame {
     }
     private void choisirRobot() {
         // Remplacez avec la logique appropriée pour choisir un robot
-        Tamagotchi robot = new Robot("NomRobot", new Lieu(Piece.SALON, new File("chemin/vers/image.jpg"), new File("chemin/vers/son.mp3")));
+        Tamagotchi robot = new Robot("NomRobot", new Maison(Piece.SALON, new File("chemin/vers/image.jpg"), new File("chemin/vers/son.mp3")));
         controleur.addTamagotchi(robot);
         // Changez de panneau ou effectuez d'autres actions nécessaires
     }

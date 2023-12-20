@@ -10,22 +10,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 
 import org.junit.jupiter.api.Test;
-import tamagotchi.Lieu.Piece;
+import tamagotchi.Maison.Piece;
 import tamagotchi.*;
 
 class TestRobot {
 	
 	//initialisation des attributs
-	File image;
-	File son;
-	Lieu l = new Lieu(Piece.Chambre,image,son);
-	Robot boulon = new Robot("Boulon",l);
+	Robot boulon = new Robot("Boulon");
 	
-	/*
+	
 	@Test
 	void TestConstructeur() {
 		assertEquals("Boulon", boulon.getNom());
-		assertEquals(l , boulon.getLieu());
+		assertEquals(Maison.Piece.Salon , boulon.getMaison().getPiece());
 	}
 	
 	@Test
@@ -44,6 +41,7 @@ class TestRobot {
 		assertEquals(50,boulon.getEnergie());
 	}
 	
+	/*
 	@Test
 	void TestMourirDeVieillesse() {
 		boulon.setVie(23);
@@ -52,7 +50,8 @@ class TestRobot {
 			assertEquals(true,boulon.estMort());
 		}
 	}
-	*/
+
+	
 	
 	@Test
 	void TestMourirDeDepression() {
@@ -98,8 +97,9 @@ class TestRobot {
 			assertEquals(true,boulon.estMort());
 		}
 	}
+	*/
 	
-	/*
+	
 	@Test
 	void TestJouer() {
 		boulon.setEnergie(31);
@@ -132,6 +132,12 @@ class TestRobot {
 		assertEquals(9, boulon.getBatterie());
 		assertEquals(30, boulon.getEnergie());
 	}
-	*/
+	
+	@Test
+	void TestSeDeplacer() {
+		boulon.seDeplacer(Maison.Piece.Chambre);
+		assertEquals(Maison.Piece.Chambre , boulon.getMaison().getPiece());
+	}
+	
 
 }

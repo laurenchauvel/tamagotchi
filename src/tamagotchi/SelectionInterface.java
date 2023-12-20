@@ -37,7 +37,7 @@ public class SelectionInterface extends JFrame {
 
     private void choisirAnimal() {
         // Logique pour choisir un Tamagotchi animal
-        Tamagotchi animal = new Chien("NomChien", new Lieu(Piece.JARDIN, new File("/home/salma/Downloads/Jardin.jpg"), new File("/home/salma/Downloads/Jardin.mp3")));
+        Tamagotchi animal = new Chien("NomChien", new Maison(Piece.JARDIN, new File("/home/salma/Downloads/Jardin.jpg"), new File("/home/salma/Downloads/Jardin.mp3")));
         controleur.addTamagotchi(animal);
         ((EcranDemarrage)SwingUtilities.getWindowAncestor(this)).changeView("GamePanel"); // Changement de vue
 
@@ -45,7 +45,7 @@ public class SelectionInterface extends JFrame {
 
     private void choisirRobot() {
         // Logique pour choisir un Tamagotchi robot
-        Tamagotchi robot = new Robot("NomRobot", new Lieu(Piece.SALON, new File("/home/salma/Downloads/Jardin.jpg"), new File("/home/salma/Downloads/Jardin.mp3")));
+        Tamagotchi robot = new Robot("NomRobot", new Maison(Piece.SALON, new File("/home/salma/Downloads/Jardin.jpg"), new File("/home/salma/Downloads/Jardin.mp3")));
         controleur.addTamagotchi(robot);
         dispose(); // Ferme la fenêtre de sélection
         new InterfaceJeu(controleur).setVisible(true); // Ouvre l'interface du jeu

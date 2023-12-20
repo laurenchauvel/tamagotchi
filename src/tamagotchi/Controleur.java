@@ -35,7 +35,7 @@ public void chargerPartie() {
     File sonJardin = new File("/home/salma/Downloads/jardin.mp3");
 
     // Création du lieu avec les bons arguments
-    Lieu jardinCharge = new Lieu(Piece.JARDIN, imageJardin, sonJardin);
+    Maison jardinCharge = new Maison(Piece.JARDIN, imageJardin, sonJardin);
 
     // Ajout du Tamagotchi chargé avec le lieu créé
     tamagotchis.clear();

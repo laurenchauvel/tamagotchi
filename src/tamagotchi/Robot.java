@@ -12,8 +12,8 @@ public class Robot extends Tamagotchi{
     /**
      * Constructeur
      */
-    public Robot(String n , Lieu l) {
-        super(n,l);
+    public Robot(String n) {
+        super(n);
         setBatterie(100);
     }
 

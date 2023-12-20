@@ -11,10 +11,9 @@ public class Lion extends Animal {
     /**
      * Constructeur
      */
-    public Lion(String n , Lieu l) {
-        super(n,l);
+    public Lion(String n) {
+        super(n);
         setCri(Cri.Rugir);
-        setSon(null);
     }
 
     //=================================================================================================================
