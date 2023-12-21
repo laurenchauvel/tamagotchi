@@ -15,7 +15,7 @@ public class Sauvegarde implements Serializable {
     private Tamagotchi tamagotchi;
     
     //nom du fichier dans lequel on enregistre les donnees
-    private final String filename = "tamagotchis_sauvegardes.txt" ;
+    private final String filename = "tamagotchis_sauvegardes.dat" ;
     
     //liste des tamagotchis sauvegardes
 	private ArrayList<Tamagotchi> tamagotchisSauvegardes;
