@@ -39,7 +39,6 @@ public class CreateTamagotchiView extends JPanel {
 				//TODO : A modfier
 				frame.getController().createTamagotchi();
 				frame.getLayout().show(frame.getPanel(), frame.getGame());
-				frame.getController().getTamagotchi().mourirDeVieillesse();
 			}
 			
 		});
