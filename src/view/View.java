@@ -13,11 +13,13 @@ public class View extends JFrame {
 	private StartScreenView startScreen = new StartScreenView(this);	//ecran de debut
 	private MenuView menuScreen = new MenuView(this);	//choix de la partie (ancienne ou nouvelle)
 	private CreateTamagotchiView createTamagotchi = new CreateTamagotchiView(this);	//creation d'un nouveau Tamagotchi
+	private InterfaceJeuView gameView = new InterfaceJeuView(this);
 	
 	//Nom des fenêtres 
 	private final String start = "Start";
 	private final String menu = "Menu";
 	private final String create = "Create";
+	private final String game = "Game";
 	
 	public View() {
 		super();
@@ -37,6 +39,7 @@ public class View extends JFrame {
 		this.add(startScreen, start);
 		this.add(menuScreen, menu);
 		this.add(createTamagotchi, create);
+		this.add(gameView, game);
 		layout.show(panel, start);
 		
 		
@@ -51,16 +54,36 @@ public class View extends JFrame {
 		return layout;
 	}
 	
+	//Permet de recuperer le nom de l'ecran de demarrage 
 	public String getStart() {
 		return start;
 	}
 	
+	//Permet de recuperer le nom du Menu dans lequel on chosit si on veut creer ou sauvegarder un tamagotchi
 	public String getMenu() {
 		return menu;
 	}
 	
+	//Permet de recuperer le nom du panel de creation du Tamagotchi
 	public String getCreate() {
 		return create;
+	}
+	
+	
+	//Permet de recuperer le nom du panel de jeu
+	public String getGame() {
+		return game;
+	}
+	
+	
+	//Permet de passer au controleur le nom du Tamagotchi que l'on souhaite creer
+	public String getName() {
+		return createTamagotchi.getName();
+	}
+	
+	//Premet de passer au controlleur l'espece du Tamagotchi que l'on souhaite creer
+	public String getEspece() {
+		return createTamagotchi.getEspece();
 	}
 	
 	public static void main (String args []) {	

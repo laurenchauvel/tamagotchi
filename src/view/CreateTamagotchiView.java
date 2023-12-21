@@ -34,8 +34,8 @@ public class CreateTamagotchiView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				//TODO : A modfier
+				frame.getLayout().show(frame.getPanel(), frame.getGame());
 			}
 			
 		});
