@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 import modele.*;
 import view.*;
 
-public class Controller {
+public class ControllerV1 {
 	
 	
 	private Tamagotchi tamagotchi; //modele
@@ -20,7 +20,7 @@ public class Controller {
 	
 	private Scanner scan;
 	
-	public Controller()  {
+	public ControllerV1()  {
 		enCours = true;
 		scan = new Scanner(System.in);
 		switch(scan.nextInt()) {
@@ -94,7 +94,7 @@ public class Controller {
 
         //int choix = scanner.nextInt();
         
-        Controller test = new Controller();
+        ControllerV1 test = new ControllerV1();
         
 
         System.out.println("Vous avez choisi: " + test.tamagotchi.getNom());

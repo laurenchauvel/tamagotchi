@@ -18,9 +18,10 @@ public class Controller {
 	public Controller(View v, Sauvegarde s) {
 		view = v;
 		view.setController(this);
+		view.setVisible(true);
 		sauvegarde = s ;
 		tamagotchi = null ;
-		piece = tamagotchi.getMaison().getPiece();
+		piece = null;
 	}
 
 	public void createTamagotchi() {
@@ -30,25 +31,11 @@ public class Controller {
 		
 		
 		tamagotchi = sauvegarde.nouvellePartie(name, espece);
-		
-		/*
-		//On cree un nouveau tamagotchi de l'espece choisie par l'utilisateur
-		switch(espece){
-			case "Chien" : 
-				tamagotchi = new Chien(name);
-				break;
-			case "Lion" : 
-				tamagotchi = new Lion(name);
-				break;
-			case "Oiseau" :
-				tamagotchi = new Oiseau(name);
-				break;
-			case "Robot" : 
-				tamagotchi = new Robot(name);
-				break;
-		}*/
-		
-		//sauvegarde.sauvegarder(tamagotchi);
+		piece = tamagotchi.getPiece();
+	}
+	
+	public Tamagotchi getTamagotchi() {
+		return tamagotchi;
 		
 	}
 	

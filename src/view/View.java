@@ -31,7 +31,6 @@ public class View extends JFrame {
 		panel = new JPanel(layout);
 		setContentPane(panel);
 		
-		
 		//Reglage des parametres de la fenetre
 		this.setTitle("Dark Tamagotchi");
 		this.setVisible(true);
