@@ -10,35 +10,38 @@ public class Maison implements Serializable { //public class maison
 
 	//Les differentes pieces du jeu
 	public enum Piece{
-		Salon(new File("../media/salon-image.avif"), new File("../media/menu-musique.wav")),
-		Chambre(new File("../media/chambre-image.avif"), new File("../media/menu-musique.wav")),
-		Cuisine(new File("../media/cuisine-image.avif"), new File("../media/menu-musique.wav")),
-		SDB(new File("../media/sdb-image.avif"), new File("../media/menu-musique.wav")),  //SDB = Salle de bain
-		Jardin(new File("../media/jardin-image.jpeg"), new File("../media/menu-musique.wav"));
+		
+		Salon("Salon",new File("../media/salon-image.avif")),
+		Chambre("Chambre",new File("../media/chambre-image.avif")),
+		Cuisine("Cuisine",new File("../media/cuisine-image.avif")),
+		SDB("SDB", new File("../media/sdb-image.avif")),  //SDB = Salle de bain
+		Jardin("Jardin", new File("../media/jardin-image.jpeg"));
+		
+		private final String name ;
 		
 		//attributs d'une piece
 		private File image;
-		private File son;
+		
 		
 		//=================================================================================================================
 		
 		//constructeur
-		private Piece(File i , File s) {
+		private Piece(String name, File i) {
+			this.name=name;
 			this.image = i;
-			this.son = s;
 		}
 		
 		//=================================================================================================================
+		
+		public String getName() {
+			return name;
+		}
 		
 		//getter image
 		public File getImage() {
 			return image;
 		}
 		
-		//getter son
-		public File getSon() {
-			return son;
-		}
 	};
 	
 	//=================================================================================================================
@@ -48,7 +51,6 @@ public class Maison implements Serializable { //public class maison
 	
 	//ensemble des pieces dans lesquelles le tamagotchi vivra
 	private ArrayList<Piece> toutesLespieces;
-	 
 	
 	//=================================================================================================================
 	

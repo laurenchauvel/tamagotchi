@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
+
 import javax.swing.*;
 
 import controller.Controller;
@@ -35,7 +37,7 @@ public class View extends JFrame {
 		this.setTitle("Dark Tamagotchi");
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setSize(800,700);
+		this.setSize(1500,900);
 		this.setLocationRelativeTo(null); 	//mets la fenetre au milieu de l'ecran
 		
 		

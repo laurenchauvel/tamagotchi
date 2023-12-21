@@ -9,8 +9,7 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class StartScreenView extends JPanel {
-
-
+	
 	private JButton playButton ;
 	private JButton rulesButton ;
 	
