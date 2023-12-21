@@ -1,27 +1,23 @@
 package controller;
 
 import java.util.Scanner;
-
-import java.io.*;
-
-import view.MenuView;
-
-import java.util.concurrent.Executors;
 //import java.util.concurrent.Executor; //inutile avec serivce qui est plus complet
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future; //peut servir plus tard
+import java.util.concurrent.Executors;
 
 import modele.*;
-import modele.Maison.Piece;
+import view.*;
 
 public class Controller {
 	
 	
 	private Tamagotchi tamagotchi; //modele
 	
-	private MenuView view; //view
+	private View view; //view
 	
-	private boolean enCours;
+	private Sauvegarde sauvegarde; //modele
+	
+	private boolean enCours; //indique si une partie est en cours
 	
 	private Scanner scan;
 	

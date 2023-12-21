@@ -10,7 +10,7 @@ public class TestSauvegarde {
 
     public static void main(String[] args) {
         // Crée une nouvelle instance de ChargerPartie
-        Sauvegarde chargerPartie = new Sauvegarde();
+        Sauvegarde sauvegarde = new Sauvegarde();
 
         //Crée quelques Tamagotchis et les sauvegarde
         Tamagotchi tama1 = new Lion("Lee");
@@ -18,27 +18,28 @@ public class TestSauvegarde {
         Tamagotchi tama3 = new Robot("Robbie");
         Tamagotchi tama4 = new Robot("Joe");
 
-        chargerPartie.sauvegarder(tama1);
-        chargerPartie.sauvegarder(tama2);
-        chargerPartie.sauvegarder(tama3);
+        sauvegarde.sauvegarder(tama1);
+        sauvegarde.sauvegarder(tama2);
+        sauvegarde.sauvegarder(tama3);
 
         // Charge les Tamagotchis sauvegardés
-        //chargerPartie.charger();
+        //sauvegarde.charger();
 
         // Récupère la liste des Tamagotchis sauvegardés
-        //ArrayList<Tamagotchi> tamagotchisSauvegardes = chargerPartie.getTamagotchisSauvegardes();
+        //ArrayList<Tamagotchi> tamagotchisSauvegardes = sauvegarde.getTamagotchisSauvegardes();
 
         // Affiche les Tamagotchis chargés
         System.out.println("Tamagotchis chargés : ");
-        for (Tamagotchi tamagotchi : chargerPartie.getTamagotchisSauvegardes()) {
+        for (Tamagotchi tamagotchi : sauvegarde.getTamagotchisSauvegardes()) {
             System.out.println(tamagotchi.getNom());
         }
         
-        chargerPartie.sauvegarder(tama4);
-        //chargerPartie.charger();
+        tama1.setNom("koko");
+        //sauvegarde.sauvegarder(tama1);
+        //sauvegarde.charger();
         
         System.out.println("Tamagotchis chargés : ");
-        for (Tamagotchi tamagotchi : chargerPartie.getTamagotchisSauvegardes()) {
+        for (Tamagotchi tamagotchi : sauvegarde.getTamagotchisSauvegardes()) {
             System.out.println(tamagotchi.getNom());
         }
         
