@@ -77,7 +77,8 @@ public class InterfaceJeuView extends JPanel {
         
         //Initialisation du panel des actions
         boutonsActions = new JPanel();
-        boutonsActions.setLayout(new GridLayout(9,1));
+        //boutonsActions.setLayout(new GridLayout(9,1));
+        boutonsActions.setLayout(new BoxLayout(boutonsActions, BoxLayout.Y_AXIS));
         boutonsActions.add(manger_recharge);
         boutonsActions.add(dormir_veille);
         boutonsActions.add(jouer);
@@ -87,6 +88,8 @@ public class InterfaceJeuView extends JPanel {
         boutonsActions.add(seLaver);
         boutonsActions.add(brosserDents);
         boutonsActions.add(toilettes);
+        boutonsActions.setBackground(new Color(255, 255, 255, 0));
+        boutonsActions.setPreferredSize(new Dimension(200, 500));
         
         afficherBoutonsAction(Piece.Salon);	//TODO: a enlever et gerer avec le controller
         
