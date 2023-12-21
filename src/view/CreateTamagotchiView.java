@@ -5,8 +5,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import controller.Controller;
+
 @SuppressWarnings("serial")
 public class CreateTamagotchiView extends JPanel {
+	
+	private Controller controller ;
 	
 	private String[] elements = {"Oiseau", "Robot", "Lion", "Chien"};
 	private JLabel chooseName ; 
@@ -17,6 +21,8 @@ public class CreateTamagotchiView extends JPanel {
 	private JButton submit;
 	
 	public CreateTamagotchiView(View frame) {
+		
+		this.controller = frame.getController();
 		
 		chooseName = new JLabel("Choose a name : ");
 		name = new JTextField(20);
@@ -35,6 +41,7 @@ public class CreateTamagotchiView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//TODO : A modfier
+				controller.createTamagotchi();
 				frame.getLayout().show(frame.getPanel(), frame.getGame());
 			}
 			

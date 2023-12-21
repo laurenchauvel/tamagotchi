@@ -14,6 +14,9 @@ public class Sauvegarde implements Serializable {
     //attributs tamagotchi
     private Tamagotchi tamagotchi;
     
+    //nom du fichier dans lequel on enregistre les donnees
+    private final String filename = "tamagotchis_sauvegardes.txt" ;
+    
     //liste des tamagotchis sauvegardes
 	private ArrayList<Tamagotchi> tamagotchisSauvegardes;
 	
@@ -35,7 +38,7 @@ public class Sauvegarde implements Serializable {
 
     // Méthode pour charger la liste des Tamagotchis sauvegardés
     public void charger() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("tamagotchis_sauvegardes.dat"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
             tamagotchisSauvegardes = (ArrayList<Tamagotchi>) ois.readObject();
         } catch (Exception e) {
             System.out.println("Erreur lors du chargement des Tamagotchis sauvegardés : " + e.getMessage());
@@ -96,7 +99,7 @@ public class Sauvegarde implements Serializable {
     	if (!tamagotchisSauvegardes.contains(tamagotchi)) {
     		tamagotchisSauvegardes.add(tamagotchi);
     	}
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("tamagotchis_sauvegardes.dat"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(tamagotchisSauvegardes);
         } catch (Exception e) {
             System.out.println("Erreur lors de la sauvegarde des Tamagotchis : " + e.getMessage());

@@ -3,8 +3,12 @@ package view;
 import java.awt.CardLayout;
 import javax.swing.*;
 
+import controller.Controller;
+
 @SuppressWarnings("serial")
 public class View extends JFrame {
+	
+	private Controller controller ;
 	
 	private CardLayout layout ;
 
@@ -43,6 +47,14 @@ public class View extends JFrame {
 		layout.show(panel, start);
 		
 		
+	}
+	
+	public Controller getController() {
+		return controller ; 
+	}
+	
+	public void setController(Controller controller) {
+		this.controller = controller ; 
 	}
 	
 	

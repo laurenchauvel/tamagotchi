@@ -35,13 +35,15 @@ public class TestSauvegarde {
         }
         
         tama1.setNom("koko");
+        tama1.setEnergie(20);
         //sauvegarde.sauvegarder(tama1);
         //sauvegarde.charger();
         
         System.out.println("Tamagotchis chargés : ");
         for (Tamagotchi tamagotchi : sauvegarde.getTamagotchisSauvegardes()) {
-            System.out.println(tamagotchi.getNom());
+            System.out.println(tamagotchi.getNom()+", Energie : " + tamagotchi.getEnergie());
         }
+        
         
     }
 }
