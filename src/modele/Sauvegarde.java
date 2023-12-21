@@ -85,7 +85,7 @@ public class Sauvegarde implements Serializable {
     
     //=================================================================================================================
     
-    public Tamagotchi euqalsTamagotchi(int index) {
+    public Tamagotchi equalsTamagotchi(int index) {
     	return tamagotchisSauvegardes.get(index);
     }
     
@@ -93,8 +93,9 @@ public class Sauvegarde implements Serializable {
 
     // Méthode pour sauvegarder les Tamagotchis
     public void sauvegarder(Tamagotchi tamagotchi) {
-    	if (tamagotchisSauvegardes.contains(tamagotchi))
-        tamagotchisSauvegardes.add(tamagotchi);
+    	if (!tamagotchisSauvegardes.contains(tamagotchi)) {
+    		tamagotchisSauvegardes.add(tamagotchi);
+    	}
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("tamagotchis_sauvegardes.dat"))) {
             oos.writeObject(tamagotchisSauvegardes);
         } catch (Exception e) {

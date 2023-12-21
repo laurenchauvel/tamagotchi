@@ -2,6 +2,8 @@ package modele;
 
 import java.io.Serializable;
 
+import modele.Maison.Piece;
+
 public abstract class Tamagotchi implements Serializable {
 
 	private static final long serialVersionUID = 1L; //inutile
@@ -27,6 +29,9 @@ public abstract class Tamagotchi implements Serializable {
 	
 	//attribut representant la maison de chaque tamagotchi
 	private Maison maison ;
+	
+	//attribut pour sa piece courante
+	private Piece piece;
 
 	//=================================================================================================================
 
@@ -40,6 +45,7 @@ public abstract class Tamagotchi implements Serializable {
 		setEnergie(100);
 		setMoral(100);
 		maison = new Maison();
+		piece = maison.getPiece();
 	}
 	
 	//=================================================================================================================
@@ -93,6 +99,13 @@ public abstract class Tamagotchi implements Serializable {
     public void setHygiene(int n) {
         hygiene = n;
     }
+    
+    //=================================================================================================================
+
+    //getter piece courange
+    public Piece getPiece() {
+        return piece;
+    }
 	
 	//=================================================================================================================
 
@@ -100,13 +113,8 @@ public abstract class Tamagotchi implements Serializable {
 		return maison;
 	}
 
-	public void seDeplacer(Maison.Piece p) {
-		//a verifier , surement inutile
-		for (Maison.Piece val : maison.getToutesLesPieces()) {
-			if (val == p) {
-				this.maison.setPiece(p); //plus simple de juste garder cette ligne
-			}
-		}
+	public void seDeplacer(Piece p) {
+		this.maison.setPiece(p); //plus simple de juste garder cette ligne
 	}
 	
 	//=================================================================================================================
