@@ -15,11 +15,16 @@ public class SauvegardesView extends JPanel {
     private Sauvegarde sauvegarde;
     
     private Controller controller ;
+    
+    private JButton retour ;
 
     public SauvegardesView(View frame) {
         
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         
+        retour = new JButton("Retour");
+        retour.addActionListener(e -> frame.getLayout().show(frame.getPanel(), frame.getMenu()));
+        this.add(retour);
     }
     
     public void showSavedGames() {
