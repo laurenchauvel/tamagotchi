@@ -37,6 +37,8 @@ public class InterfaceJeuView extends JPanel {
     private JButton toilettes ;
     private JButton actionSpeciale ;		//sauter, vaChercher, voler
     private JPanel boutonsActions;
+    
+    private JButton quitter ;
 
     public InterfaceJeuView(View frame) {
     	
@@ -61,6 +63,11 @@ public class InterfaceJeuView extends JPanel {
         boutonsPieces.add(chambre);
         boutonsPieces.add(cuisine);
         boutonsPieces.add(jardin);
+        
+        //Initialisation et ajout du bouton de retour au panel principal
+        quitter = new JButton("Quitter");
+        quitter.addActionListener(e -> frame.getLayout().show(frame.getPanel(), frame.getStart()));
+        boutonsPieces.add(quitter);
         
         
         //Initialisation des boutons d'actions
