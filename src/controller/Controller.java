@@ -20,8 +20,8 @@ public class Controller {
 	
 	public Controller(View v, Sauvegarde s) {
 		view = v;
-		view.getSauvegardesView().setSauvegarde(s);
 		view.setController(this);
+		view.setSauvegarde(s);
 		view.setVisible(true);
 		
 		//add Linda

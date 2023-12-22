@@ -11,7 +11,7 @@ import controller.Controller;
 public class View extends JFrame {
 	
 	private Controller controller ;
-	private Sauvegarde sauveGarde ;
+	private Sauvegarde sauvegarde ;
 	private CardLayout layout ;
 
 	private JPanel panel ;
@@ -28,7 +28,7 @@ public class View extends JFrame {
 	private final String menu = "Menu";
 	private final String create = "Create";
 	private final String game = "Game";
-	private final String sauvegarde = "Sauvegarde"; //tood Linda
+	private final String sauvegardeName= "Sauvegarde"; //tood Linda
 	
 	public View() {
 		super();
@@ -48,7 +48,7 @@ public class View extends JFrame {
 		this.add(menuScreen, menu);
 		this.add(createTamagotchi, create);
 		this.add(gameView, game);
-		this.add(sauvegardesView, sauvegarde); //todo Linda
+		this.add(sauvegardesView, sauvegardeName); //todo Linda
 		layout.show(panel, start);
 		
 		
@@ -66,8 +66,12 @@ public class View extends JFrame {
 	public SauvegardesView getSauvegardesView() {
 		return sauvegardesView;
 	}
-	public void setSauvegarde(Sauvegarde sauveGarde) { //todo Linda
-		this.sauveGarde = sauveGarde;
+	public void setSauvegarde(Sauvegarde sauvegarde) { //todo Linda
+		this.sauvegarde = sauvegarde;
+	}
+	
+	public Sauvegarde getSauvegarde() {
+		return sauvegarde ; 
 	}
 	
 	
@@ -99,6 +103,11 @@ public class View extends JFrame {
 	public String getGame() {
 		return game;
 	}
+	
+	//Permet de recuperer le nom du panel de jeu
+		public String getSauvegardeName() {
+			return sauvegardeName;
+		}
 	
 	
 	//Permet de passer au controleur le nom du Tamagotchi que l'on souhaite creer
