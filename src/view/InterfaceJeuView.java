@@ -14,18 +14,31 @@ import modele.Maison.Piece;
 
 @SuppressWarnings("serial")
 public class InterfaceJeuView extends JPanel {
+	
+	private View view ;
+	private Controller controller ;
+	
 	//Image de fond
     private Image backgroundImage;
     
-    //Bouton des pieces
+    
+    //Label des attributs
+    private JLabel name ;
+    private JLabel vie ;
+    private JLabel energie ;
+    private JLabel moral ;
+    private JLabel hygiene ;
+    private JPanel attributs ;				//panel des attributs
+    
+    //Boutons des pieces
     private JButton salon;
     private JButton salle_de_bain;
     private JButton chambre;
     private JButton cuisine;
     private JButton jardin;
-    private JPanel boutonsPieces;
+    private JPanel boutonsPieces;			//panel des pieces
     
-    //Bouton des actions
+    //Boutons des actions
     private JButton manger_recharge ;
     private JButton dormir_veille ;
     private JButton jouer ;
@@ -36,11 +49,15 @@ public class InterfaceJeuView extends JPanel {
     private JButton brosserDents ;
     private JButton toilettes ;
     private JButton actionSpeciale ;		//sauter, vaChercher, voler
-    private JPanel boutonsActions;
+    private JPanel boutonsActions;			//panel des actions
     
     private JButton quitter ;
 
+    /*
+     * Cobstructeur de l'interface de jeu  
+     */
     public InterfaceJeuView(View frame) {
+    	this.view = frame ;
     	
         // Configuration du layout du panneau principal
         setLayout(new BorderLayout());
@@ -48,29 +65,23 @@ public class InterfaceJeuView extends JPanel {
         // Charger l'image d'arrière-plan
         changeBackgroundImage("/media/salon.png");
 
-        // Initialisation des boutons de Pieces
-        salon = new JButton("Salon");
-        salle_de_bain = new JButton("Salle de bain");
-        chambre = new JButton("Chambre");
-        cuisine = new JButton("Cuisine");
-        jardin = new JButton("Jardin");
+        //Affichage des actions
+        initialisationBoutonsActions();
         
-        
-        // Initialisation du panel des pieces
-        boutonsPieces = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        boutonsPieces.add(salon);
-        boutonsPieces.add(salle_de_bain);
-        boutonsPieces.add(chambre);
-        boutonsPieces.add(cuisine);
-        boutonsPieces.add(jardin);
+        //Affichage des pieces
+        affichageBoutonsPieces();
         
         //Initialisation et ajout du bouton de retour au panel principal
         quitter = new JButton("Quitter");
-        quitter.addActionListener(e -> frame.getLayout().show(frame.getPanel(), frame.getStart()));
+        quitter.addActionListener(e -> view.getLayout().show(view.getPanel(), view.getStart()));
         boutonsPieces.add(quitter);
-        
-        
-        //Initialisation des boutons d'actions
+    }
+    
+    /*
+     * Initialisation et affichage sur le panel (this) des boutons des actions
+     */
+    private void initialisationBoutonsActions() {
+    	//Initialisation des boutons d'actions
         manger_recharge = new JButton(Action.Manger_SeRecharger.getActionName());
         dormir_veille = new JButton(Action.Dormir_EnVeille.getActionName());
         jouer = new JButton(Action.Jouer.getActionName());
@@ -98,9 +109,73 @@ public class InterfaceJeuView extends JPanel {
         boutonsActions.setBackground(new Color(255, 255, 255, 0));
         boutonsActions.setPreferredSize(new Dimension(200, 500));
         
-        afficherBoutonsAction(Piece.Salon);	//TODO: a enlever et gerer avec le controller
+        // Ajouter le pannel des actions à droite de la fenêtre
+        add(boutonsActions, BorderLayout.EAST);
         
-        chambre.addActionListener(new ActionListener() {
+        afficherBoutonsAction(Piece.Salon);	//TODO: a enlever et gerer avec le controller
+    }
+    
+    /*
+     * Initialisation et affichage sur le panel (this) des boutons des pieces
+     */
+    private void affichageBoutonsPieces() {
+    	// Initialisation des boutons de Pieces
+        salon = new JButton("Salon");
+        salle_de_bain = new JButton("Salle de bain");
+        chambre = new JButton("Chambre");
+        cuisine = new JButton("Cuisine");
+        jardin = new JButton("Jardin");
+        
+        
+        // Initialisation du panel des pieces
+        boutonsPieces = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        boutonsPieces.add(salon);
+        boutonsPieces.add(salle_de_bain);
+        boutonsPieces.add(chambre);
+        boutonsPieces.add(cuisine);
+        boutonsPieces.add(jardin);
+        
+        addListenersToPieces();
+        
+     // Ajouter le pannel des pieces en bas de la fenêtre
+        add(boutonsPieces, BorderLayout.SOUTH);
+    }
+    
+    /*
+     * Initialisation et affichage sur le panel (this) des attributs du Tamagotchi courant
+     */
+    public void affichageLabelsAttributs() {
+    	name = new JLabel(controller.getTamagotchi().getNom()) ;
+        vie = new JLabel("Vie : " + controller.getTamagotchi().getVie()) ;
+        energie = new JLabel("Energie : " + controller.getTamagotchi().getEnergie()) ;
+        moral = new JLabel("Moral : " + controller.getTamagotchi().getMoral()) ;
+        hygiene = new JLabel("Hygiene : " + controller.getTamagotchi().getHygiene()) ;
+        
+        //Changement de la couleur du texte des Label
+        name.setForeground(Color.WHITE);
+        vie.setForeground(Color.WHITE);
+        energie.setForeground(Color.WHITE);
+        moral.setForeground(Color.WHITE);
+        hygiene.setForeground(Color.WHITE);
+        
+        attributs = new JPanel();
+        attributs.setLayout(new BoxLayout(attributs, BoxLayout.Y_AXIS));
+        attributs.add(name);
+        attributs.add(vie);
+        attributs.add(energie);
+        attributs.add(moral);
+        attributs.add(hygiene);
+        attributs.setBackground(new Color(255, 255, 255, 0));
+        
+        this.add(attributs, BorderLayout.WEST);
+        
+    }
+    
+    /*
+     * Ajout de listeners aux boutons des pieces 
+     */
+    private void addListenersToPieces() {
+    	chambre.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeBackgroundImage("/media/chambre.png");
@@ -139,15 +214,8 @@ public class InterfaceJeuView extends JPanel {
                 afficherBoutonsAction(Piece.Jardin);
             }
         });
-        
-        // Ajouter le pannel des pieces en bas de la fenêtre
-        add(boutonsPieces, BorderLayout.SOUTH);
-        
-     // Ajouter le pannel des actions à droite de la fenêtre
-        add(boutonsActions, BorderLayout.EAST);
-        
-        
     }
+    
     private void changeBackgroundImage(String imagePath) {
         try {
             backgroundImage = ImageIO.read(getClass().getResource(imagePath));
@@ -157,6 +225,8 @@ public class InterfaceJeuView extends JPanel {
             System.exit(1);
         }
     }
+    
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -164,7 +234,10 @@ public class InterfaceJeuView extends JPanel {
         g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), this);
     }
     
-    
+    /*
+     * Methode qui permet de rendre visible ou invisible les boutons d'action
+     * en fonction de la piece ou l'on se trouve 
+     */
     public void afficherBoutonsAction(Piece p) {
     	switch(p.getName()) {
     		case "Salon" :
@@ -223,6 +296,10 @@ public class InterfaceJeuView extends JPanel {
     			toilettes.setVisible(false);
     			break;
     	}
+    }
+    
+    public void setController(Controller c) {
+    	this.controller = c;
     }
 }
 

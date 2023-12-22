@@ -66,6 +66,10 @@ public class View extends JFrame {
 	public SauvegardesView getSauvegardesView() {
 		return sauvegardesView;
 	}
+	
+	public InterfaceJeuView getGameView() {
+		return gameView ;
+	}
 	public void setSauvegarde(Sauvegarde sauvegarde) { //todo Linda
 		this.sauvegarde = sauvegarde;
 	}

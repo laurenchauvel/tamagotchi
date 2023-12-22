@@ -37,8 +37,18 @@ public class CreateTamagotchiView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//TODO : A modfier
-				frame.getController().createTamagotchi();
-				frame.getLayout().show(frame.getPanel(), frame.getGame());
+				
+				if(!getName().equals("")) {
+					frame.getController().createTamagotchi();
+					
+					//Affichage des attributs sur l'interface
+					frame.getGameView().setController(frame.getController());
+					frame.getGameView().affichageLabelsAttributs();
+					
+					frame.getLayout().show(frame.getPanel(), frame.getGame());
+				}else {
+					JOptionPane.showMessageDialog(CreateTamagotchiView.this, "Veuillez donner un nom au Tamagotchi");
+				}
 			}
 			
 		});
