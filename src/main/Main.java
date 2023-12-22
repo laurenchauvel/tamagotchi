@@ -10,6 +10,8 @@ public class Main {
 		Sauvegarde sauvegarde = new Sauvegarde();
 		View view = new View();
 		Controller controller = new Controller(view, sauvegarde);
+		
+        view.setSauvegarde(sauvegarde); //todo Linda
 		view.setController(controller);
 	}
 

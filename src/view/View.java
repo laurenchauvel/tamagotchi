@@ -1,5 +1,5 @@
 package view;
-
+import modele.*;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 
@@ -11,7 +11,7 @@ import controller.Controller;
 public class View extends JFrame {
 	
 	private Controller controller ;
-	
+	private Sauvegarde sauveGarde ;
 	private CardLayout layout ;
 
 	private JPanel panel ;
@@ -20,12 +20,15 @@ public class View extends JFrame {
 	private MenuView menuScreen = new MenuView(this);	//choix de la partie (ancienne ou nouvelle)
 	private CreateTamagotchiView createTamagotchi = new CreateTamagotchiView(this);	//creation d'un nouveau Tamagotchi
 	private InterfaceJeuView gameView = new InterfaceJeuView(this);
-	
+	private SauvegardesView sauvegardesView = new SauvegardesView(this); //todo Linda
+
+    
 	//Nom des fenêtres 
 	private final String start = "Start";
 	private final String menu = "Menu";
 	private final String create = "Create";
 	private final String game = "Game";
+	private final String sauvegarde = "Sauvegarde"; //tood Linda
 	
 	public View() {
 		super();
@@ -45,6 +48,7 @@ public class View extends JFrame {
 		this.add(menuScreen, menu);
 		this.add(createTamagotchi, create);
 		this.add(gameView, game);
+		this.add(sauvegardesView, sauvegarde); //todo Linda
 		layout.show(panel, start);
 		
 		
@@ -56,6 +60,14 @@ public class View extends JFrame {
 	
 	public void setController(Controller controller) {
 		this.controller = controller ; 
+	}
+	
+	//TOdo Linda
+	public SauvegardesView getSauvegardesView() {
+		return sauvegardesView;
+	}
+	public void setSauvegarde(Sauvegarde sauveGarde) { //todo Linda
+		this.sauveGarde = sauveGarde;
 	}
 	
 	
@@ -98,6 +110,7 @@ public class View extends JFrame {
 	public String getEspece() {
 		return createTamagotchi.getEspece();
 	}
+	
 	
 	public static void main (String args []) {	
 		View view = new View();

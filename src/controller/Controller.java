@@ -1,6 +1,9 @@
 package controller;
 
 import view.*;
+
+import java.util.ArrayList;
+
 import modele.*;
 import modele.Maison.Piece;;
 
@@ -17,11 +20,21 @@ public class Controller {
 	
 	public Controller(View v, Sauvegarde s) {
 		view = v;
+		view.getSauvegardesView().setSauvegarde(s);
 		view.setController(this);
 		view.setVisible(true);
-		sauvegarde = s ;
+		
+		//add Linda
+		
+	    if (s == null) {
+	        throw new IllegalArgumentException("L'objet Sauvegarde ne doit pas être null");
+	    }
+	    this.sauvegarde = s;
+	    
+		//sauvegarde = s ;
 		tamagotchi = null ;
 		piece = null;
+		
 	}
 
 	public void createTamagotchi() {
@@ -31,12 +44,20 @@ public class Controller {
 		
 		
 		tamagotchi = sauvegarde.nouvellePartie(name, espece);
+		
 		piece = tamagotchi.getPiece();
+		//todo Linda
+		sauvegarde.sauvegarder(tamagotchi);
 	}
-	
+	//todo Linda
+	public ArrayList<Tamagotchi> getTamagoSauvegardes() {
+        return sauvegarde.getTamagotchisSauvegardes();
+    }
 	public Tamagotchi getTamagotchi() {
 		return tamagotchi;
 		
 	}
+	
+	
 	
 }
