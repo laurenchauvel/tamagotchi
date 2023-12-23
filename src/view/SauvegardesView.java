@@ -97,7 +97,9 @@ public class SauvegardesView extends JPanel {
                 
                 break;
             case 1: // Supprimer
-                
+            	controller.getdelete(tamagotchi);
+                // Mise à jour de l'affichage après la suppression
+                showSavedGames();
                 break;
             case 2: // Retour
                 // Ne rien faire, retourner à l'écran précédent

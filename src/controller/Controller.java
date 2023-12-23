@@ -57,7 +57,10 @@ public class Controller {
 		return tamagotchi;
 		
 	}
-	
+	//yodo Linda
+	public void getdelete(Tamagotchi t) {
+		sauvegarde.deleteTamagotchi(t);
+	}
 	
 	
 }
