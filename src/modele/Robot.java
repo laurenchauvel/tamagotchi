@@ -15,6 +15,7 @@ public class Robot extends Tamagotchi{
     public Robot(String n) {
         super(n);
         setBatterie(100);
+        setCri(Cri.ORDI);
     }
 
     //=================================================================================================================
@@ -103,6 +104,62 @@ public class Robot extends Tamagotchi{
     }
 
     //=================================================================================================================
+    
+    //methode pour faire du sport
+    public void faireSport() {
+        //maj energie
+        if (getEnergie() > 20 && getBatterie() > 20) {
+            majMoral(20);
+            majBatterie(-20);
+            majHygiene(-30);
+            majEnergie(-20);
+        } else {
+            System.out.println("Ressources insuffisantes");
+        }
+    }
+    
+    //=================================================================================================================
+    
+    //methode qui signale si le robot est dechargé
+    public boolean estDecharge() {
+    	if (getBatterie() < 15) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    //=================================================================================================================
+    
+    //methode pour la perte de nutrition
+    /*
+	 * n le nombre de points de nutrition qui baissent toutes les s secondes
+	 */
+    public void perteDeCharge(int n, int s) {
+    	while(!estDecharge()) {
+    		majBatterie(n);
+    		wait(s);
+    	}
+    }
+    
+    //=================================================================================================================
+    
+    //methode pour mourir de malnutrition
+    /*
+     * perte de 1 pn toutes les 5 secondes
+     * pere de 5 pv toutes les 180 secondes
+     */
+    public void dechargement() {
+    	perteDeCharge(-1, 5);
+    	if (estDecharge()) {
+			System.out.println(getNom() + " est déchargé");
+			perteDeVie(-5,180);
+		}
+    	if (estMort()) {
+			System.out.println(getNom() + " a succombé face à la brutalité du manque soudain de vivres !!!!");
+		}
+    	
+    }
+    
 
 
 

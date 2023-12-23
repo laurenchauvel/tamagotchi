@@ -1,5 +1,6 @@
 package modele;
 
+import java.io.File;
 import java.io.Serializable;
 
 import modele.Maison.Piece;
@@ -11,6 +12,35 @@ public abstract class Tamagotchi implements Serializable {
 	/**
 	 * attributs
 	 */
+	
+	//enum avec les differents cris
+    public enum Cri {
+    	Aboyer(new File("../media/cri-chien.wav")),
+    	Rugir(new File("../media/cri-lion.wav")),
+    	Chanter(new File("../media/cri-oiseau-2.wav")),
+    	ORDI(new File("../media/musique-nintendo-utile.mp3"));
+    	
+    	//attribut du fichier son pour le cri
+        private File son;
+        
+        //=================================================================================================================
+        
+        /*
+         * constructeur
+         */
+    	private Cri(File s) {
+    		son = s;
+    	}
+    	
+    	//=================================================================================================================
+    	
+    	public File getSon() {
+    		return son;
+    	}
+    };
+
+    //attribut du cri de l'animal
+    private Cri cri;
 	
 	//attribut pour le nom
 	private String nom ;
@@ -26,6 +56,10 @@ public abstract class Tamagotchi implements Serializable {
 	
 	//attribut pour le moral
 	private int moral;
+	
+	//attribut toielette
+    private int toilette;
+
 	
 	//attribut representant la maison de chaque tamagotchi
 	private Maison maison ;
@@ -44,6 +78,8 @@ public abstract class Tamagotchi implements Serializable {
 		setVie(100);
 		setEnergie(100);
 		setMoral(100);
+		setHygiene(100);
+		setToilette(100);
 		maison = new Maison();
 		piece = maison.getPiece();
 	}
@@ -80,6 +116,18 @@ public abstract class Tamagotchi implements Serializable {
 	
 	//=================================================================================================================
 
+    //getter toilette
+    public int getToilette() {
+        return toilette;
+    }
+
+    //setter toilette
+    public void setToilette(int n) {
+        toilette = n;
+    }
+	
+	//=================================================================================================================
+
 	public int getMoral() {
 		return moral;
 	}
@@ -99,6 +147,19 @@ public abstract class Tamagotchi implements Serializable {
     public void setHygiene(int n) {
         hygiene = n;
     }
+    
+    //=================================================================================================================
+
+    //getter cri
+    public Cri getCri() {
+        return cri;
+    }
+
+    //setter cri
+    public void setCri(Cri cri) {
+        this.cri = cri;
+    }
+
     
     //=================================================================================================================
 
@@ -136,6 +197,16 @@ public abstract class Tamagotchi implements Serializable {
     	}
     	return result;
     }
+    
+    //=================================================================================================================
+    
+    //definit si 2 tamagotchis soient egaux
+    public boolean equals(Tamagotchi t) {
+    	if (t.getNom().equals(this.getNom()) && t.getEspece().equals(this.getEspece())) {
+    		return true;
+    	}
+    	return false;
+    }
 	
 	//=================================================================================================================
 	
@@ -144,6 +215,8 @@ public abstract class Tamagotchi implements Serializable {
 	public abstract void jouer();
 	
 	public abstract void jardinage();
+	
+	public abstract void faireSport();
 	
 	//=================================================================================================================
 
@@ -170,6 +243,25 @@ public abstract class Tamagotchi implements Serializable {
 	
 	//=================================================================================================================
 
+    //methode mise a jour de toilette
+    public void majToilette(int n) {
+        if (n > 0) {
+            if (getToilette() + n <= 100) {
+                setToilette(getToilette() + n);
+            } else {
+                setToilette(100);
+            }
+        } else {
+            if (getToilette() + n >= 0) {
+                setToilette(getToilette() + n);
+            } else {
+                setToilette(0);
+            }
+        }
+    }
+    
+    //=================================================================================================================
+
 	//methode mise a jour de Moral
 	public void majMoral(int n) {
 		if (n > 0) {
@@ -187,7 +279,7 @@ public abstract class Tamagotchi implements Serializable {
 		}
 	}
 
-	//==============================false===================================================================================
+	//=================================================================================================================
 
 	//methode mise a jour de Energie
 	public void majEnergie(int n) {
@@ -223,6 +315,20 @@ public abstract class Tamagotchi implements Serializable {
                 setHygiene(0);
             }
         }
+    }
+    
+    //=================================================================================================================
+
+    public void brosserDent() {
+        majHygiene(40);
+    }
+
+    
+    //=================================================================================================================
+
+    //methode pour se laver
+    public void seLaver() {
+        majHygiene(60);
     }
     
     //=================================================================================================================
@@ -364,7 +470,7 @@ public abstract class Tamagotchi implements Serializable {
 		}
     }
     
-//=================================================================================================================
+    //=================================================================================================================
     
     //methode qui signale si le tamagotchi est sale
     public boolean estFatigue() {
@@ -389,6 +495,33 @@ public abstract class Tamagotchi implements Serializable {
     		System.out.println(getNom() + " est KO");
     	}
     }
+    
+    //=================================================================================================================
+    
+    //methode qui signale si le tamagotchi veut se soulager
+    public boolean doitSeSoulager() {
+    	if (getToilette() < 5) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    //=================================================================================================================
+     
+    //methode pour la perte de la reserve des toilettes
+    /*
+	 * t la decrementaion des toilettes toutes les s secondes
+	 */
+    public void perteToilette(int t, int s) {
+    	while(!doitSeSoulager()) {
+    		majToilette(t);
+    		wait(s);
+    	}
+    	if (doitSeSoulager()) {
+			System.out.println(getNom() + " sens que sa vessie va exploser");
+		}
+    }
+  
     
 	
 	

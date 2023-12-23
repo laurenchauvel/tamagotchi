@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.*;
 
 import controller.Controller;
+import controller.Sauvegarde;
 
 @SuppressWarnings("serial")
 public class View extends JFrame {

@@ -8,39 +8,8 @@ public abstract class Animal extends Tamagotchi {
      * les attributs
      */
 
-    //attribut toielette
-    private int toilette;
-
     //attribut nourriture
     private int nourriture;
-
-    //enum avec les differents cris
-    public enum Cri {
-    	Aboyer(new File("../media/cri-chien.wav")),
-    	Rugir(new File("../media/cri-lion.wav")),
-    	Chanter(new File("../media/cri-oiseau-2.wav"));
-    	
-    	//attribut du fichier son pour le cri
-        private File son;
-        
-        //=================================================================================================================
-        
-        /*
-         * constructeur
-         */
-    	private Cri(File s) {
-    		son = s;
-    	}
-    	
-    	//=================================================================================================================
-    	
-    	public File getSon() {
-    		return son;
-    	}
-    };
-
-    //attribut du cri de l'animal
-    private Cri cri;
 
     //=================================================================================================================
 
@@ -51,9 +20,7 @@ public abstract class Animal extends Tamagotchi {
      */
     public Animal(String n) {
         super(n);
-        setHygiene(100);
         setNourriture(100);
-        setToilette(100);
     }
 
     //=================================================================================================================
@@ -72,29 +39,7 @@ public abstract class Animal extends Tamagotchi {
         nourriture = n;
     }
 
-    //=================================================================================================================
-
-    //getter toilette
-    public int getToilette() {
-        return toilette;
-    }
-
-    //setter toilette
-    public void setToilette(int n) {
-        toilette = n;
-    }
-
-    //=================================================================================================================
-
-    //getter cri
-    public Cri getCri() {
-        return cri;
-    }
-
-    //setter cri
-    public void setCri(Cri cri) {
-        this.cri = cri;
-    }
+    
 
     //=================================================================================================================
 
@@ -118,37 +63,12 @@ public abstract class Animal extends Tamagotchi {
 
     //=================================================================================================================
 
-    //methode mise a jour de toilette
-    public void majToilette(int n) {
-        if (n > 0) {
-            if (getToilette() + n <= 100) {
-                setToilette(getToilette() + n);
-            } else {
-                setToilette(100);
-            }
-        } else {
-            if (getToilette() + n >= 0) {
-                setToilette(getToilette() + n);
-            } else {
-                setToilette(0);
-            }
-        }
-    }
-
-    //=================================================================================================================
-
     //methode pour manger
     public void manger() {
         majNourriture(30);
         majEnergie(10);
     }
 
-    //=================================================================================================================
-
-    //methode pour se laver
-    public void seLaver() {
-        majHygiene(60);
-    }
 
     //=================================================================================================================
 
@@ -167,12 +87,6 @@ public abstract class Animal extends Tamagotchi {
 
     //=================================================================================================================
 
-    public void brosserDent() {
-        majHygiene(40);
-    }
-
-    //=================================================================================================================
-
     public void regarderTV() {
     	if (getNourriture() > 10) {
 	        majMoral(15);
@@ -184,6 +98,13 @@ public abstract class Animal extends Tamagotchi {
         }
     }
 
+    //=================================================================================================================
+    
+    public void seSoulager() {
+    	majToilette(50);
+    	majHygiene(15);
+    }
+    
     //=================================================================================================================
 
     //methode pour dormir
@@ -273,32 +194,7 @@ public abstract class Animal extends Tamagotchi {
     	
     }
     
-    //=================================================================================================================
     
-    //methode qui signale si le tamagotchi veut se soulager
-    public boolean doitSeSoulager() {
-    	if (getToilette() < 5) {
-    		return true;
-    	}
-    	return false;
-    }
-    
-    //=================================================================================================================
-     
-    //methode pour la perte de la reserve des toilettes
-    /*
-	 * t la decrementaion des toilettes toutes les s secondes
-	 */
-    public void perteToilette(int t, int s) {
-    	while(!doitSeSoulager()) {
-    		majToilette(t);
-    		wait(s);
-    	}
-    	if (doitSeSoulager()) {
-			System.out.println(getNom() + " sens que sa vessie va exploser");
-		}
-    }
-  
     
     
     
