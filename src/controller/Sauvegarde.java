@@ -53,8 +53,6 @@ public class Sauvegarde implements Serializable {
      * les methodes
      */
     
-    // methode pour initialiser les flux
-    
     public void ajouterSauvegarde(Tamagotchi t) {
     	tamagotchisSauvegardes.add(t);
     }
