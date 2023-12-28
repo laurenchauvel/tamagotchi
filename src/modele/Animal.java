@@ -97,13 +97,6 @@ public abstract class Animal extends Tamagotchi {
             System.out.println("Ressources insuffisantes");
         }
     }
-
-    //=================================================================================================================
-    
-    public void seSoulager() {
-    	majToilette(50);
-    	majHygiene(15);
-    }
     
     //=================================================================================================================
 
