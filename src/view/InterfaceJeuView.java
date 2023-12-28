@@ -24,10 +24,13 @@ public class InterfaceJeuView extends JPanel {
     
     //Label des attributs
     private JLabel name ;
+    private JLabel espece; 
     private JLabel vie ;
     private JLabel energie ;
     private JLabel moral ;
     private JLabel hygiene ;
+    private JLabel toilette;
+    private JLabel nourriture_batterie;
     private JPanel attributs ;				//panel des attributs
     
     //Boutons des pieces
@@ -174,26 +177,39 @@ public class InterfaceJeuView extends JPanel {
      * Initialisation et affichage sur le panel (this) des attributs du Tamagotchi courant
      */
     public void affichageLabelsAttributs() {
-    	name = new JLabel(controller.getTamagotchi().getNom()) ;
-        vie = new JLabel("Vie : " + controller.getTamagotchi().getVie()) ;
-        energie = new JLabel("Energie : " + controller.getTamagotchi().getEnergie()) ;
-        moral = new JLabel("Moral : " + controller.getTamagotchi().getMoral()) ;
-        hygiene = new JLabel("Hygiene : " + controller.getTamagotchi().getHygiene()) ;
-        
-        //Changement de la couleur du texte des Label
+    	name = new JLabel("Nom : " + controller.getNom()) ;
+        espece = new JLabel("Espèce : " + controller.getEspece()) ;
+    	vie = new JLabel("Vie : " + controller.getVie()) ;
+        energie = new JLabel("Energie : " + controller.getEnergie()) ;
+        moral = new JLabel("Moral : " + controller.getMoral()) ;
+        hygiene = new JLabel("Hygiene : " + controller.getHygiene()) ;
+        toilette = new JLabel("Toilettes : " + controller.getToilette()) ;
+        if (controller.getEspece().equals("Robot")){
+        	nourriture_batterie = new JLabel("Batterie : " + controller.getNourriture_Batterie()) ;
+        }else {
+        	nourriture_batterie = new JLabel("Nourriture : " + controller.getNourriture_Batterie()) ;
+        }
+        	
+        	//Changement de la couleur du texte des Label
         name.setForeground(Color.WHITE);
+        espece.setForeground(Color.WHITE);
         vie.setForeground(Color.WHITE);
         energie.setForeground(Color.WHITE);
         moral.setForeground(Color.WHITE);
         hygiene.setForeground(Color.WHITE);
+        toilette.setForeground(Color.WHITE);
+        nourriture_batterie.setForeground(Color.WHITE);
         
         attributs = new JPanel();
         attributs.setLayout(new BoxLayout(attributs, BoxLayout.Y_AXIS));
         attributs.add(name);
+        attributs.add(espece);
         attributs.add(vie);
         attributs.add(energie);
         attributs.add(moral);
         attributs.add(hygiene);
+        attributs.add(toilette);
+        attributs.add(nourriture_batterie);
         attributs.setBackground(new Color(255, 255, 255, 0));
         
         this.add(attributs, BorderLayout.WEST);

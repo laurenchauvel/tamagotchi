@@ -126,24 +126,6 @@ public class Controller {
 	}
 	
 	//=================================================================================================================
-	/*
-	 * Methode qui retourne l'espece du Tamgocthi courant sous forme de String
-	 * (Elle est utilisee dans la classe InterfaceJeuView pour l'affichage des boutons d'actions
-	 */
-	public String getEspece() {
-		if (tamagotchi instanceof Robot) {
-			return "Robot" ;
-		}else if(tamagotchi instanceof Chien) {
-			return "Chien" ;
-		}else if(tamagotchi instanceof Oiseau) {
-			return "Oiseau" ;
-		}else if (tamagotchi instanceof Lion) {
-			return "Lion";
-		}
-		return null;		//TODO: ajouter un try catch avec msg d'erreur
-	}
-	
-	//=================================================================================================================
 	
 	//APPELS AUX METHODES DE TYPE ACTION DU TAMAGOTCHI (jouer, regarder TV...)
 	
@@ -237,4 +219,58 @@ public class Controller {
 			((Chien)tamagotchi).vaChercher();
 		}
 	}
+	
+	//=================================================================================================================
+	
+	//GETTER DES ATTRIBUTS
+	
+	public String getNom() {
+		return tamagotchi.getNom();
+	}
+	
+	/*
+	 * Methode qui retourne l'espece du Tamgocthi courant sous forme de String
+	 * (Elle est utilisee dans la classe InterfaceJeuView pour l'affichage des boutons d'actions
+	 */
+	public String getEspece() {
+		if (tamagotchi instanceof Robot) {
+			return "Robot" ;
+		}else if(tamagotchi instanceof Chien) {
+			return "Chien" ;
+		}else if(tamagotchi instanceof Oiseau) {
+			return "Oiseau" ;
+		}else if (tamagotchi instanceof Lion) {
+			return "Lion";
+		}
+		return null;		//TODO: ajouter un try catch avec msg d'erreur
+	}
+	
+	public int getVie() {
+		return tamagotchi.getVie();
+	}
+	
+	public int getEnergie() {
+		return tamagotchi.getEnergie();
+	}
+	
+	public int getMoral() {
+		return tamagotchi.getMoral();
+	}
+	
+	public int getHygiene() {
+		return tamagotchi.getHygiene();
+	}
+	
+	public int getToilette() {
+		return tamagotchi.getToilette();
+	}
+	
+	public int getNourriture_Batterie() {
+		if(getEspece().equals("Robot")){
+			return ((Robot)tamagotchi).getBatterie();
+		}else {
+			return ((Animal)tamagotchi).getNourriture();
+		}
+	}
+	
 }
