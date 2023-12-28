@@ -41,9 +41,9 @@ public class CreateTamagotchiView extends JPanel {
 				if(!getName().equals("")) {
 					frame.getController().createTamagotchi();
 					
-					//Affichage des attributs sur l'interface
-					frame.getGameView().setController(frame.getController());
-					frame.getGameView().affichageLabelsAttributs();
+					frame.setGameView(new InterfaceJeuView(frame));
+					//frame.getGameView().setController(frame.getController());
+					frame.add(frame.getGameView(), frame.getGame());					
 					
 					frame.getLayout().show(frame.getPanel(), frame.getGame());
 				}else {

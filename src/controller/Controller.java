@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import modele.Chien;
+import modele.Lion;
 import modele.Maison.Piece;
+import modele.Oiseau;
+import modele.Robot;
 import modele.Tamagotchi;
 import view.View;;
 
@@ -119,5 +123,18 @@ public class Controller {
 		return enCours;
 	}
 	
+	
+	public String getEspece() {
+		if (tamagotchi instanceof Robot) {
+			return "Robot" ;
+		}else if(tamagotchi instanceof Chien) {
+			return "Chien" ;
+		}else if(tamagotchi instanceof Oiseau) {
+			return "Oiseau" ;
+		}else if (tamagotchi instanceof Lion) {
+			return "Lion";
+		}
+		return null;		//TODO: ajouter un try catch avec msg d'erreur
+	}
 	
 }

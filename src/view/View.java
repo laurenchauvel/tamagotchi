@@ -20,7 +20,7 @@ public class View extends JFrame {
 	private StartScreenView startScreen = new StartScreenView(this);	//ecran de debut
 	private MenuView menuScreen = new MenuView(this);	//choix de la partie (ancienne ou nouvelle)
 	private CreateTamagotchiView createTamagotchi = new CreateTamagotchiView(this);	//creation d'un nouveau Tamagotchi
-	private InterfaceJeuView gameView = new InterfaceJeuView(this);
+	private InterfaceJeuView gameView ;
 	private SauvegardesView sauvegardesView = new SauvegardesView(this); //todo Linda
 
     
@@ -48,7 +48,7 @@ public class View extends JFrame {
 		this.add(startScreen, start);
 		this.add(menuScreen, menu);
 		this.add(createTamagotchi, create);
-		this.add(gameView, game);
+		//this.add(gameView, game);		cette ligne se fait mtn dans le actionPerfomed du bouton "Creer Tamagotchi" (classe CreateTamagotchiView)
 		this.add(sauvegardesView, sauvegardeName); //todo Linda
 		layout.show(panel, start);
 		
@@ -71,6 +71,11 @@ public class View extends JFrame {
 	public InterfaceJeuView getGameView() {
 		return gameView ;
 	}
+	
+	public void setGameView(InterfaceJeuView ijv) {
+		gameView=ijv;
+	}
+	
 	public void setSauvegarde(Sauvegarde sauvegarde) { //todo Linda
 		this.sauvegarde = sauvegarde;
 	}

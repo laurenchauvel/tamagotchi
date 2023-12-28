@@ -59,30 +59,50 @@ public class InterfaceJeuView extends JPanel {
     public InterfaceJeuView(View frame) {
     	this.view = frame ;
     	
+    	setController(view.getController());
         // Configuration du layout du panneau principal
         setLayout(new BorderLayout());
 
         // Charger l'image d'arrière-plan
         changeBackgroundImage("/media/salon.png");
-
+        
         //Affichage des actions
         initialisationBoutonsActions();
         
         //Affichage des pieces
         affichageBoutonsPieces();
         
-        //Initialisation et ajout du bouton de retour au panel principal
-        quitter = new JButton("Quitter");
-        quitter.addActionListener(e -> view.getLayout().show(view.getPanel(), view.getStart()));
-        boutonsPieces.add(quitter);
+        //Affichage des attirbuts
+		affichageLabelsAttributs();
     }
     
     /*
      * Initialisation et affichage sur le panel (this) des boutons des actions
      */
-    private void initialisationBoutonsActions() {
+    public void initialisationBoutonsActions() {
     	//Initialisation des boutons d'actions
-        manger_recharge = new JButton(Action.Manger_SeRecharger.getActionName());
+        switch(controller.getEspece()){
+        	case "Robot":
+        		Action.Manger_SeRecharger.setActionName("Se recharger");
+        		Action.Dormir_EnVeille.setActionName("En veille");
+        		break ;
+        	case "Chien":
+        		Action.Manger_SeRecharger.setActionName("Manger");
+        		Action.Dormir_EnVeille.setActionName("Dormir");
+        		Action.ActionSpeciale.setActionName("Va chercher");
+        		break ;
+        	case "Oiseau":
+        		Action.Manger_SeRecharger.setActionName("Manger");
+        		Action.Dormir_EnVeille.setActionName("Dormir");
+        		Action.ActionSpeciale.setActionName("Voler");
+        		break ;
+        	case "Lion":
+        		Action.Manger_SeRecharger.setActionName("Manger");
+        		Action.Dormir_EnVeille.setActionName("Dormir");
+        		Action.ActionSpeciale.setActionName("Sauter");
+        		break ;
+        }
+    	manger_recharge = new JButton(Action.Manger_SeRecharger.getActionName());
         dormir_veille = new JButton(Action.Dormir_EnVeille.getActionName());
         jouer = new JButton(Action.Jouer.getActionName());
         regarderTV = new JButton(Action.RegarderTV.getActionName());
@@ -91,7 +111,7 @@ public class InterfaceJeuView extends JPanel {
         seLaver = new JButton(Action.SeLaver.getActionName());
         brosserDents = new JButton(Action.BrosserDents.getActionName());
         toilettes = new JButton(Action.Toilettes.getActionName());
-        //actionSpeciale = new JButton("Manger");
+        actionSpeciale = new JButton(Action.ActionSpeciale.getActionName());
         
         //Initialisation du panel des actions
         boutonsActions = new JPanel();
@@ -106,6 +126,7 @@ public class InterfaceJeuView extends JPanel {
         boutonsActions.add(seLaver);
         boutonsActions.add(brosserDents);
         boutonsActions.add(toilettes);
+        boutonsActions.add(actionSpeciale);
         boutonsActions.setBackground(new Color(255, 255, 255, 0));
         boutonsActions.setPreferredSize(new Dimension(200, 500));
         
@@ -118,7 +139,7 @@ public class InterfaceJeuView extends JPanel {
     /*
      * Initialisation et affichage sur le panel (this) des boutons des pieces
      */
-    private void affichageBoutonsPieces() {
+    public void affichageBoutonsPieces() {
     	// Initialisation des boutons de Pieces
         salon = new JButton("Salon");
         salle_de_bain = new JButton("Salle de bain");
@@ -139,6 +160,11 @@ public class InterfaceJeuView extends JPanel {
         
      // Ajouter le pannel des pieces en bas de la fenêtre
         add(boutonsPieces, BorderLayout.SOUTH);
+        
+      //Initialisation et ajout du bouton de retour au panel principal
+        quitter = new JButton("Quitter");
+        quitter.addActionListener(e -> view.getLayout().show(view.getPanel(), view.getStart()));
+        boutonsPieces.add(quitter);
     }
     
     /*
@@ -250,6 +276,7 @@ public class InterfaceJeuView extends JPanel {
     			seLaver.setVisible(false);
     			brosserDents.setVisible(false);
     			toilettes.setVisible(false);
+    			actionSpeciale.setVisible(false);
     			break;
     		case "Cuisine" :
     			jouer.setVisible(false);
@@ -261,6 +288,7 @@ public class InterfaceJeuView extends JPanel {
     			seLaver.setVisible(false);
     			brosserDents.setVisible(false);
     			toilettes.setVisible(false);
+    			actionSpeciale.setVisible(false);
     			break ;
     		case "Chambre" :
     			jouer.setVisible(true);
@@ -272,6 +300,7 @@ public class InterfaceJeuView extends JPanel {
     			seLaver.setVisible(false);
     			brosserDents.setVisible(false);
     			toilettes.setVisible(false);
+    			actionSpeciale.setVisible(false);
     			break;
     		case "SDB" :
     			jouer.setVisible(false);
@@ -283,6 +312,7 @@ public class InterfaceJeuView extends JPanel {
     			seLaver.setVisible(true);
     			brosserDents.setVisible(true);
     			toilettes.setVisible(true);
+    			actionSpeciale.setVisible(false);
     			break;
     		case "Jardin" :
     			jouer.setVisible(true);
@@ -294,6 +324,11 @@ public class InterfaceJeuView extends JPanel {
     			seLaver.setVisible(false);
     			brosserDents.setVisible(false);
     			toilettes.setVisible(false);
+    			if(controller.getEspece().equals("Robot")){
+    				actionSpeciale.setVisible(false);
+    			}else {
+    				actionSpeciale.setVisible(true);
+    			}
     			break;
     	}
     }
