@@ -1,11 +1,12 @@
 package controller;
 
-import view.*;
-
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import modele.*;
-import modele.Maison.Piece;;
+import modele.Maison.Piece;
+import modele.Tamagotchi;
+import view.View;;
 
 public class Controller {
 	
@@ -17,6 +18,9 @@ public class Controller {
 	
 	private Piece piece ; 	//La piece courante
 	
+	private boolean enCours;
+	
+	//=================================================================================================================
 	
 	public Controller(View v, Sauvegarde s) {
 		view = v;
@@ -36,6 +40,8 @@ public class Controller {
 		piece = null;
 		
 	}
+	
+	//=================================================================================================================
 
 	public void createTamagotchi() {
 		//On recupere les infos de la View
@@ -46,20 +52,71 @@ public class Controller {
 		tamagotchi = sauvegarde.nouvellePartie(name, espece);
 		
 		piece = tamagotchi.getPiece();
+		
+		play();
 		//todo Linda
 		sauvegarde.sauvegarder(tamagotchi);
 	}
+	
+	//=================================================================================================================
+	
+	public void play() {
+		
+		enCours = true;
+		
+		ExecutorService ex = Executors.newCachedThreadPool();
+		
+		//lancer la perte de vie
+		Runnable pv = () -> {
+			while(enCours) {
+				tamagotchi.mourirDeVieillesse();
+				if (tamagotchi.estMort()) {
+					enCours = false;
+				}
+			}
+		};
+		
+		//lancer la perte des points de moral
+		Runnable pm = () -> {
+			while (enCours) {
+				tamagotchi.mourirDeDepression();
+				if (tamagotchi.estMort()) {
+					enCours = false;
+				}
+			}
+		};
+		
+		ex.execute(pv);
+		ex.execute(pm);
+		
+}
+	
+	//=================================================================================================================
+	
 	//todo Linda
 	public ArrayList<Tamagotchi> getTamagoSauvegardes() {
         return sauvegarde.getTamagotchisSauvegardes();
     }
+	
+	//=================================================================================================================
+	
 	public Tamagotchi getTamagotchi() {
 		return tamagotchi;
 		
 	}
+	
+	//=================================================================================================================
+	
 	//yodo Linda
 	public void getdelete(Tamagotchi t) {
 		sauvegarde.deleteTamagotchi(t);
+	}
+	
+	//=================================================================================================================
+	
+	//TODO : Oldton
+	public boolean getState() {
+		return enCours;
 	}
 	
 	
