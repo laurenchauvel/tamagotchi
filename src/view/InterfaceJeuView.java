@@ -130,6 +130,9 @@ public class InterfaceJeuView extends JPanel {
         boutonsActions.setBackground(new Color(255, 255, 255, 0));
         boutonsActions.setPreferredSize(new Dimension(200, 500));
         
+        
+        addListenersToActions();
+        
         // Ajouter le pannel des actions à droite de la fenêtre
         add(boutonsActions, BorderLayout.EAST);
         
@@ -240,6 +243,88 @@ public class InterfaceJeuView extends JPanel {
                 afficherBoutonsAction(Piece.Jardin);
             }
         });
+    }
+    
+    
+    private void addListenersToActions() {
+    	manger_recharge.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.manger_recharger();
+			}
+		});
+    	
+        dormir_veille.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.dormir_veille();
+			}
+		});
+        
+        jouer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.jouer();
+				
+			}
+		});
+        
+        regarderTV.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.regarderTV();
+				
+			}
+		});
+        
+        sport.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.sport();
+				
+			}
+		});
+        
+        jardiner.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.jardiner();
+				
+			}
+		});
+        
+        seLaver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.seLaver();
+				
+			}
+		});
+        
+        brosserDents.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.brosserDents();
+				
+			}
+		});
+        
+        
+        toilettes.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.toilettes();
+				
+			}
+		});
+        
+        actionSpeciale.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.actionSpeciale();
+				
+			}
+		});
     }
     
     private void changeBackgroundImage(String imagePath) {

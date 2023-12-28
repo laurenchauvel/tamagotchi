@@ -11,8 +11,8 @@ public class Main {
 		View view = new View();
 		Controller controller = new Controller(view, sauvegarde);
 		
-        view.setSauvegarde(sauvegarde); //todo Linda
-		view.setController(controller);
+        //view.setSauvegarde(sauvegarde); //todo Linda
+		//view.setController(controller);
 	}
 
 }

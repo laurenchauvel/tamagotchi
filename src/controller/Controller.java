@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import modele.Animal;
 import modele.Chien;
 import modele.Lion;
 import modele.Maison.Piece;
@@ -30,6 +31,7 @@ public class Controller {
 		view = v;
 		view.setController(this);
 		view.setSauvegarde(s);
+		view.getSauvegardesView().setSauvegarde(s);
 		view.setVisible(true);
 		
 		//add Linda
@@ -123,7 +125,11 @@ public class Controller {
 		return enCours;
 	}
 	
-	
+	//=================================================================================================================
+	/*
+	 * Methode qui retourne l'espece du Tamgocthi courant sous forme de String
+	 * (Elle est utilisee dans la classe InterfaceJeuView pour l'affichage des boutons d'actions
+	 */
 	public String getEspece() {
 		if (tamagotchi instanceof Robot) {
 			return "Robot" ;
@@ -137,4 +143,98 @@ public class Controller {
 		return null;		//TODO: ajouter un try catch avec msg d'erreur
 	}
 	
+	//=================================================================================================================
+	
+	//APPELS AUX METHODES DE TYPE ACTION DU TAMAGOTCHI (jouer, regarder TV...)
+	
+	/*
+	 * Methode qui execute une action en fonction de l'espece
+	 * manger pour un Animal
+	 * seRecharger pour un Robot
+	 */
+	public void manger_recharger() {
+		if (getEspece().equals("Robot")) {
+			((Robot)tamagotchi).seRecharger();
+		}else {
+			((Animal)tamagotchi).manger();
+		}
+	}
+	
+	/*
+	 * Methode qui execute une action en fonction de l'espece
+	 * dormir pour un Animal
+	 * enVeille pour un Robot
+	 */
+	public void dormir_veille() {
+		if (getEspece().equals("Robot")) {
+			((Robot)tamagotchi).enVeille();
+		}else {	
+			((Animal)tamagotchi).dormir();
+		}
+	}
+	
+	/*
+	 * Execute la methode jouer
+	 */
+	public void jouer() {
+		tamagotchi.jouer();
+	}
+	
+	/*
+	 * Execute la methode regarderTV
+	 */
+	public void regarderTV() {
+		tamagotchi.regarderTV();
+	}
+	
+	/*
+	 * Execute la methode faireSport
+	 */
+	public void sport() {
+		tamagotchi.faireSport();
+	}
+	
+	/*
+	 * Execute la methode jardinage
+	 */
+	public void jardiner() {
+		tamagotchi.jardinage();
+	}
+	
+	/*
+	 * Execute la methode seLaver
+	 */
+	public void seLaver() {
+		tamagotchi.seLaver();
+	}
+	
+	/*
+	 * Execute la methode brosserDent
+	 */
+	public void brosserDents() {
+		tamagotchi.brosserDent();
+	}
+	
+	/*
+	 * Execute la methode seSoulager
+	 */
+	public void toilettes() {
+		tamagotchi.seSoulager();
+	}
+	
+	/*
+	 * Methode qui execute une action speciale en fonction de l'espece
+	 * sauter si c'est un Lion,
+	 * voler si c'est un Oiseau,
+	 * va chercher si c'est un Chien
+	 */
+	public void actionSpeciale() {
+		if (getEspece().equals("Lion")) {
+			((Lion)tamagotchi).sauter();
+		}else if(getEspece().equals("Oiseau")) {
+			((Oiseau)tamagotchi).voler();
+		}else if(getEspece().equals("Chien")) {
+			((Chien)tamagotchi).vaChercher();
+		}
+	}
 }

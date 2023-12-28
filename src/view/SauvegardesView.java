@@ -21,8 +21,10 @@ public class SauvegardesView extends JPanel {
     private JPanel centerPanel;
     private JButton retour;
     private Image backgroundImage;
+    private View view ;
 
     public SauvegardesView(View frame) {
+    	this.view=frame;
     	try {
             backgroundImage = ImageIO.read(getClass().getResource("/media/maison.png"));
         } catch (IOException e) {
@@ -94,7 +96,8 @@ public class SauvegardesView extends JPanel {
 
         switch (response) {
             case 0: // Jouer
-                
+                sauvegarde.reprendrePartie(tamagotchi);
+                view.getLayout().show(view.getPanel(), view.getGame());
                 break;
             case 1: // Supprimer
             	controller.getdelete(tamagotchi);
