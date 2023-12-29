@@ -55,7 +55,7 @@ public class InterfaceJeuView extends JPanel {
     private JPanel boutonsActions;			//panel des actions
     
     private JButton quitter ;
-
+    private Image TamaImage;
     /*
      * Cobstructeur de l'interface de jeu  
      */
@@ -86,20 +86,24 @@ public class InterfaceJeuView extends JPanel {
     	//Initialisation des boutons d'actions
         switch(controller.getEspece()){
         	case "Robot":
+        		changeImage("media/robot.png");
         		Action.Manger_SeRecharger.setActionName("Se recharger");
         		Action.Dormir_EnVeille.setActionName("En veille");
         		break ;
         	case "Chien":
+        		changeImage("media/chien.png");
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Va chercher");
         		break ;
         	case "Oiseau":
+        		changeImage("media/oiseau.png");
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Voler");
         		break ;
         	case "Lion":
+        		changeImage("media/lion.png");
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Sauter");
@@ -343,10 +347,21 @@ public class InterfaceJeuView extends JPanel {
 		});
     }
     
+    public void changeImage(String imagePath) {
+        try {
+            TamaImage = ImageIO.read(getClass().getResource(imagePath));
+            repaint(); // Redessiner pour afficher la nouvelle image
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void changeBackgroundImage(String imagePath) {
         try {
             backgroundImage = ImageIO.read(getClass().getResource(imagePath));
             repaint(); // Redessiner le panel pour afficher la nouvelle image
+            
+            
+            
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -359,6 +374,15 @@ public class InterfaceJeuView extends JPanel {
         super.paintComponent(g);
         // Dessiner l'image en arrière-plan
         g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), this);
+        if (TamaImage != null) {
+            int imageWidth = TamaImage.getWidth(this);
+            int imageHeight = TamaImage.getHeight(this);
+
+            int x = (this.getWidth() - imageWidth) / 2; // Centrer 
+            int y = this.getHeight() - imageHeight;     // Positionner en bas
+
+            g.drawImage(TamaImage, x, y, this);
+        }
     }
     
     /*
