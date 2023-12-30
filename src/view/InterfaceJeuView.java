@@ -34,27 +34,27 @@ public class InterfaceJeuView extends JPanel {
     private JPanel attributs ;				//panel des attributs
     
     //Boutons des pieces
-    private JButton salon;
-    private JButton salle_de_bain;
-    private JButton chambre;
-    private JButton cuisine;
-    private JButton jardin;
+    private GradientButton salon;
+    private GradientButton salle_de_bain;
+    private GradientButton chambre;
+    private GradientButton cuisine;
+    private GradientButton jardin;
     private JPanel boutonsPieces;			//panel des pieces
     
     //Boutons des actions
-    private JButton manger_recharge ;
-    private JButton dormir_veille ;
-    private JButton jouer ;
-    private JButton regarderTV ;
-    private JButton sport ;
-    private JButton jardiner ;
-    private JButton seLaver ;
-    private JButton brosserDents ;
-    private JButton toilettes ;
-    private JButton actionSpeciale ;		//sauter, vaChercher, voler
+    private GradientButton manger_recharge ;
+    private GradientButton dormir_veille ;
+    private GradientButton jouer ;
+    private GradientButton regarderTV ;
+    private GradientButton sport ;
+    private GradientButton jardiner ;
+    private GradientButton seLaver ;
+    private GradientButton brosserDents ;
+    private GradientButton toilettes ;
+    private GradientButton actionSpeciale ;		//sauter, vaChercher, voler
     private JPanel boutonsActions;			//panel des actions
     
-    private JButton quitter ;
+    private GradientButton quitter ;
     private Image TamaImage;
     /*
      * Cobstructeur de l'interface de jeu  
@@ -86,39 +86,39 @@ public class InterfaceJeuView extends JPanel {
     	//Initialisation des boutons d'actions
         switch(controller.getEspece()){
         	case "Robot":
-        		changeImage("media/robot.png");
+        		changeImage("/media/robot.png");
         		Action.Manger_SeRecharger.setActionName("Se recharger");
         		Action.Dormir_EnVeille.setActionName("En veille");
         		break ;
         	case "Chien":
-        		changeImage("media/chien.png");
+        		changeImage("/media/chien.png");
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Va chercher");
         		break ;
         	case "Oiseau":
-        		changeImage("media/oiseau.png");
+        		changeImage("/media/oiseau.png");
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Voler");
         		break ;
         	case "Lion":
-        		changeImage("media/lion.png");
+        		changeImage("/media/lion.png");
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Sauter");
         		break ;
         }
-    	manger_recharge = new JButton(Action.Manger_SeRecharger.getActionName());
-        dormir_veille = new JButton(Action.Dormir_EnVeille.getActionName());
-        jouer = new JButton(Action.Jouer.getActionName());
-        regarderTV = new JButton(Action.RegarderTV.getActionName());
-        sport = new JButton(Action.Sport.getActionName());
-        jardiner = new JButton(Action.Jardiner.getActionName());
-        seLaver = new JButton(Action.SeLaver.getActionName());
-        brosserDents = new JButton(Action.BrosserDents.getActionName());
-        toilettes = new JButton(Action.Toilettes.getActionName());
-        actionSpeciale = new JButton(Action.ActionSpeciale.getActionName());
+    	manger_recharge = new GradientButton(Action.Manger_SeRecharger.getActionName());
+        dormir_veille = new GradientButton(Action.Dormir_EnVeille.getActionName());
+        jouer = new GradientButton(Action.Jouer.getActionName());
+        regarderTV = new GradientButton(Action.RegarderTV.getActionName());
+        sport = new GradientButton(Action.Sport.getActionName());
+        jardiner = new GradientButton(Action.Jardiner.getActionName());
+        seLaver = new GradientButton(Action.SeLaver.getActionName());
+        brosserDents = new GradientButton(Action.BrosserDents.getActionName());
+        toilettes = new GradientButton(Action.Toilettes.getActionName());
+        actionSpeciale = new GradientButton(Action.ActionSpeciale.getActionName());
         
         //Initialisation du panel des actions
         boutonsActions = new JPanel();
@@ -151,15 +151,16 @@ public class InterfaceJeuView extends JPanel {
      */
     public void affichageBoutonsPieces() {
     	// Initialisation des boutons de Pieces
-        salon = new JButton("Salon");
-        salle_de_bain = new JButton("Salle de bain");
-        chambre = new JButton("Chambre");
-        cuisine = new JButton("Cuisine");
-        jardin = new JButton("Jardin");
+        salon = new GradientButton("Salon");
+        salle_de_bain = new GradientButton("Salle de bain");
+        chambre = new GradientButton("Chambre");
+        cuisine = new GradientButton("Cuisine");
+        jardin = new GradientButton("Jardin");
         
         
         // Initialisation du panel des pieces
         boutonsPieces = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        
         boutonsPieces.add(salon);
         boutonsPieces.add(salle_de_bain);
         boutonsPieces.add(chambre);
@@ -172,7 +173,7 @@ public class InterfaceJeuView extends JPanel {
         add(boutonsPieces, BorderLayout.SOUTH);
         
       //Initialisation et ajout du bouton de retour au panel principal
-        quitter = new JButton("Quitter");
+        quitter = new GradientButton("Quitter");
         quitter.addActionListener(e -> view.getLayout().show(view.getPanel(), view.getStart()));
         boutonsPieces.add(quitter);
     }
@@ -349,8 +350,9 @@ public class InterfaceJeuView extends JPanel {
     
     public void changeImage(String imagePath) {
         try {
-            TamaImage = ImageIO.read(getClass().getResource(imagePath));
-            repaint(); // Redessiner pour afficher la nouvelle image
+        	Image originalImage = ImageIO.read(getClass().getResource(imagePath));
+            TamaImage = originalImage.getScaledInstance(350, 350, Image.SCALE_SMOOTH);
+            repaint();
         } catch (IOException e) {
             e.printStackTrace();
         }

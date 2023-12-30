@@ -2,22 +2,35 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class StartScreenView extends JPanel {
 	
-	private JButton playButton ;
-	private JButton rulesButton ;
+	private GradientButton playButton ;
+	private GradientButton rulesButton ;
+	private Image backgroundImage;
 	
 	public StartScreenView(View frame) {
+		try {
+            backgroundImage = ImageIO.read(getClass().getResource("/media/maison.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Erreur de chargement de l'image de fond : " + e.getMessage());
+        }
 		
-		playButton = new JButton("PLAY");		//bouton pour jouer
-		rulesButton = new JButton("RULES");		//bouton pour afficher les regles
+		playButton = new GradientButton("PLAY");		//bouton pour jouer
+		rulesButton = new GradientButton("RULES");		//bouton pour afficher les regles
 		
+		playButton.setForeground(Color.WHITE);
+		rulesButton.setForeground(Color.WHITE);
 		
 		this.add(playButton);
 		this.add(rulesButton);
@@ -42,14 +55,14 @@ public class StartScreenView extends JPanel {
 		//Changer la taille des boutons
 		playButton.setPreferredSize(new Dimension(200,100));
 		
-		//Changer la couleur des boutons 
-		playButton.setBorder(BorderFactory.createLineBorder(Color.MAGENTA, 2));
-		playButton.setBackground(new Color(153, 72, 143)); // Couleur dégradée
-		playButton.setForeground(Color.BLUE); // Couleur du texte
-
-		rulesButton.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));
-		rulesButton.setBackground(new Color(144, 238, 144));
-		rulesButton.setForeground(Color.GRAY);
+		
 	}
+	@Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), this);
+        }
+    }
 	
 }

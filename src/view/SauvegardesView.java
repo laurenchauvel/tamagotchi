@@ -35,6 +35,7 @@ public class SauvegardesView extends JPanel {
 
         // Style du bouton retour
         retour = new JButton("Retour");
+        retour.setForeground(Color.WHITE);
         retour.setBackground(new Color(216, 20, 20));
         JPanel retourPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         retourPanel.setOpaque(false);
@@ -64,6 +65,7 @@ public class SauvegardesView extends JPanel {
         List<Tamagotchi> savedGames = controller.getTamagoSauvegardes();
         if (savedGames == null || savedGames.isEmpty()) {
             JLabel noSavedLabel = new JLabel("Aucun Tamagotchi sauvegardé pour l'instant.");
+            noSavedLabel.setForeground(Color.WHITE);
             noSavedLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             centerPanel.add(noSavedLabel);
         } else {
