@@ -1,9 +1,6 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -25,16 +22,38 @@ public class StartScreenView extends JPanel {
             e.printStackTrace();
             System.err.println("Erreur de chargement de l'image de fond : " + e.getMessage());
         }
+		setLayout(new GridBagLayout()); // Utiliser GridBagLayout pour le positionnement
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        playButton = new GradientButton("JOUER");
+        rulesButton = new GradientButton("RÈGLES");
+
+        // Configurer les boutons pour avoir la même taille
+        Dimension buttonSize = new Dimension(200, 50);
+        playButton.setPreferredSize(buttonSize);
+        rulesButton.setPreferredSize(buttonSize);
+        
+        //-----------------------------------------------------------------------------------------------
+        // Configuration des contraintes pour les boutons
+        gbc.gridx = 0; // Position X dans la grille
+      
+        gbc.insets = new Insets(5, 0, 5, 0); // Réduire l'espacement entre les boutons si nécessaire
+
+        // Réglage du poids pour centrer les boutons dans l'espace vertical
+        gbc.weightx = 1;
+        gbc.weighty = 0.5; // Réduire ce poids rapproche les boutons verticalement
+
+        // Ajouter le bouton "JOUER" avec les contraintes
+        gbc.gridy = 0; // Position Y dans la grille pour "JOUER"
+        gbc.anchor = GridBagConstraints.SOUTH; // Aligner au bas de l'espace
+        add(playButton, gbc);
+
+        // Ajouter le bouton "RÈGLES" avec les contraintes
+        gbc.gridy = 1; // Position Y dans la grille pour "RÈGLES"
+        gbc.anchor = GridBagConstraints.NORTH; // Aligner au haut de l'espace
+        add(rulesButton, gbc);
 		
-		playButton = new GradientButton("PLAY");		//bouton pour jouer
-		rulesButton = new GradientButton("RULES");		//bouton pour afficher les regles
-		
-		playButton.setForeground(Color.WHITE);
-		rulesButton.setForeground(Color.WHITE);
-		
-		this.add(playButton);
-		this.add(rulesButton);
-		
+        //----------------------------------------------------------------------------------------------
 		//Action declenchee lorsque l'on appuie sur le bouton play
 		playButton.addActionListener(e -> frame.getLayout().show(frame.getPanel() ,frame.getMenu()));
 		
@@ -52,8 +71,6 @@ public class StartScreenView extends JPanel {
 			}
 		});
 		
-		//Changer la taille des boutons
-		playButton.setPreferredSize(new Dimension(200,100));
 		
 		
 	}
