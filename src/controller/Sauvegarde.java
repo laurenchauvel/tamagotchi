@@ -18,10 +18,13 @@ import modele.Lion;
 import modele.Oiseau;
 import modele.Robot;
 import modele.Tamagotchi;
+import view.View;
 
 public class Sauvegarde implements Serializable {
 
     private static final long serialVersionUID = 1L; //inutile
+    
+    private View view ;
     
     //test Oldton
     private final String dir = "src/not-user-dir/";
@@ -36,8 +39,9 @@ public class Sauvegarde implements Serializable {
 	 * constructeur
 	 */
 
-    public Sauvegarde() {
+    public Sauvegarde(View view) {
     	try {
+    		this.view=view;
 	    	if (!Files.exists(Paths.get(dir)) && !Files.isDirectory(Paths.get(dir))) {
 	        	Files.createDirectory(Paths.get(dir)); //creation du rep si il n'existe pas
 	        }
@@ -122,7 +126,7 @@ public class Sauvegarde implements Serializable {
     // Méthode pour sauvegarder les Tamagotchis
     public void sauvegarderV2(Tamagotchi t) {
     	if (findTamagotchi(t) == null) { //si il n'existe pas il est créé
-	    	sauvegarder(t);
+    		sauvegarder(t);
     	} else {
     		//si le tamagotchi existe , il est supprimé puis recréé
     		deleteTamagotchi(t);
@@ -204,6 +208,7 @@ public class Sauvegarde implements Serializable {
     	default:
     		return null;
     	}
+    	t.ajouterObservateur(view.getGameView());	//TODO : Observateur
     	//maj de la liste
     	majSauvegarde();
     	//recuperation du dernier tamagotchi de la liste 
@@ -232,7 +237,6 @@ public class Sauvegarde implements Serializable {
     }
     
     //=================================================================================================================
-    
     
     
 }

@@ -1,18 +1,19 @@
 package tests;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import controller.Sauvegarde;
 import modele.*;
-import modele.Maison.Piece;
+import view.View;
+
+
 
 
 public class TestSauvegarde {
 
     public static void main(String[] args) throws IOException {
         // Crée une nouvelle instance de ChargerPartie
-        Sauvegarde sauvegarde = new Sauvegarde();
+        Sauvegarde sauvegarde = new Sauvegarde(new View());
 
         //Crée quelques Tamagotchis et les sauvegarde
         Tamagotchi tama1 = new Lion("Lee");

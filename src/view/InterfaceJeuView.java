@@ -13,7 +13,7 @@ import modele.Action ;
 import modele.Maison.Piece;
 
 @SuppressWarnings("serial")
-public class InterfaceJeuView extends JPanel {
+public class InterfaceJeuView extends JPanel implements Observateur {
 	
 	private View view ;
 	private Controller controller ;
@@ -156,8 +156,7 @@ public class InterfaceJeuView extends JPanel {
         chambre = new GradientButton("Chambre");
         cuisine = new GradientButton("Cuisine");
         jardin = new GradientButton("Jardin");
-        
-        
+      
         // Initialisation du panel des pieces
         boutonsPieces = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
@@ -272,6 +271,7 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.manger_recharger();
+				mettreAJour();			//TODO : Observateur
 			}
 		});
     	
@@ -279,6 +279,7 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.dormir_veille();
+				mettreAJour();			//TODO : Observateur
 			}
 		});
         
@@ -286,6 +287,7 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.jouer();
+				mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -294,6 +296,7 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.regarderTV();
+				mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -302,6 +305,7 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.sport();
+				mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -310,6 +314,7 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.jardiner();
+				mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -318,6 +323,7 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.seLaver();
+				mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -326,6 +332,7 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.brosserDents();
+				mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -335,6 +342,7 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.toilettes();
+				mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -343,7 +351,8 @@ public class InterfaceJeuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.actionSpeciale();
-				
+				mettreAJour();			//TODO : Observateur
+					
 			}
 		});
     }
@@ -463,5 +472,26 @@ public class InterfaceJeuView extends JPanel {
     public void setController(Controller c) {
     	this.controller = c;
     }
+    
+    //TODO : Observateur
+	@Override
+	public void mettreAJour() {
+		System.out.println("Mise a jour des attributs");
+		
+		//Changement de la valeur des attributs
+		name.setText("Nom : " + controller.getNom()) ;
+        espece.setText("Espèce : " + controller.getEspece()) ;
+    	vie.setText("Vie : " + controller.getVie()) ;
+        energie.setText("Energie : " + controller.getEnergie()) ;
+        moral.setText("Moral : " + controller.getMoral()) ;
+        hygiene.setText("Hygiene : " + controller.getHygiene()) ;
+        toilette.setText("Toilettes : " + controller.getToilette()) ;
+        if (controller.getEspece().equals("Robot")){
+        	nourriture_batterie.setText("Batterie : " + controller.getNourriture_Batterie()) ;
+        }else {
+        	nourriture_batterie.setText("Nourriture : " + controller.getNourriture_Batterie()) ;
+        }
+		
+	}
 }
 

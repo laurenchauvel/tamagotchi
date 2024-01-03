@@ -7,12 +7,10 @@ import controller.Sauvegarde;
 public class Main {
 
 	public static void main(String[] args) {
-		Sauvegarde sauvegarde = new Sauvegarde();
-		View view = new View();
-		Controller controller = new Controller(view, sauvegarde);
 		
-        //view.setSauvegarde(sauvegarde); //todo Linda
-		//view.setController(controller);
+		View view = new View();
+		Sauvegarde sauvegarde = new Sauvegarde(view);
+		Controller controller = new Controller(view, sauvegarde);
 	}
 
 }

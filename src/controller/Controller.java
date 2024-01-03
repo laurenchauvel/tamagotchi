@@ -11,6 +11,7 @@ import modele.Maison.Piece;
 import modele.Oiseau;
 import modele.Robot;
 import modele.Tamagotchi;
+import view.Observateur;
 import view.View;;
 
 public class Controller {
@@ -53,7 +54,6 @@ public class Controller {
 		//On recupere les infos de la View
 		String name = view.getName();
 		String espece = view.getEspece();
-		
 		
 		tamagotchi = sauvegarde.nouvellePartie(name, espece);
 		
@@ -124,6 +124,11 @@ public class Controller {
 	public boolean getState() {
 		return enCours;
 	}
+	
+	public Observateur getObservateur() {
+		return view.getGameView();
+	}
+	
 	
 	//=================================================================================================================
 	

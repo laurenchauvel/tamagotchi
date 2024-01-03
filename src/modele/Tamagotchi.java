@@ -2,6 +2,8 @@ package modele;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
+import view.Observateur;
 
 import modele.Maison.Piece;
 
@@ -39,6 +41,9 @@ public abstract class Tamagotchi implements Serializable {
     	}
     };
 
+    @SuppressWarnings("deprecation")
+	private ArrayList<Observateur> observateurs = new ArrayList<Observateur>();	//TODO : Observateur
+    
     //attribut du cri de l'animal
     private Cri cri;
 	
@@ -85,6 +90,26 @@ public abstract class Tamagotchi implements Serializable {
 	}
 	
 	//=================================================================================================================
+	//METHODES
+	//=================================================================================================================
+	
+	public void ajouterObservateur(Observateur observateur) {
+        observateurs.add(observateur);
+    }
+	
+	public void notifierObservateurs() {
+		
+		if(observateurs.isEmpty()) {
+			System.out.println("MAJ : appel de notifierObservateurs dans la classe Tamagotchi");
+		}
+        for (Observateur observateur : observateurs) {
+            observateur.mettreAJour();
+        }
+    }
+	
+	
+	
+	//=================================================================================================================
 
 	public String getNom() {
 		return nom;
@@ -92,6 +117,7 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+		notifierObservateurs();	//TODO : Observateur (j'ai ajouyé cette ligne dans tous les setters)
 	}
 	
 	//=================================================================================================================
@@ -102,6 +128,7 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void setVie(int vie) {
 		this.vie = vie;
+		notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -111,7 +138,9 @@ public abstract class Tamagotchi implements Serializable {
 	}
 
 	public void setEnergie(int energie) {
+		System.out.println("Hereee");
 		this.energie = energie;
+		notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -124,6 +153,7 @@ public abstract class Tamagotchi implements Serializable {
     //setter toilette
     public void setToilette(int n) {
         toilette = n;
+        notifierObservateurs();
     }
 	
 	//=================================================================================================================
@@ -134,6 +164,7 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void setMoral(int moral) {
 		this.moral = moral;
+		notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -146,6 +177,7 @@ public abstract class Tamagotchi implements Serializable {
     //setter hygiene
     public void setHygiene(int n) {
         hygiene = n;
+        notifierObservateurs();
     }
     
     //=================================================================================================================
@@ -158,6 +190,7 @@ public abstract class Tamagotchi implements Serializable {
     //setter cri
     public void setCri(Cri cri) {
         this.cri = cri;
+        notifierObservateurs();
     }
 
     
@@ -176,6 +209,7 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void seDeplacer(Piece p) {
 		this.maison.setPiece(p); //plus simple de juste garder cette ligne
+		notifierObservateurs();
 	}
 	
 	//=================================================================================================================

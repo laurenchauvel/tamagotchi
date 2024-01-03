@@ -62,6 +62,7 @@ public class Robot extends Tamagotchi{
     }
     public void setBatterie(int n){
         batterie = n;
+        notifierObservateurs();	//TODO : Observateur
     }
 
     //=================================================================================================================

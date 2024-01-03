@@ -1,15 +1,11 @@
 package view;
-import modele.*;
 import java.awt.CardLayout;
-import java.awt.Dimension;
-
 import javax.swing.*;
-
 import controller.Controller;
 import controller.Sauvegarde;
 
 @SuppressWarnings("serial")
-public class View extends JFrame {
+public class View extends JFrame{
 	
 	private Controller controller ;
 	private Sauvegarde sauvegarde ;

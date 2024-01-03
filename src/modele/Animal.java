@@ -37,6 +37,7 @@ public abstract class Animal extends Tamagotchi {
     //setter nourriture
     public void setNourriture(int n) {
         nourriture = n;
+        notifierObservateurs();	//TODO : Observateur
     }
 
     
