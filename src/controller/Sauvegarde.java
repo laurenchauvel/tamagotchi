@@ -20,11 +20,10 @@ import modele.Robot;
 import modele.Tamagotchi;
 import view.View;
 
+@SuppressWarnings("serial")
 public class Sauvegarde implements Serializable {
 
-    private static final long serialVersionUID = 1L; //inutile
-    
-    private View view ;
+	private View view ;
     
     //test Oldton
     private final String dir = "src/not-user-dir/";
@@ -182,37 +181,34 @@ public class Sauvegarde implements Serializable {
     
     //transformation de la reponse la view pour créer un nouveau tamagotchi
     public Tamagotchi nouvellePartie(String nom , String esp) {
-    	Tamagotchi t = null;
+    	Tamagotchi tamagotchi = null;
     	switch(esp) {
     	
     	case "Chien":
-    		sauvegarderV2(new Chien(nom));
-    		t = findTamagotchi(new Chien(nom));
+    		tamagotchi = new Chien(nom);
     		break;
     	
     	case "Lion":
-    		sauvegarderV2(new Lion(nom));
-    		t = findTamagotchi(new Lion(nom));
+    		tamagotchi = new Lion(nom);
     		break;
     		
     	case "Oiseau":
-    		sauvegarderV2(new Oiseau(nom));
-    		t = findTamagotchi(new Oiseau(nom));
+    		tamagotchi = new Oiseau(nom);
     		break;
     	
     	case "Robot":
-    		sauvegarderV2(new Robot(nom));
-    		t = findTamagotchi(new Robot(nom));
+    		tamagotchi = new Robot(nom);
     		break;
     		
     	default:
     		return null;
     	}
-    	t.ajouterObservateur(view.getGameView());	//TODO : Observateur
+    	tamagotchi.ajouterObservateur(view.getGameView());	//TODO : Observateur
+    	sauvegarderV2(tamagotchi);
     	//maj de la liste
     	majSauvegarde();
     	//recuperation du dernier tamagotchi de la liste 
-		return reprendrePartie(t);		
+		return reprendrePartie(tamagotchi);		
     }
     
     //=================================================================================================================
