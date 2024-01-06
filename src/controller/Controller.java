@@ -1,6 +1,7 @@
 package controller;
 //betise
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -176,6 +177,14 @@ public class Controller {
 	public Tamagotchi getTamagotchi() {
 		return tamagotchi;
 		
+	}
+	
+	
+	public String getImagePiece() {
+		return tamagotchi.getMaison().getPiece().getImage();
+	}
+	public void changerDePiece(Piece p) {
+		tamagotchi.seDeplacer(p);
 	}
 	
 	//=================================================================================================================

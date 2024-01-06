@@ -11,22 +11,22 @@ public class Maison implements Serializable { //public class maison
 	//Les differentes pieces du jeu
 	public enum Piece{
 		
-		Salon("Salon",new File("../media/salon-image.avif")),
-		Chambre("Chambre",new File("../media/chambre-image.avif")),
-		Cuisine("Cuisine",new File("../media/cuisine-image.avif")),
-		SDB("SDB", new File("../media/sdb-image.avif")),  //SDB = Salle de bain
-		Jardin("Jardin", new File("../media/jardin-image.jpeg"));
+		Salon("Salon","../media/salon-image.avif"),
+		Chambre("Chambre","../media/chambre-image.avif"),
+		Cuisine("Cuisine","../media/cuisine-image.avif"),
+		SDB("SDB","../media/sdb-image.avif"),  //SDB = Salle de bain
+		Jardin("Jardin","../media/jardin-image.jpeg");
 		
 		private final String name ;
 		
 		//attributs d'une piece
-		private File image;
+		private String image;
 		
 		
 		//=================================================================================================================
 		
 		//constructeur
-		private Piece(String name, File i) {
+		private Piece(String name, String i) {
 			this.name=name;
 			this.image = i;
 		}
@@ -38,7 +38,7 @@ public class Maison implements Serializable { //public class maison
 		}
 		
 		//getter image
-		public File getImage() {
+		public String getImage() {
 			return image;
 		}
 		

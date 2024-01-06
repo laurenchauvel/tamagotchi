@@ -228,7 +228,8 @@ public class InterfaceJeuView extends JPanel implements Observateur {
     	chambre.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeBackgroundImage("/media/chambre.png");
+            	controller.changerDePiece(Piece.Chambre);
+                changeBackgroundImage(controller.getImagePiece());
                 afficherBoutonsAction(Piece.Chambre);
             }
         });
@@ -236,7 +237,8 @@ public class InterfaceJeuView extends JPanel implements Observateur {
         salon.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeBackgroundImage("/media/salon.png");
+            	controller.changerDePiece(Piece.Salon);
+                changeBackgroundImage(controller.getImagePiece());
                 afficherBoutonsAction(Piece.Salon);
             }
         });
@@ -244,7 +246,8 @@ public class InterfaceJeuView extends JPanel implements Observateur {
         salle_de_bain.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeBackgroundImage("/media/salle de bain.png");
+            	controller.changerDePiece(Piece.SDB);
+                changeBackgroundImage(controller.getImagePiece());
                 afficherBoutonsAction(Piece.SDB);
             }
         });
@@ -252,7 +255,8 @@ public class InterfaceJeuView extends JPanel implements Observateur {
         cuisine.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeBackgroundImage("/media/cuisine.png");
+            	controller.changerDePiece(Piece.Cuisine);
+                changeBackgroundImage(controller.getImagePiece());
                 afficherBoutonsAction(Piece.Cuisine);
             }
         });
@@ -260,7 +264,8 @@ public class InterfaceJeuView extends JPanel implements Observateur {
         jardin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeBackgroundImage("/media/Jardin.png");
+            	controller.changerDePiece(Piece.Jardin);
+                changeBackgroundImage(controller.getImagePiece());
                 afficherBoutonsAction(Piece.Jardin);
             }
         });

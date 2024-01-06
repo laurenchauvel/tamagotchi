@@ -41,7 +41,6 @@ public abstract class Tamagotchi implements Serializable {
     	}
     };
 
-    @SuppressWarnings("deprecation")
 	private ArrayList<Observateur> observateurs = new ArrayList<Observateur>();	//TODO : Observateur
     
     //attribut du cri de l'animal
@@ -95,6 +94,7 @@ public abstract class Tamagotchi implements Serializable {
 	
 	public void ajouterObservateur(Observateur observateur) {
         observateurs.add(observateur);
+        System.out.println("Observateur ajoute");
     }
 	
 	public void notifierObservateurs() {
