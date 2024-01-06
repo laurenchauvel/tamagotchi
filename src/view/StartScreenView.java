@@ -55,7 +55,7 @@ public class StartScreenView extends JPanel {
 		
         //----------------------------------------------------------------------------------------------
 		//Action declenchee lorsque l'on appuie sur le bouton play
-		playButton.addActionListener(e -> frame.getLayout().show(frame.getPanel() ,frame.getMenu()));
+		playButton.addActionListener(e->frame.showMenu());
 		
 		//Action declenchee lorsque l'on appuie sur le bouton des regles
 		rulesButton.addActionListener(new ActionListener() {

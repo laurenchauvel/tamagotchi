@@ -98,16 +98,14 @@ public class CreateTamagotchiView extends JPanel {
 					
 					//frame.setGameView(new InterfaceJeuView(frame));
 					//frame.getGameView().setController(frame.getController());
-					frame.add(frame.getGameView(), frame.getGame());					
-					
-					frame.getLayout().show(frame.getPanel(), frame.getGame());
+					frame.showGameView();
 				}else {
 					JOptionPane.showMessageDialog(CreateTamagotchiView.this, "Veuillez donner un nom au Tamagotchi");
 				}
 			}
 			
 		});
-		retour.addActionListener(e -> frame.getLayout().show(frame.getPanel(), frame.getMenu()));
+		retour.addActionListener(e -> frame.showMenu());
 		
 	}
 	

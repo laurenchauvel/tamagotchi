@@ -44,11 +44,47 @@ public class View extends JFrame{
 		this.add(startScreen, start);
 		this.add(menuScreen, menu);
 		this.add(createTamagotchi, create);
-		//this.add(gameView, game);		cette ligne se fait mtn dans le actionPerfomed du bouton "Creer Tamagotchi" (classe CreateTamagotchiView)
+		//this.add(gameView, game);		//cette ligne se fait mtn dans la methode showGameView() de cette classe
 		this.add(sauvegardesView, sauvegardeName); //todo Linda
 		layout.show(panel, start);
 		
 		
+	}
+	
+	/*
+	 * Affiche le panel de démarrage à l'écran
+	 */
+	public void showStartScreen() {
+		layout.show(panel, start);
+	}
+	
+	/*
+	 * Affiche le panel du menu à l'écran
+	 */
+	public void showMenu() {
+		layout.show(panel, menu);
+	}
+	
+	/*
+	 * Affiche le panel de creation d'un nouveau tamagotchi à l'écran
+	 */
+	public void showCreateView() {
+		layout.show(panel, create);
+	}
+	
+	/*
+	 * Affiche le panel du jeu à l'écran
+	 */
+	public void showGameView() {
+		this.add(gameView, game);
+		layout.show(panel, game);
+	}
+	
+	/*
+	 * Affiche le panel des parties sauvegardées à l'écran
+	 */
+	public void showSauvegardes() {
+		layout.show(panel, sauvegardeName);
 	}
 	
 	public Controller getController() {
@@ -88,32 +124,6 @@ public class View extends JFrame{
 	public CardLayout getLayout() {
 		return layout;
 	}
-	
-	//Permet de recuperer le nom de l'ecran de demarrage 
-	public String getStart() {
-		return start;
-	}
-	
-	//Permet de recuperer le nom du Menu dans lequel on chosit si on veut creer ou sauvegarder un tamagotchi
-	public String getMenu() {
-		return menu;
-	}
-	
-	//Permet de recuperer le nom du panel de creation du Tamagotchi
-	public String getCreate() {
-		return create;
-	}
-	
-	
-	//Permet de recuperer le nom du panel de jeu
-	public String getGame() {
-		return game;
-	}
-	
-	//Permet de recuperer le nom du panel de jeu
-		public String getSauvegardeName() {
-			return sauvegardeName;
-		}
 	
 	
 	//Permet de passer au controleur le nom du Tamagotchi que l'on souhaite creer

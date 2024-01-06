@@ -42,7 +42,7 @@ public class SauvegardesView extends JPanel {
         retourPanel.add(retour);
         this.add(retourPanel, BorderLayout.NORTH);
 
-        retour.addActionListener(e -> frame.getLayout().show(frame.getPanel(), frame.getMenu()));
+        retour.addActionListener(e -> frame.showMenu());
 
         // Panel central pour les boutons de sauvegarde
         centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -99,7 +99,7 @@ public class SauvegardesView extends JPanel {
         switch (response) {
             case 0: // Jouer
                 sauvegarde.reprendrePartie(tamagotchi);
-                view.getLayout().show(view.getPanel(), view.getGame());
+                view.showGameView();
                 break;
             case 1: // Supprimer
             	controller.getdelete(tamagotchi);

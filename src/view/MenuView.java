@@ -84,7 +84,7 @@ public class MenuView extends JPanel {
 		
 		
 		//Action declenchee lorsque le bouton newGame est cliqué
-		newGame.addActionListener(e -> frame.getLayout().show(frame.getPanel(), frame.getCreate()));
+		newGame.addActionListener(e -> frame.showCreateView());
 		
 		//Action declenchee lorsque le bouton newGame est cliqué
 		oldGame.addActionListener(new ActionListener() {
@@ -92,7 +92,7 @@ public class MenuView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				frame.getLayout().show(frame.getPanel(), frame.getSauvegardeName());
+				frame.showSauvegardes();
 				frame.getSauvegardesView().setController(frame.getController());
 				frame.getSauvegardesView().showSavedGames();
 			}
@@ -100,7 +100,7 @@ public class MenuView extends JPanel {
 		});
 		
 		//Action declenchee lorsue le bouton retour est cliqué
-		retour.addActionListener(e -> frame.getLayout().show(frame.getPanel(), frame.getStart()));
+		retour.addActionListener(e -> frame.showStartScreen());
 		
 
 	}

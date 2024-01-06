@@ -174,7 +174,7 @@ public class InterfaceJeuView extends JPanel implements Observateur {
         
       //Initialisation et ajout du bouton de retour au panel principal
         quitter = new GradientButton("Quitter");
-        quitter.addActionListener(e -> view.getLayout().show(view.getPanel(), view.getStart()));
+        quitter.addActionListener(e -> view.showStartScreen());
         boutonsPieces.add(quitter);
     }
     
