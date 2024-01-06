@@ -1,8 +1,9 @@
 package modele;
 
+@SuppressWarnings("serial")
 public class Robot extends Tamagotchi{
-
-    /**
+	
+	/**
      * les attributs
      */
     private int batterie;

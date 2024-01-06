@@ -96,7 +96,7 @@ public class CreateTamagotchiView extends JPanel {
 				if(!getName().equals("")) {
 					frame.getController().createTamagotchi();
 					
-					frame.setGameView(new InterfaceJeuView(frame));
+					//frame.setGameView(new InterfaceJeuView(frame));
 					//frame.getGameView().setController(frame.getController());
 					frame.add(frame.getGameView(), frame.getGame());					
 					

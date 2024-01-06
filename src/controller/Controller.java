@@ -12,6 +12,7 @@ import modele.Maison.Piece;
 import modele.Oiseau;
 import modele.Robot;
 import modele.Tamagotchi;
+import view.InterfaceJeuView;
 import view.Observateur;
 import view.View;;
 
@@ -58,15 +59,28 @@ public class Controller {
 		
 		tamagotchi = sauvegarde.nouvellePartie(name, espece);
 		
-		piece = tamagotchi.getPiece();
+		if (tamagotchi != null) {
+			System.out.println("SUCCESS DE LA SAUVEGARDE");
+			view.setGameView(new InterfaceJeuView(view));
+			if (view.getGameView() != null) {
+				System.out.println("VIEW NON NULL");
+				tamagotchi.ajouterObservateur(view.getGameView());
+			} else {
+				System.out.println("VIEW NULL");
+			}
+			piece = tamagotchi.getPiece();
+			play();
+			//todo Linda
+			sauvegarde.sauvegarder(tamagotchi);
+		} else {
+			System.out.println("ECHEC DE LA SAUVEGARDE");
+		}
 		
-		play();
-		//todo Linda
-		sauvegarde.sauvegarder(tamagotchi);
 	}
 	
 	//=================================================================================================================
 	
+	//TODO : Oldton
 	public void play() {
 		
 		enCours = true;
@@ -85,7 +99,7 @@ public class Controller {
 		
 		//lancer la perte des points de moral
 		Runnable pm = () -> {
-			while (enCours) {
+			while(enCours) {
 				tamagotchi.mourirDeDepression();
 				if (tamagotchi.estMort()) {
 					enCours = false;
@@ -93,11 +107,63 @@ public class Controller {
 			}
 		};
 		
+		//lance la perte des points d'hygiene
+		Runnable ph = () -> {
+			while(enCours) {
+				tamagotchi.mourirParHygiene();
+				if (tamagotchi.estMort()) {
+					enCours = false;
+				}
+			}
+		};
+		
+		//lance la perte d'energie
+		Runnable pe = () -> {
+			while(enCours) {
+				tamagotchi.perteEnergie(-2, 3);
+			}
+		};
+		
+		//lance la perte des points de toielette
+		Runnable pt = () -> {
+			while(enCours) {
+				tamagotchi.perteToilette(-1, 3);
+			}
+		};
+		
 		ex.execute(pv);
 		ex.execute(pm);
+		ex.execute(ph);
+		ex.execute(pe);
+		ex.execute(pt);
 		
-}
-	
+		if (tamagotchi instanceof Animal) {
+			//lance la famine
+			Runnable pn = () -> {
+				while(enCours) {
+					((Animal) tamagotchi).mourirDeMalNutrition();
+					if (tamagotchi.estMort()) {
+						enCours = false;
+					}
+				}
+			};
+			ex.execute(pn);
+		}
+		
+		if (tamagotchi instanceof Robot) {
+			//lance la perte de batterie
+			Runnable pb = () -> {
+				while(enCours) {
+					((Robot) tamagotchi).dechargement();
+					if (tamagotchi.estMort()) {
+						enCours = false;
+					}
+				}
+			};
+			ex.execute(pb);
+		}
+	}
+
 	//=================================================================================================================
 	
 	//todo Linda

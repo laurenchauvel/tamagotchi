@@ -1,14 +1,15 @@
 package modele;
 
+@SuppressWarnings("serial")
 public class Oiseau extends Animal {
 
-    /**
+	/**
      * attributs
      */
 
     //=================================================================================================================
 
-    /**
+	/**
      * Constructeur
      */
     public Oiseau(String n) {

@@ -1,14 +1,15 @@
 package modele;
 
+@SuppressWarnings("serial")
 public class Lion extends Animal {
 
-    /**
+	/**
      * attributs
      */
 
     //=================================================================================================================
 
-    /**
+	/**
      * Constructeur
      */
     public Lion(String n) {

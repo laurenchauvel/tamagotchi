@@ -1,14 +1,15 @@
 package modele;
 
+@SuppressWarnings("serial")
 public class Chien extends Animal {
-
-    /**
+	
+	/**
      * attributs
      */
 
     //=================================================================================================================
 
-    /**
+	/**
      * Cosntructeur
      * @param n
      */

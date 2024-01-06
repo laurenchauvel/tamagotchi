@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import modele.Action ;
 import modele.Maison.Piece;
+import modele.Tamagotchi;
 
 @SuppressWarnings("serial")
 public class InterfaceJeuView extends JPanel implements Observateur {
@@ -473,11 +474,46 @@ public class InterfaceJeuView extends JPanel implements Observateur {
     	this.controller = c;
     }
     
+    public void eraseStat() {
+    	System.out.println("ERASE");
+    	//name.setText(null) ;
+        //espece.setText(null) ;
+    	vie.setText(null) ;
+        energie.setText(null) ;
+        moral.setText(null) ;
+        hygiene.setText(null) ;
+        toilette.setText(null) ;
+        if (controller.getEspece().equals("Robot")){
+        	nourriture_batterie.setText(null) ;
+        }else {
+        	nourriture_batterie.setText(null) ;
+        }
+    }
+    
+    public void resetStat() {
+    	eraseStat();
+    	name.setText("Nom : ") ;
+        espece.setText("Espèce : ") ;
+    	vie.setText("Vie : ") ;
+        energie.setText("Energie : ") ;
+        moral.setText("Moral : ") ;
+        hygiene.setText("Hygiene : ") ;
+        toilette.setText("Toilettes : ") ;
+        if (controller.getEspece().equals("Robot")){
+        	nourriture_batterie.setText("Batterie : ") ;
+        }else {
+        	nourriture_batterie.setText("Nourriture : ") ;
+        }
+    }
+    
     //TODO : Observateur
 	@Override
 	public void mettreAJour() {
 		System.out.println("Mise a jour des attributs");
 		
+		eraseStat();
+		//name.setText("KOO") ;
+		Tamagotchi.wait(1);
 		//Changement de la valeur des attributs
 		name.setText("Nom : " + controller.getNom()) ;
         espece.setText("Espèce : " + controller.getEspece()) ;

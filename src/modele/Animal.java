@@ -2,13 +2,16 @@ package modele;
 
 import java.io.*;
 
+@SuppressWarnings("serial")
 public abstract class Animal extends Tamagotchi {
-
-    /**
+	
+	
+	/**
      * les attributs
      */
 
     //attribut nourriture
+	
     private int nourriture;
 
     //=================================================================================================================

@@ -203,7 +203,7 @@ public class Sauvegarde implements Serializable {
     	default:
     		return null;
     	}
-    	tamagotchi.ajouterObservateur(view.getGameView());	//TODO : Observateur
+    	//tamagotchi.ajouterObservateur(view.getGameView());	//TODO : Observateur
     	sauvegarderV2(tamagotchi);
     	//maj de la liste
     	majSauvegarde();
