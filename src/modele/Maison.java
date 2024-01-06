@@ -11,11 +11,11 @@ public class Maison implements Serializable { //public class maison
 	//Les differentes pieces du jeu
 	public enum Piece{
 		
-		Salon("Salon","../media/salon-image.avif"),
-		Chambre("Chambre","../media/chambre-image.avif"),
-		Cuisine("Cuisine","../media/cuisine-image.avif"),
-		SDB("SDB","../media/sdb-image.avif"),  //SDB = Salle de bain
-		Jardin("Jardin","../media/jardin-image.jpeg");
+		Salon("Salon","/media/salon.png"),
+		Chambre("Chambre","/media/chambre.png"),
+		Cuisine("Cuisine","/media/cuisine.png"),
+		SDB("SDB","/media/salle de bain.png"),  //SDB = Salle de bain
+		Jardin("Jardin","/media/Jardin.png");
 		
 		private final String name ;
 		
