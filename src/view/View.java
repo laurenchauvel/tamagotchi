@@ -46,7 +46,7 @@ public class View extends JFrame{
 		this.add(createTamagotchi, create);
 		//this.add(gameView, game);		//cette ligne se fait mtn dans la methode showGameView() de cette classe
 		this.add(sauvegardesView, sauvegardeName); //todo Linda
-		layout.show(panel, start);
+		showStartScreen();
 		
 		
 	}
