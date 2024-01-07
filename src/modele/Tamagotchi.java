@@ -1,4 +1,7 @@
 package modele;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
 import java.io.File;
 import java.io.Serializable;
@@ -14,7 +17,24 @@ public abstract class Tamagotchi implements Serializable {
 	/**
 	 * attributs
 	 */
-	
+	//enum avec les differents Espece 
+	public enum Espece {
+		Chien("/media/chien.png"),
+        Oiseau("/media/oiseau.png"),
+        Lion("/media/lion.png"),
+        Robot("/media/robot.png");
+
+
+	    private final String image;
+
+	    private Espece(String imgPath) {
+            this.image = imgPath;
+        }
+
+        public String getImage() {
+            return image;
+        }
+	};
 	//enum avec les differents cris
     public enum Cri {
     	Aboyer(new File("../media/cri-chien.wav")),
@@ -43,6 +63,9 @@ public abstract class Tamagotchi implements Serializable {
 
 	private ArrayList<Observateur> observateurs = new ArrayList<Observateur>();	//TODO : Observateur
     
+	//attribut de l'espece
+	private Espece espece;
+	
     //attribut du cri de l'animal
     private Cri cri;
 	
@@ -565,13 +588,14 @@ public abstract class Tamagotchi implements Serializable {
   
     
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//Linda
+    public String getImageEspece() {
+        
+        return this.espece.getImage();
+    }
+    
+    public void setEspece(Espece e) {
+    	this.espece = e;
+    }
+    
 }

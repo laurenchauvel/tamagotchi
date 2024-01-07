@@ -79,6 +79,15 @@ public class Controller {
 		
 	}
 	
+	public void demarerPartie(Tamagotchi t) {
+		if (sauvegarde.findTamagotchi(t) == null) {
+			createTamagotchi();
+		}
+		else {
+			this.tamagotchi = sauvegarde.reprendrePartie(t);
+		}
+	}
+	
 	//=================================================================================================================
 	
 	//TODO : Oldton
@@ -179,6 +188,9 @@ public class Controller {
 		
 	}
 	
+	public void setTamagotchi(Tamagotchi t) {
+		this.tamagotchi = t;
+	}
 	
 	public String getImagePiece() {
 		return tamagotchi.getMaison().getPiece().getImage();
@@ -187,9 +199,15 @@ public class Controller {
 		tamagotchi.seDeplacer(p);
 	}
 	
+	//TODO: Linda
+	public String choisirEspece(Tamagotchi.Espece t) {
+		
+		return tamagotchi.getImageEspece();
+		
+	}
 	//=================================================================================================================
 	
-	//yodo Linda
+	//todo Linda
 	public void getdelete(Tamagotchi t) {
 		sauvegarde.deleteTamagotchi(t);
 	}

@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import modele.Action ;
 import modele.Maison.Piece;
 import modele.Tamagotchi;
+import modele.Tamagotchi.Espece;
 
 @SuppressWarnings("serial")
 public class InterfaceJeuView extends JPanel implements Observateur {
@@ -87,24 +88,28 @@ public class InterfaceJeuView extends JPanel implements Observateur {
     	//Initialisation des boutons d'actions
         switch(controller.getEspece()){
         	case "Robot":
-        		changeImage("/media/robot.png");
+        		changeImage(controller.choisirEspece(Espece.Robot));
+        		
         		Action.Manger_SeRecharger.setActionName("Se recharger");
         		Action.Dormir_EnVeille.setActionName("En veille");
         		break ;
         	case "Chien":
-        		changeImage("/media/chien.png");
+        		changeImage(controller.choisirEspece(Espece.Chien));
+        		
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Va chercher");
         		break ;
         	case "Oiseau":
-        		changeImage("/media/oiseau.png");
+        		changeImage(controller.choisirEspece(Espece.Oiseau));
+        		
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Voler");
         		break ;
         	case "Lion":
-        		changeImage("/media/lion.png");
+        		changeImage(controller.choisirEspece(Espece.Lion));
+        		
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Sauter");
@@ -372,6 +377,7 @@ public class InterfaceJeuView extends JPanel implements Observateur {
             e.printStackTrace();
         }
     }
+    
     private void changeBackgroundImage(String imagePath) {
         try {
             backgroundImage = ImageIO.read(getClass().getResource(imagePath));
