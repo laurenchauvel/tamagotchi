@@ -1,13 +1,6 @@
 package modele;
-import java.awt.Image;
-import javax.imageio.ImageIO;
-import java.io.IOException;
 
-import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
-import view.Observateur;
-
 import modele.Maison.Piece;
 
 public abstract class Tamagotchi implements Serializable {
@@ -35,42 +28,14 @@ public abstract class Tamagotchi implements Serializable {
             return image;
         }
 	};
-	//enum avec les differents cris
-    public enum Cri {
-    	Aboyer(new File("../media/cri-chien.wav")),
-    	Rugir(new File("../media/cri-lion.wav")),
-    	Chanter(new File("../media/cri-oiseau-2.wav")),
-    	ORDI(new File("../media/musique-nintendo-utile.mp3"));
-    	
-    	//attribut du fichier son pour le cri
-        private File son;
-        
-        //=================================================================================================================
-        
-        /*
-         * constructeur
-         */
-    	private Cri(File s) {
-    		son = s;
-    	}
-    	
-    	//=================================================================================================================
-    	
-    	public File getSon() {
-    		return son;
-    	}
-    };
+	
     
     //
     private boolean enCours;
 
-	//private transient ArrayList<Observateur> observateurs = new ArrayList<Observateur>();	//TODO : Observateur
     
 	//attribut de l'espece
 	private Espece espece;
-	
-    //attribut du cri de l'animal
-    private Cri cri;
 	
 	//attribut pour le nom
 	private String nom ;
@@ -122,33 +87,13 @@ public abstract class Tamagotchi implements Serializable {
 	//METHODES
 	//=================================================================================================================
 	
-	/*
-	public void ajouterObservateur(Observateur observateur) {
-        observateurs.add(observateur);
-        System.out.println("Observateur ajoute");
-    }
 	
-	public void notifierObservateurs() {
-		
-		if(observateurs.isEmpty()) {
-			System.out.println("MAJ : appel de notifierObservateurs dans la classe Tamagotchi");
-		}
-        for (Observateur observateur : observateurs) {
-            observateur.mettreAJour();
-        }
-    }
-    */
-    
-	
-	//=================================================================================================================
-
 	public String getNom() {
 		return nom;
 	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
-		//notifierObservateurs();	//TODO : Observateur (j'ai ajouyé cette ligne dans tous les setters)
 	}
 	
 	//=================================================================================================================
@@ -159,7 +104,6 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void setState(boolean b) {
 		this.enCours = b;
-		//notifierObservateurs();	//TODO : Observateur (j'ai ajouyé cette ligne dans tous les setters)
 	}
 	
 	//=================================================================================================================
@@ -170,7 +114,6 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void setVie(int vie) {
 		this.vie = vie;
-		//notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -182,7 +125,6 @@ public abstract class Tamagotchi implements Serializable {
 	public void setEnergie(int energie) {
 		System.out.println("Hereee");
 		this.energie = energie;
-		//notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -195,7 +137,6 @@ public abstract class Tamagotchi implements Serializable {
     //setter toilette
     public void setToilette(int n) {
         toilette = n;
-        //notifierObservateurs();
     }
 	
 	//=================================================================================================================
@@ -206,7 +147,6 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void setMoral(int moral) {
 		this.moral = moral;
-		//notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -219,7 +159,6 @@ public abstract class Tamagotchi implements Serializable {
     //setter hygiene
     public void setHygiene(int n) {
         hygiene = n;
-        //notifierObservateurs();
     }
     
     //=================================================================================================================
@@ -230,24 +169,9 @@ public abstract class Tamagotchi implements Serializable {
 
   	public void setMinuteur(long m) {
   		this.minuteur = m;
-  		//notifierObservateurs();	//TODO : Observateur (j'ai ajouyé cette ligne dans tous les setters)
   	}
   	
   	//=================================================================================================================
-
-    //getter cri
-    public Cri getCri() {
-        return cri;
-    }
-
-    //setter cri
-    public void setCri(Cri cri) {
-        this.cri = cri;
-        //notifierObservateurs();
-    }
-
-    
-    //=================================================================================================================
 
     //getter piece courange
     public Piece getPiece() {
@@ -261,8 +185,7 @@ public abstract class Tamagotchi implements Serializable {
 	}
 
 	public void seDeplacer(Piece p) {
-		this.maison.setPiece(p); //plus simple de juste garder cette ligne
-		//notifierObservateurs();
+		this.maison.setPiece(p); 
 	}
 	
 	//=================================================================================================================
@@ -431,9 +354,8 @@ public abstract class Tamagotchi implements Serializable {
     //=================================================================================================================
 	
 	/*
-	 * a mettre dans le main
+	 * methode utile pour la perte de vie progressive
 	 */
-	//methode utile pour la perte de vie progressive
 	public static void wait(int sec) {
 		try {
 			Thread.sleep(sec * 1000);
@@ -445,57 +367,12 @@ public abstract class Tamagotchi implements Serializable {
 	
 	//=================================================================================================================
 	
-	//methode de perte de vie
-	/*
-	 * p le nombre de pv perdu
-	 * s l'intervalle entre deux pertes
-	 */
-	public void perteDeVie(int p , int s) {
-		while(!estMort()) {
-			majVie(p);
-			System.out.println(getNom() + " vie : " +getVie());
-			wait(s);
-		}
-	}
-	
-	
-	//=================================================================================================================
-	
-	//methode perte de vie progressive
-	/*
-	 *toutes les 180 sec , le tamagotchi perd 1 pv
-	 * si on ne s'occupe pas de lui il meurt au bout de 5h
-	 */
-	public void mourirDeVieillesse() {
-		perteDeVie(-3,2);
-		if (estMort()) {
-			System.out.println(getNom() + " a succombé au poids de sa pauvre existence");
-		}
-	}
-	
-	//=================================================================================================================
-	
 	//methode qui signale si le tamagotchi est mort
 	public boolean estMort() {
 		if (getVie() == 0) {
 			return true;
 		}
 		return false;
-	}
-	
-	//=================================================================================================================
-	
-	//methode perte de morale progressive
-	/*
-	 * m le nombre de points de morale qui baissent toutes les s secondes
-	 */
-	public void perteDeMoral(int m , int s) {
-		while(!pasDeMoral()) {
-			majMoral(m);
-			//System.out.println(getNom() + " moral : " + getMoral());
-			wait(s);
-		}
-		
 	}
 	
 	//=================================================================================================================
@@ -510,61 +387,12 @@ public abstract class Tamagotchi implements Serializable {
 	
 	//=================================================================================================================
 	
-	//methode pour mourir de depression
-	/*
-	 * perte de 1 pv par minute
-	 * perte de 1 pm toutes les 2 secondes
-	 */
-	public void mourirDeDepression() {
-		perteDeMoral(-2,2);
-		if (pasDeMoral()) {
-			System.out.println(getNom() + " n'est pas de bonne humeur");
-			perteDeVie(-3,2);
-		}
-		if (estMort()) {
-			System.out.println(getNom() + " a succombé face à ses problèmes");
-		}
-	}
-	
-	//=================================================================================================================
-    
     //methode qui signale si le tamagotchi est sale
     public boolean estSale() {
     	if (getHygiene() == 0) {
     		return true;
     	}
     	return false;
-    }
-    
-    //=================================================================================================================
-    
-    //methode pour perde des points d'hygiene
-    /*
-	 * h le nombre de points d'hygiene qui baissent toutes les s secondes
-	 */
-    public void perteHygiene(int h, int s) {
-    	while(!estSale()) {
-    		majHygiene(h);
-    		wait(s);
-    	}
-    }
-    
-    //=================================================================================================================
-    
-    //methode pour mourir de manque d'hygiene
-    /*
-     * perte de 1 ph toutes les 5 secondes
-     * pere de 1 pv toutes les 60 secondes
-     */
-    public void mourirParHygiene() {
-    	perteHygiene(-1, 5);
-    	if (estSale()) {
-			System.out.println(getNom() + " est tout crade");
-			perteDeVie(-1,60);
-		}
-		if (estMort()) {
-			System.out.println(getNom() + " a succombé face à son insalubrité maladive");
-		}
     }
     
     //=================================================================================================================
@@ -579,44 +407,12 @@ public abstract class Tamagotchi implements Serializable {
     
     //=================================================================================================================
     
-    //methode pour perde des points d'hygiene
-    /*
-	 * e le nombre de points d'hygiene qui baissent toutes les s secondes
-	 */
-    public void perteEnergie(int h, int s) {
-    	while(!estFatigue()) {
-    		majHygiene(h);
-    		wait(s);
-    	}
-    	if (estFatigue()) {
-    		System.out.println(getNom() + " est KO");
-    	}
-    }
-    
-    //=================================================================================================================
-    
     //methode qui signale si le tamagotchi veut se soulager
     public boolean doitSeSoulager() {
     	if (getToilette() < 5) {
     		return true;
     	}
     	return false;
-    }
-    
-    //=================================================================================================================
-     
-    //methode pour la perte de la reserve des toilettes
-    /*
-	 * t la decrementaion des toilettes toutes les s secondes
-	 */
-    public void perteToilette(int t, int s) {
-    	while(!doitSeSoulager()) {
-    		majToilette(t);
-    		wait(s);
-    	}
-    	if (doitSeSoulager()) {
-			System.out.println(getNom() + " sens que sa vessie va exploser");
-		}
     }
     
     //=================================================================================================================
@@ -699,10 +495,8 @@ public abstract class Tamagotchi implements Serializable {
   
 	//=================================================================================================================
 	
-	//Linda
     public String getImageEspece() {
-        
-        return this.espece.getImage();
+    	return this.espece.getImage();
     }
     
     public void setEspece(Espece e) {

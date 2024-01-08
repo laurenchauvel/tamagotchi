@@ -58,44 +58,16 @@ public class Controller {
 		tamagotchi = sauvegarde.nouvellePartie(name, espece);
 		setState(true);
 		
-		if (tamagotchi != null) {
-			System.out.println("SUCCESS DE LA SAUVEGARDE");
-			view.setGameView(new InterfaceJeuView(view));
-			if (view.getGameView() != null) {
-				System.out.println("VIEW NON NULL");
-				//tamagotchi.ajouterObservateur(view.getGameView());
-			} else {
-				System.out.println("VIEW NULL");
-			}
-			play();
-			//todo Linda
-			
-		} else {
-			System.out.println("ECHEC DE LA SAUVEGARDE");
-		}
-		
+		view.setGameView(new InterfaceJeuView(view));
 	}
 	
 	//=================================================================================================================
 	
 	public void chargerPartie(Tamagotchi t) {
 		tamagotchi = sauvegarde.reprendrePartie(t);
-		setState(true);
+		setState(true);	
+		view.setGameView(new InterfaceJeuView(view));	
 		
-		if (tamagotchi != null) {
-			System.out.println("SUCCESS DE LA SAUVEGARDE");
-			view.setGameView(new InterfaceJeuView(view));
-			if (view.getGameView() != null) {
-				System.out.println("VIEW NON NULL");
-				//tamagotchi.ajouterObservateur(view.getGameView());
-			} else {
-				System.out.println("VIEW NULL");
-			}
-			play();
-			
-		} else {
-			System.out.println("ECHEC DE LA SAUVEGARDE");
-		}
 	}
 	
 	//=================================================================================================================
@@ -106,6 +78,7 @@ public class Controller {
 		} else {
 			chargerPartie(t);
 		}
+		play();
 	}
 	
 	//=================================================================================================================
@@ -116,84 +89,6 @@ public class Controller {
 		tamagotchi.setState(true);
 		
 		ExecutorService ex = Executors.newCachedThreadPool();
-		
-		/*
-		//lancer la perte de vie
-		Runnable pv = () -> {
-			while(enCours) {
-				tamagotchi.mourirDeVieillesse();
-				if (tamagotchi.estMort()) {
-					enCours = false;
-				}
-			}
-		};
-		
-		//lancer la perte des points de moral
-		Runnable pm = () -> {
-			while(enCours) {
-				tamagotchi.mourirDeDepression();
-				if (tamagotchi.estMort()) {
-					enCours = false;
-				}
-			}
-		};
-		
-		//lance la perte des points d'hygiene
-		Runnable ph = () -> {
-			while(enCours) {
-				tamagotchi.mourirParHygiene();
-				if (tamagotchi.estMort()) {
-					enCours = false;
-				}
-			}
-		};
-		
-		//lance la perte d'energie
-		Runnable pe = () -> {
-			while(enCours) {
-				tamagotchi.perteEnergie(-2, 3);
-			}
-		};
-		
-		//lance la perte des points de toielette
-		Runnable pt = () -> {
-			while(enCours) {
-				tamagotchi.perteToilette(-1, 3);
-			}
-		};
-		
-		ex.execute(pv);
-		ex.execute(pm);
-		ex.execute(ph);
-		ex.execute(pe);
-		ex.execute(pt);
-		
-		if (tamagotchi instanceof Animal) {
-			//lance la famine
-			Runnable pn = () -> {
-				while(enCours) {
-					((Animal) tamagotchi).mourirDeMalNutrition();
-					if (tamagotchi.estMort()) {
-						enCours = false;
-					}
-				}
-			};
-			ex.execute(pn);
-		}
-		
-		if (tamagotchi instanceof Robot) {
-			//lance la perte de batterie
-			Runnable pb = () -> {
-				while(enCours) {
-					((Robot) tamagotchi).dechargement();
-					if (tamagotchi.estMort()) {
-						enCours = false;
-					}
-				}
-			};
-			ex.execute(pb);
-		}
-		*/
 		
 		Runnable perte = () -> {
 			while(getState() == true) {
@@ -264,14 +159,6 @@ public class Controller {
 	
 	//=================================================================================================================
 	
-	/*
-	public Observateur getObservateur() {
-		return view.getGameView();
-	}
-	*/
-	
-	
-	//=================================================================================================================
 	
 	//APPELS AUX METHODES DE TYPE ACTION DU TAMAGOTCHI (jouer, regarder TV...)
 	
@@ -379,16 +266,16 @@ public class Controller {
 	 * (Elle est utilisee dans la classe InterfaceJeuView pour l'affichage des boutons d'actions
 	 */
 	public String getEspece() {
-		if (tamagotchi instanceof Robot) {
-			return "Robot" ;
-		}else if(tamagotchi instanceof Chien) {
-			return "Chien" ;
-		}else if(tamagotchi instanceof Oiseau) {
-			return "Oiseau" ;
-		}else if (tamagotchi instanceof Lion) {
-			return "Lion";
-		}
-		return null;		//TODO: ajouter un try catch avec msg d'erreur
+			if (tamagotchi instanceof Robot) {
+				return "Robot" ;
+			}else if(tamagotchi instanceof Chien) {
+				return "Chien" ;
+			}else if(tamagotchi instanceof Oiseau) {
+				return "Oiseau" ;
+			}else if (tamagotchi instanceof Lion) {
+				return "Lion";
+			}
+		return null;		
 	}
 	
 	public int getVie() {

@@ -1,14 +1,9 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.File;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-
 import modele.Chien;
 import modele.Maison;
-import modele.Maison.Piece;
 
 class TestChien {
 	

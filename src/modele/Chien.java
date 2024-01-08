@@ -15,7 +15,6 @@ public class Chien extends Animal {
      */
     public Chien(String n) {
         super(n);
-        setCri(Cri.Aboyer);
         setEspece(Espece.Chien);
     }
 
@@ -27,7 +26,6 @@ public class Chien extends Animal {
 
     //action specifique au chien
     public void vaChercher() {
-        System.out.println("Le chien va chercher la  balle");
         majEnergie(-10);
         majMoral(10);
         majHygiene(-10);

@@ -1,7 +1,5 @@
 package modele;
 
-import java.io.*;
-
 @SuppressWarnings("serial")
 public abstract class Animal extends Tamagotchi {
 	
@@ -40,7 +38,6 @@ public abstract class Animal extends Tamagotchi {
     //setter nourriture
     public void setNourriture(int n) {
         nourriture = n;
-       // notifierObservateurs();	//TODO : Observateur
     }
 
     
@@ -84,8 +81,6 @@ public abstract class Animal extends Tamagotchi {
             majNourriture(-20);
             majHygiene(-30);
             majEnergie(-20);
-        } else {
-            System.out.println("Ressources insuffisantes");
         }
     }
 
@@ -97,9 +92,7 @@ public abstract class Animal extends Tamagotchi {
 	        majEnergie(5);
 	        majNourriture(-10);
 	        majHygiene(-10);
-    	} else {
-            System.out.println("Ressources insuffisantes");
-        }
+    	}
     }
     
     //=================================================================================================================
@@ -111,16 +104,6 @@ public abstract class Animal extends Tamagotchi {
 
     //=================================================================================================================
 
-    public boolean equalsCri (Animal a) {
-        boolean result = false;
-        if (this.getCri() == a.getCri()) {
-            result = true;
-        }
-        return result;
-    }
-
-    //=================================================================================================================
-
     @Override
     public void jardinage() {
         if (getEnergie() > 15 && getNourriture() > 20) {
@@ -128,8 +111,6 @@ public abstract class Animal extends Tamagotchi {
             majNourriture(-20);
             majEnergie(-15);
             majHygiene(-30);
-        } else {
-            System.out.println("Ressources insuffisantes");
         }
     }
 
@@ -144,8 +125,6 @@ public abstract class Animal extends Tamagotchi {
             majNourriture(-20);
             majEnergie(-30);
             majHygiene(-20);
-        } else {
-            System.out.println("Ressources insuffisantes");
         }
     }
     
@@ -158,46 +137,4 @@ public abstract class Animal extends Tamagotchi {
     	}
     	return false;
     }
-    
-    //=================================================================================================================
-    
-    //methode pour la perte de nutrition
-    /*
-	 * n le nombre de points de nutrition qui baissent toutes les s secondes
-	 */
-    public void perteNourriture(int n, int s) {
-    	while(!estAffame()) {
-    		majNourriture(n);
-    		wait(s);
-    	}
-    }
-    
-    //=================================================================================================================
-    
-    //methode pour mourir de malnutrition
-    /*
-     * perte de 1 pn toutes les 5 secondes
-     * pere de 5 pv toutes les 180 secondes
-     */
-    public void mourirDeMalNutrition() {
-    	perteNourriture(-1, 5);
-    	if (estAffame()) {
-			System.out.println(getNom() + " est affamé");
-			perteDeVie(-5,180);
-		}
-    	if (estMort()) {
-			System.out.println(getNom() + " a succombé face à la brutalité du manque soudain de vivres !!!!");
-		}
-    	
-    }
-    
-    
-    
-    
-    
-
-
-
-
-
 }

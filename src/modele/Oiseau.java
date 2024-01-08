@@ -14,7 +14,6 @@ public class Oiseau extends Animal {
      */
     public Oiseau(String n) {
         super(n);
-        setCri(Cri.Chanter);
         setEspece(Espece.Oiseau);
     }
 
@@ -26,7 +25,6 @@ public class Oiseau extends Animal {
 
     //action specifique de l'oiseau
     public void voler() {
-        System.out.println("L'oiseau vole");
         majEnergie(-10);
         majMoral(10);
         majHygiene(-10);

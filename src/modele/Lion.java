@@ -14,7 +14,6 @@ public class Lion extends Animal {
      */
     public Lion(String n) {
         super(n);
-        setCri(Cri.Rugir);
         setEspece(Espece.Lion);
     }
 
@@ -26,7 +25,6 @@ public class Lion extends Animal {
 
     //action specifique au lion
     public void sauter() {
-        System.out.println("le lion saute");
         majEnergie(-10);
         majMoral(10);
         majHygiene(-10);

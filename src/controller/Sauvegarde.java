@@ -38,7 +38,6 @@ public class Sauvegarde implements Serializable {
 
     public Sauvegarde(View view) {
     	try {
-    		//this.view=view;
 	    	if (!Files.exists(Paths.get(dir)) && !Files.isDirectory(Paths.get(dir))) {
 	        	Files.createDirectory(Paths.get(dir)); //creation du rep si il n'existe pas
 	        }
@@ -92,13 +91,9 @@ public class Sauvegarde implements Serializable {
     		if (t != null) {
         		oos.writeObject(t);
         		oos.flush();
-        		System.out.println(t.getNom());
-    		} else {
-    			System.out.println("ECHEC");
     		}
         } catch (Exception e) {
         	e.printStackTrace();
-            System.out.println("Erreur lors de la sauvegarde des Tamagotchis : " + e.getMessage());
         }
     }
     
@@ -109,7 +104,6 @@ public class Sauvegarde implements Serializable {
     	Path fichier = Paths.get(newFileName(t));
     	try {
     		Files.delete(fichier);
-    		System.out.println("Le fichier a été supprimé avec succès.");
     	} catch (NoSuchFileException e) {
     		e.printStackTrace();
     	} catch (IOException e) {
@@ -190,7 +184,6 @@ public class Sauvegarde implements Serializable {
     	default:
     		return null;
     	}
-    	//tamagotchi.ajouterObservateur(view.getGameView());	//TODO : Observateur
     	sauvegarderV2(tamagotchi);
     	//maj de la liste
     	majSauvegarde();
