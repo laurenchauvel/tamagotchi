@@ -53,11 +53,6 @@ public class Sauvegarde implements Serializable {
      * les methodes
      */
     
-    public void ajouterSauvegarde(Tamagotchi t) {
-    	tamagotchisSauvegardes.add(t);
-    }
-    
-    //=================================================================================================================
 
     // Méthode pour obtenir la liste des Tamagotchis sauvegardés
     public ArrayList<Tamagotchi> getTamagotchisSauvegardes() {
