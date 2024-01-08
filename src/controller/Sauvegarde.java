@@ -200,5 +200,18 @@ public class Sauvegarde implements Serializable {
     
     //=================================================================================================================
     
+    /*
+     * Return true si le nom donné existe déjà pour un autre Tamagotchi
+     */
+    public boolean compareNames(String name) {
+    	majSauvegarde();
+    	boolean trouve = false ;
+    	for(Tamagotchi t : tamagotchisSauvegardes) {
+    		if(t.getNom().equals(name)) {
+    			trouve = true ;
+    		}
+    	}
+		return trouve;
+    }
     
 }

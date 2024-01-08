@@ -7,7 +7,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import controller.Controller;
 
 @SuppressWarnings("serial")
@@ -91,16 +92,20 @@ public class CreateTamagotchiView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO : A modfier
 				
-				if(!getName().equals("")) {
+				if(getName().equals("")) {
+					JOptionPane.showMessageDialog(CreateTamagotchiView.this, "Veuillez donner un nom au Tamagotchi.");
+				}else if(Pattern.compile("^[a-zA-Z]+$").matcher(getName()).matches()) {	
+					JOptionPane.showMessageDialog(CreateTamagotchiView.this, "Le nom du Tamagotchi ne doit contenir que des lettres.");
+				
+				}else if(frame.getSauvegarde().compareNames(getName())) {
+					JOptionPane.showMessageDialog(CreateTamagotchiView.this, "Il existe deja un Tamagotchi portant ce nom.");
+				}else {
 					frame.getController().demarrerPartie(null);;
 					
 					//frame.setGameView(new InterfaceJeuView(frame));
 					//frame.getGameView().setController(frame.getController());
 					frame.showGameView();
-				}else {
-					JOptionPane.showMessageDialog(CreateTamagotchiView.this, "Veuillez donner un nom au Tamagotchi");
 				}
 			}
 			
