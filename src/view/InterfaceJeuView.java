@@ -200,7 +200,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
         		 
         		 view.getController().enregistrer();
         		 
-        		 view.showMenu();
+        		 view.showStartScreen();
         	 	break;
         	 case 1: // Non
         		 break;    	 
