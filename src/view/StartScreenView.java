@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
 public class StartScreenView extends JPanel {
@@ -24,7 +25,13 @@ public class StartScreenView extends JPanel {
         }
 		setLayout(new GridBagLayout()); // Utiliser GridBagLayout pour le positionnement
         GridBagConstraints gbc = new GridBagConstraints();
-
+        
+        JLabel title = new JLabel("DARK TAMAGOTCHI");
+        add(title);
+        Font font = new Font("Courier New", Font.BOLD, 50);
+        title.setFont(font);
+        title.setForeground(Color.WHITE);
+        
         playButton = new GradientButton("JOUER");
         rulesButton = new GradientButton("RÈGLES");
 
