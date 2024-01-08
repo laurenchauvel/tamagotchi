@@ -16,8 +16,7 @@ import modele.Tamagotchi;
 
 @SuppressWarnings("serial")
 public class SauvegardesView extends JPanel {
-    private Sauvegarde sauvegarde;
-    private Controller controller;
+    
     private JPanel centerPanel;
     private JButton retour;
     private Image backgroundImage;
@@ -62,7 +61,7 @@ public class SauvegardesView extends JPanel {
     public void showSavedGames() {
         centerPanel.removeAll();
 
-        List<Tamagotchi> savedGames = controller.getTamagoSauvegardes();
+        List<Tamagotchi> savedGames = view.getController().getTamagoSauvegardes();
         if (savedGames == null || savedGames.isEmpty()) {
             JLabel noSavedLabel = new JLabel("Aucun Tamagotchi sauvegardé pour l'instant.");
             noSavedLabel.setForeground(Color.WHITE);
@@ -102,7 +101,7 @@ public class SauvegardesView extends JPanel {
                 view.showGameView();
                 break;
             case 1: // Supprimer
-            	controller.getdelete(tamagotchi);
+            	view.getController().getdelete(tamagotchi);
                 // Mise à jour de l'affichage après la suppression
                 showSavedGames();
                 break;
@@ -111,11 +110,10 @@ public class SauvegardesView extends JPanel {
                 break;
         }
     }
-    public void setSauvegarde(Sauvegarde sauvegarde) {
-        this.sauvegarde = sauvegarde;
-    }
-
+    
+    /*
     public void setController(Controller controller) {
         this.controller = controller;
     }
+    */
 }

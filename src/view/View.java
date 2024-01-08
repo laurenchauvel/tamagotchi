@@ -8,7 +8,7 @@ import controller.Sauvegarde;
 public class View extends JFrame{
 	
 	private Controller controller ;
-	private Sauvegarde sauvegarde ;
+	//private Sauvegarde sauvegarde ;
 	private CardLayout layout ;
 
 	private JPanel panel ;
@@ -87,6 +87,7 @@ public class View extends JFrame{
 		layout.show(panel, sauvegardeName);
 	}
 	
+	
 	public Controller getController() {
 		return controller ; 
 	}
@@ -94,6 +95,7 @@ public class View extends JFrame{
 	public void setController(Controller controller) {
 		this.controller = controller ; 
 	}
+	
 	
 	//TOdo Linda
 	public SauvegardesView getSauvegardesView() {
@@ -107,15 +109,6 @@ public class View extends JFrame{
 	public void setGameView(InterfaceJeuView ijv) {
 		gameView=ijv;
 	}
-	
-	public void setSauvegarde(Sauvegarde sauvegarde) { //todo Linda
-		this.sauvegarde = sauvegarde;
-	}
-	
-	public Sauvegarde getSauvegarde() {
-		return sauvegarde ; 
-	}
-	
 	
 	public JPanel getPanel() {
 		return panel ;

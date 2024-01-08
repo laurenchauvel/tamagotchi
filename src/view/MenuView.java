@@ -93,7 +93,7 @@ public class MenuView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				frame.showSauvegardes();
-				frame.getSauvegardesView().setController(frame.getController());
+				frame.getSauvegardesView();//setController(frame.getController());
 				frame.getSauvegardesView().showSavedGames();
 			}
 		

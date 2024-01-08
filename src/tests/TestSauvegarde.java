@@ -13,7 +13,7 @@ public class TestSauvegarde {
 
     public static void main(String[] args) throws IOException {
         // Crée une nouvelle instance de ChargerPartie
-        Sauvegarde sauvegarde = new Sauvegarde(new View());
+        Sauvegarde sauvegarde = new Sauvegarde();
 
         //Crée quelques Tamagotchis et les sauvegarde
         Tamagotchi tama1 = new Lion("Lee");

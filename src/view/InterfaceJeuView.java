@@ -21,7 +21,7 @@ import modele.Tamagotchi.Espece;
 public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
 	
 	private View view ;
-	private Controller controller ;
+	//private Controller controller ;
 	
 	//Image de fond
     private Image backgroundImage;
@@ -66,8 +66,7 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
      */
     public InterfaceJeuView(View frame) {
     	this.view = frame ;
-    	
-    	setController(view.getController());
+    
         // Configuration du layout du panneau principal
         setLayout(new BorderLayout());
 
@@ -89,29 +88,29 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
      */
     public void initialisationBoutonsActions() {
     	//Initialisation des boutons d'actions
-        switch(controller.getEspece()){
+        switch(view.getController().getEspece()){
         	case "Robot":
-        		changeImage(controller.choisirEspece(Espece.Robot));
+        		changeImage(view.getController().choisirEspece(Espece.Robot));
         		
         		Action.Manger_SeRecharger.setActionName("Se recharger");
         		Action.Dormir_EnVeille.setActionName("En veille");
         		break ;
         	case "Chien":
-        		changeImage(controller.choisirEspece(Espece.Chien));
+        		changeImage(view.getController().choisirEspece(Espece.Chien));
         		
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Va chercher");
         		break ;
         	case "Oiseau":
-        		changeImage(controller.choisirEspece(Espece.Oiseau));
+        		changeImage(view.getController().choisirEspece(Espece.Oiseau));
         		
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
         		Action.ActionSpeciale.setActionName("Voler");
         		break ;
         	case "Lion":
-        		changeImage(controller.choisirEspece(Espece.Lion));
+        		changeImage(view.getController().choisirEspece(Espece.Lion));
         		
         		Action.Manger_SeRecharger.setActionName("Manger");
         		Action.Dormir_EnVeille.setActionName("Dormir");
@@ -210,22 +209,7 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
      * Initialisation et affichage sur le panel (this) des attributs du Tamagotchi courant
      */
     public synchronized void affichageLabelsAttributs() {
-    	
-    	/*
-		name.setText("Nom : " + controller.getNom());
-        espece .setText("Espèce : " + controller.getEspece()) ;
-    	vie.setText("Vie : " + controller.getVie()) ;
-        energie.setText("Energie : " + controller.getEnergie()) ;
-        moral.setText("Moral : " + controller.getMoral()) ;
-        hygiene.setText("Hygiene : " + controller.getHygiene()) ;
-        toilette.setText("Toilettes : " + controller.getToilette()) ;
-        if (controller.getEspece().equals("Robot")){
-        	nourriture_batterie.setText("Batterie : " + controller.getNourriture_Batterie()) ;
-        }else {
-        	nourriture_batterie.setText("Nourriture : " + controller.getNourriture_Batterie()) ;
-        }*/
-        
-    	
+ 
         name = new JLabel(/*"Nom : " + controller.getNom()*/) ;
         espece = new JLabel(/*"Espèce : " + controller.getEspece()*/) ;
     	vie = new JLabel(/*"Vie : " + controller.getVie()*/) ;
@@ -233,7 +217,7 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         moral = new JLabel(/*"Moral : " + controller.getMoral()*/) ;
         hygiene = new JLabel(/*"Hygiene : " + controller.getHygiene()*/) ;
         toilette = new JLabel(/*"Toilettes : " + controller.getToilette()*/) ;
-        if (controller.getEspece().equals("Robot")){
+        if (view.getController().getEspece().equals("Robot")){
         	nourriture_batterie = new JLabel(/*"Batterie : " + controller.getNourriture_Batterie()*/) ;
         }else {
         	nourriture_batterie = new JLabel(/*"Nourriture : " + controller.getNourriture_Batterie()*/) ;
@@ -277,7 +261,7 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         ExecutorService ex = Executors.newCachedThreadPool();
         
         Runnable stat = () -> {
-        	while (controller.getState() == true) {
+        	while (view.getController().getState() == true) {
         		mettreAJour();
         		Tamagotchi.wait(1);
         	}
@@ -294,8 +278,8 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
     	chambre.addActionListener(new ActionListener() {
             @Override
             public synchronized void actionPerformed(ActionEvent e) {
-            	controller.changerDePiece(Piece.Chambre);
-                changeBackgroundImage(controller.getImagePiece());
+            	view.getController().changerDePiece(Piece.Chambre);
+                changeBackgroundImage(view.getController().getImagePiece());
                 afficherBoutonsAction(Piece.Chambre);
             }
         });
@@ -303,8 +287,8 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         salon.addActionListener(new ActionListener() {
             @Override
             public synchronized void actionPerformed(ActionEvent e) {
-            	controller.changerDePiece(Piece.Salon);
-                changeBackgroundImage(controller.getImagePiece());
+            	view.getController().changerDePiece(Piece.Salon);
+                changeBackgroundImage(view.getController().getImagePiece());
                 afficherBoutonsAction(Piece.Salon);
             }
         });
@@ -312,8 +296,8 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         salle_de_bain.addActionListener(new ActionListener() {
             @Override
             public synchronized void actionPerformed(ActionEvent e) {
-            	controller.changerDePiece(Piece.SDB);
-                changeBackgroundImage(controller.getImagePiece());
+            	view.getController().changerDePiece(Piece.SDB);
+                changeBackgroundImage(view.getController().getImagePiece());
                 afficherBoutonsAction(Piece.SDB);
             }
         });
@@ -321,8 +305,8 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         cuisine.addActionListener(new ActionListener() {
             @Override
             public synchronized void actionPerformed(ActionEvent e) {
-            	controller.changerDePiece(Piece.Cuisine);
-                changeBackgroundImage(controller.getImagePiece());
+            	view.getController().changerDePiece(Piece.Cuisine);
+                changeBackgroundImage(view.getController().getImagePiece());
                 afficherBoutonsAction(Piece.Cuisine);
             }
         });
@@ -330,8 +314,8 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         jardin.addActionListener(new ActionListener() {
             @Override
             public synchronized void actionPerformed(ActionEvent e) {
-            	controller.changerDePiece(Piece.Jardin);
-                changeBackgroundImage(controller.getImagePiece());
+            	view.getController().changerDePiece(Piece.Jardin);
+                changeBackgroundImage(view.getController().getImagePiece());
                 afficherBoutonsAction(Piece.Jardin);
             }
         });
@@ -342,70 +326,56 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
     	manger_recharge.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.manger_recharger();
-				//mettreAJour();			//TODO : Observateur
+				view.getController().manger_recharger();
 			}
 		});
     	
         dormir_veille.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.dormir_veille();
-				//mettreAJour();			//TODO : Observateur
+				view.getController().dormir_veille();
 			}
 		});
         
         jouer.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.jouer();
-				//mettreAJour();			//TODO : Observateur
-				
+				view.getController().jouer();
 			}
 		});
         
         regarderTV.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.regarderTV();
-				//mettreAJour();			//TODO : Observateur
-				
+				view.getController().regarderTV();
 			}
 		});
         
         sport.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.sport();
-				//mettreAJour();			//TODO : Observateur
-				
+				view.getController().sport();
 			}
 		});
         
         jardiner.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.jardiner();
-				//mettreAJour();			//TODO : Observateur
-				
+				view.getController().jardiner();
 			}
 		});
         
         seLaver.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.seLaver();
-				//mettreAJour();			//TODO : Observateur
-				
+				view.getController().seLaver();
 			}
 		});
         
         brosserDents.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.brosserDents();
-				//mettreAJour();			//TODO : Observateur
-				
+				view.getController().brosserDents();
 			}
 		});
         
@@ -413,18 +383,14 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         toilettes.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.toilettes();
-				//mettreAJour();			//TODO : Observateur
-				
+				view.getController().toilettes();
 			}
 		});
         
         actionSpeciale.addActionListener(new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent e) {
-				controller.actionSpeciale();
-				//mettreAJour();			//TODO : Observateur
-					
+				view.getController().actionSpeciale();
 			}
 		});
     }
@@ -533,7 +499,7 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
     			seLaver.setVisible(false);
     			brosserDents.setVisible(false);
     			toilettes.setVisible(false);
-    			if(controller.getEspece().equals("Robot")){
+    			if(view.getController().getEspece().equals("Robot")){
     				actionSpeciale.setVisible(false);
     			}else {
     				actionSpeciale.setVisible(true);
@@ -542,20 +508,13 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
     	}
     }
     
-    public void setController(Controller c) {
-    	this.controller = c;
-    }
-    
     public synchronized void eraseStat() {
-    	System.out.println("ERASE");
-    	//name.setText(null) ;
-        //espece.setText(null) ;
     	vie.setText(null) ;
         energie.setText(null) ;
         moral.setText(null) ;
         hygiene.setText(null) ;
         toilette.setText(null) ;
-        if (controller.getEspece().equals("Robot")){
+        if (view.getController().getEspece().equals("Robot")){
         	nourriture_batterie.setText(null) ;
         }else {
         	nourriture_batterie.setText(null) ;
@@ -571,7 +530,7 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         moral.setText("Moral : ") ;
         hygiene.setText("Hygiene : ") ;
         toilette.setText("Toilettes : ") ;
-        if (controller.getEspece().equals("Robot")){
+        if (view.getController().getEspece().equals("Robot")){
         	nourriture_batterie.setText("Batterie : ") ;
         }else {
         	nourriture_batterie.setText("Nourriture : ") ;
@@ -581,32 +540,28 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
     
     //TODO : Observateur
 	public synchronized void mettreAJour() {
-		System.out.println("Mise a jour des attributs");
-		
-		//eraseStat();
-		//name.setText("KOO") ;
 		Tamagotchi.wait(1);
 		//Changement de la valeur des attributs
-		name.setText("Nom : " + controller.getNom()) ;
-        espece.setText("Espèce : " + controller.getEspece()) ;
-    	vie.setText("Vie : " + controller.getVie()) ;
-        energie.setText("Energie : " + controller.getEnergie()) ;
-        moral.setText("Moral : " + controller.getMoral()) ;
-        hygiene.setText("Hygiene : " + controller.getHygiene()) ;
-        toilette.setText("Toilettes : " + controller.getToilette()) ;
-        if (controller.getEspece().equals("Robot")){
-        	nourriture_batterie.setText("Batterie : " + controller.getNourriture_Batterie()) ;
+		name.setText("Nom : " + view.getController().getNom()) ;
+        espece.setText("Espèce : " + view.getController().getEspece()) ;
+    	vie.setText("Vie : " + view.getController().getVie()) ;
+        energie.setText("Energie : " + view.getController().getEnergie()) ;
+        moral.setText("Moral : " + view.getController().getMoral()) ;
+        hygiene.setText("Hygiene : " + view.getController().getHygiene()) ;
+        toilette.setText("Toilettes : " + view.getController().getToilette()) ;
+        if (view.getController().getEspece().equals("Robot")){
+        	nourriture_batterie.setText("Batterie : " + view.getController().getNourriture_Batterie()) ;
         }else {
-        	nourriture_batterie.setText("Nourriture : " + controller.getNourriture_Batterie()) ;
+        	nourriture_batterie.setText("Nourriture : " + view.getController().getNourriture_Batterie()) ;
         }      
 		
 	}
 	
 	public synchronized void afficherMsgMort() {		
-		JOptionPane.showMessageDialog(InterfaceJeuView.this, controller.getNom()+" a succombé au poids de sa pauvre existence...");
+		JOptionPane.showMessageDialog(InterfaceJeuView.this, view.getController().getNom()+" a succombé au poids de sa pauvre existence...");
    	 	
 		view.getController().setState(false);
-		view.getController().getdelete(controller.getTamagotchi());
+		view.getController().getdelete(view.getController().getTamagotchi());
 		view.showStartScreen();
    	 		
 	}
