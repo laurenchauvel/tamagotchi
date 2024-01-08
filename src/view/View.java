@@ -36,7 +36,7 @@ public class View extends JFrame{
 		//Reglage des parametres de la fenetre
 		this.setTitle("Dark Tamagotchi");
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1500,900);
 		this.setLocationRelativeTo(null); 	//mets la fenetre au milieu de l'ecran
 		

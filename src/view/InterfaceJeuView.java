@@ -192,7 +192,7 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
     	 private void Options() {
         	 String[] options = {"Oui", "Non"};
         	 
-        	 int response = JOptionPane.showOptionDialog(this, "Voulez vous quitter ?", "Options pour " ,
+        	 int response = JOptionPane.showOptionDialog(this, "Voulez vous quitter ?", "Quitter" ,
         	 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null, options, options[0]);
         	 
         	 switch (response) {
@@ -211,7 +211,6 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
      */
     public synchronized void affichageLabelsAttributs() {
     	
-    	attributs.removeAll();
     	/*
 		name.setText("Nom : " + controller.getNom());
         espece .setText("Espèce : " + controller.getEspece()) ;
@@ -599,12 +598,17 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         	nourriture_batterie.setText("Batterie : " + controller.getNourriture_Batterie()) ;
         }else {
         	nourriture_batterie.setText("Nourriture : " + controller.getNourriture_Batterie()) ;
-        }
-        
-        revalidate();
-        repaint();
-        
+        }      
 		
+	}
+	
+	public synchronized void afficherMsgMort() {		
+		JOptionPane.showMessageDialog(InterfaceJeuView.this, controller.getNom()+" a succombé au poids de sa pauvre existence...");
+   	 	
+		view.getController().setState(false);
+		view.getController().getdelete(controller.getTamagotchi());
+		view.showStartScreen();
+   	 		
 	}
 	
 }

@@ -199,8 +199,7 @@ public class Controller {
 			while(getState() == true) {
 				tamagotchi.decreaseStat();
 				if (tamagotchi.estMort() == true) {
-					setState(false);
-					tamagotchi = null;
+					view.getGameView().afficherMsgMort();
 				}
 			}
 		};	

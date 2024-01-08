@@ -62,9 +62,11 @@ public class StartScreenView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Ouverture d'une fenetre avec affichage des regles du jeu
-				String regles = "Voici les règles du jeu :\n"
-						+ "Le but du jeu est d'assurer la survie du Tamagotchi\n"
-						+ "Il est aussi possibe de le nourrir et de faire toute sorte d'activités avec lui.";
+				String regles = "Le but du jeu est d'assurer la survie du Tamagotchi\n"
+						+ "Pour cela, veillez à bien vous occuper de lui.\n"
+						+ "Le Tamagotchi posséde des statistiques (vie, hygiène, énergie, etc).\n"
+						+ "Il est possible de lui faire réaliser une multitude d'actions qui permettront d'incrémenter ou de décrémenter ces statistiques."
+						+ "\nA vous de jouer !";
 						;				//le message qui sera affiché quand on clique sur le bouton des regles
 				
 				JOptionPane.showMessageDialog(StartScreenView.this, regles);

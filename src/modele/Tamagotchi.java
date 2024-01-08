@@ -637,11 +637,11 @@ public abstract class Tamagotchi implements Serializable {
 		while (getState() == true) {
 			decreaseMinuteur();
 			//perte de vie
-    		if (getMinuteur() % /*180*/ 2 == 0) {
+    		if (getMinuteur() % 180 == 0) {
         		majVie(-1);	
         	}
     		//perte moral
-        	if (getMinuteur() % /*60*/ 5 == 0) {     		
+        	if (getMinuteur() % 60 == 0) {     		
         		if (pasDeMoral() == true) {
         			majVie(-1);
         		} else {
