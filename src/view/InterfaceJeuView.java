@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.imageio.ImageIO;
 import modele.Action ;
 import modele.Maison.Piece;
@@ -15,7 +18,7 @@ import modele.Tamagotchi;
 import modele.Tamagotchi.Espece;
 
 @SuppressWarnings("serial")
-public class InterfaceJeuView extends JPanel implements Observateur  {
+public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
 	
 	private View view ;
 	private Controller controller ;
@@ -194,12 +197,8 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
         	 
         	 switch (response) {
         	 case 0: // Oui
-        		 System.out.println(view.getController().getTamagotchi());
-        		 System.out.println(" /////////////////////");
-        		 //view.getController().getTamagotchi().majVie(-1000);
-        		 
+        		 view.getController().setState(false);
         		 view.getController().enregistrer();
-        		 
         		 view.showStartScreen();
         	 	break;
         	 case 1: // Non
@@ -211,7 +210,8 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
      * Initialisation et affichage sur le panel (this) des attributs du Tamagotchi courant
      */
     public void affichageLabelsAttributs() {
-    	name = new JLabel("Nom : " + controller.getNom()) ;
+    	
+		name = new JLabel("Nom : " + controller.getNom()) ;
         espece = new JLabel("Espèce : " + controller.getEspece()) ;
     	vie = new JLabel("Vie : " + controller.getVie()) ;
         energie = new JLabel("Energie : " + controller.getEnergie()) ;
@@ -223,17 +223,28 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
         }else {
         	nourriture_batterie = new JLabel("Nourriture : " + controller.getNourriture_Batterie()) ;
         }
-        	
-        	//Changement de la couleur du texte des Label
+    		
+      //Changement de la couleur et de la taille du texte des Label
+
+        Font labelFont = new Font("Arial", Font.BOLD, 20);
+
         name.setForeground(Color.WHITE);
+        name.setFont(labelFont);
         espece.setForeground(Color.WHITE);
+        espece.setFont(labelFont);
         vie.setForeground(Color.WHITE);
+        vie.setFont(labelFont);
         energie.setForeground(Color.WHITE);
+        energie.setFont(labelFont);
         moral.setForeground(Color.WHITE);
+        moral.setFont(labelFont);
         hygiene.setForeground(Color.WHITE);
+        hygiene.setFont(labelFont);
         toilette.setForeground(Color.WHITE);
+        toilette.setFont(labelFont);
         nourriture_batterie.setForeground(Color.WHITE);
-        
+        nourriture_batterie.setFont(labelFont);
+
         attributs = new JPanel();
         attributs.setLayout(new BoxLayout(attributs, BoxLayout.Y_AXIS));
         attributs.add(name);
@@ -247,6 +258,17 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
         attributs.setBackground(new Color(255, 255, 255, 0));
         
         this.add(attributs, BorderLayout.WEST);
+        
+        ExecutorService ex = Executors.newCachedThreadPool();
+        
+        Runnable stat = () -> {
+        	while (controller.getState() == true) {
+        		mettreAJour();
+        		Tamagotchi.wait(1);
+        	}
+        };
+        
+        ex.execute(stat);
         
     }
     
@@ -306,7 +328,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.manger_recharger();
-				mettreAJour();			//TODO : Observateur
+				//mettreAJour();			//TODO : Observateur
 			}
 		});
     	
@@ -314,7 +336,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.dormir_veille();
-				mettreAJour();			//TODO : Observateur
+				//mettreAJour();			//TODO : Observateur
 			}
 		});
         
@@ -322,7 +344,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.jouer();
-				mettreAJour();			//TODO : Observateur
+				//mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -331,7 +353,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.regarderTV();
-				mettreAJour();			//TODO : Observateur
+				//mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -340,7 +362,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.sport();
-				mettreAJour();			//TODO : Observateur
+				//mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -358,7 +380,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.seLaver();
-				mettreAJour();			//TODO : Observateur
+				//mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -367,7 +389,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.brosserDents();
-				mettreAJour();			//TODO : Observateur
+				//mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -377,7 +399,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.toilettes();
-				mettreAJour();			//TODO : Observateur
+				//mettreAJour();			//TODO : Observateur
 				
 			}
 		});
@@ -386,7 +408,7 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.actionSpeciale();
-				mettreAJour();			//TODO : Observateur
+				//mettreAJour();			//TODO : Observateur
 					
 			}
 		});
@@ -543,7 +565,6 @@ public class InterfaceJeuView extends JPanel implements Observateur  {
     
     
     //TODO : Observateur
-	@Override
 	public void mettreAJour() {
 		System.out.println("Mise a jour des attributs");
 		

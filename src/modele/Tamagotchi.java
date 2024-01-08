@@ -60,8 +60,11 @@ public abstract class Tamagotchi implements Serializable {
     		return son;
     	}
     };
+    
+    //
+    private boolean enCours;
 
-	private transient ArrayList<Observateur> observateurs = new ArrayList<Observateur>();	//TODO : Observateur
+	//private transient ArrayList<Observateur> observateurs = new ArrayList<Observateur>();	//TODO : Observateur
     
 	//attribut de l'espece
 	private Espece espece;
@@ -119,7 +122,7 @@ public abstract class Tamagotchi implements Serializable {
 	//METHODES
 	//=================================================================================================================
 	
-	
+	/*
 	public void ajouterObservateur(Observateur observateur) {
         observateurs.add(observateur);
         System.out.println("Observateur ajoute");
@@ -134,6 +137,7 @@ public abstract class Tamagotchi implements Serializable {
             observateur.mettreAJour();
         }
     }
+    */
     
 	
 	//=================================================================================================================
@@ -144,7 +148,18 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void setNom(String nom) {
 		this.nom = nom;
-		notifierObservateurs();	//TODO : Observateur (j'ai ajouyé cette ligne dans tous les setters)
+		//notifierObservateurs();	//TODO : Observateur (j'ai ajouyé cette ligne dans tous les setters)
+	}
+	
+	//=================================================================================================================
+
+	public boolean getState() {
+		return enCours;
+	}
+
+	public void setState(boolean b) {
+		this.enCours = b;
+		//notifierObservateurs();	//TODO : Observateur (j'ai ajouyé cette ligne dans tous les setters)
 	}
 	
 	//=================================================================================================================
@@ -155,7 +170,7 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void setVie(int vie) {
 		this.vie = vie;
-		notifierObservateurs();
+		//notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -167,7 +182,7 @@ public abstract class Tamagotchi implements Serializable {
 	public void setEnergie(int energie) {
 		System.out.println("Hereee");
 		this.energie = energie;
-		notifierObservateurs();
+		//notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -180,7 +195,7 @@ public abstract class Tamagotchi implements Serializable {
     //setter toilette
     public void setToilette(int n) {
         toilette = n;
-        notifierObservateurs();
+        //notifierObservateurs();
     }
 	
 	//=================================================================================================================
@@ -191,7 +206,7 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void setMoral(int moral) {
 		this.moral = moral;
-		notifierObservateurs();
+		//notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -204,7 +219,7 @@ public abstract class Tamagotchi implements Serializable {
     //setter hygiene
     public void setHygiene(int n) {
         hygiene = n;
-        notifierObservateurs();
+        //notifierObservateurs();
     }
     
     //=================================================================================================================
@@ -228,7 +243,7 @@ public abstract class Tamagotchi implements Serializable {
     //setter cri
     public void setCri(Cri cri) {
         this.cri = cri;
-        notifierObservateurs();
+        //notifierObservateurs();
     }
 
     
@@ -247,7 +262,7 @@ public abstract class Tamagotchi implements Serializable {
 
 	public void seDeplacer(Piece p) {
 		this.maison.setPiece(p); //plus simple de juste garder cette ligne
-		notifierObservateurs();
+		//notifierObservateurs();
 	}
 	
 	//=================================================================================================================
@@ -619,7 +634,7 @@ public abstract class Tamagotchi implements Serializable {
      * perte de vie si les autres attributs sont vides
      */
     public void decreaseStat() {
-		while (estMort() == false && this != null) {
+		while (getState() == true) {
 			decreaseMinuteur();
 			//perte de vie
     		if (getMinuteur() % /*180*/ 2 == 0) {
@@ -674,6 +689,9 @@ public abstract class Tamagotchi implements Serializable {
         				((Animal)this).majNourriture(-1);
         			}
             	}
+        	}
+        	if (estMort() == true) {
+        		setState(false);
         	}
         	wait(1);
     	}

@@ -25,8 +25,6 @@ public class Controller {
 	
 	private Tamagotchi tamagotchi ; 	//Le Tamagotchi courant
 	
-	private Piece piece ; 	//La piece courante
-	
 	private boolean enCours;
 	
 	//=================================================================================================================
@@ -47,7 +45,6 @@ public class Controller {
 	    
 		//sauvegarde = s ;
 		tamagotchi = null ;
-		piece = null;
 		
 	}
 	
@@ -59,17 +56,17 @@ public class Controller {
 		String espece = view.getEspece();
 		
 		tamagotchi = sauvegarde.nouvellePartie(name, espece);
+		setState(true);
 		
 		if (tamagotchi != null) {
 			System.out.println("SUCCESS DE LA SAUVEGARDE");
 			view.setGameView(new InterfaceJeuView(view));
 			if (view.getGameView() != null) {
 				System.out.println("VIEW NON NULL");
-				tamagotchi.ajouterObservateur(view.getGameView());
+				//tamagotchi.ajouterObservateur(view.getGameView());
 			} else {
 				System.out.println("VIEW NULL");
 			}
-			piece = tamagotchi.getPiece();
 			play();
 			//todo Linda
 			
@@ -83,13 +80,14 @@ public class Controller {
 	
 	public void chargerPartie(Tamagotchi t) {
 		tamagotchi = sauvegarde.reprendrePartie(t);
+		setState(true);
 		
 		if (tamagotchi != null) {
 			System.out.println("SUCCESS DE LA SAUVEGARDE");
 			view.setGameView(new InterfaceJeuView(view));
 			if (view.getGameView() != null) {
 				System.out.println("VIEW NON NULL");
-				tamagotchi.ajouterObservateur(view.getGameView());
+				//tamagotchi.ajouterObservateur(view.getGameView());
 			} else {
 				System.out.println("VIEW NULL");
 			}
@@ -115,7 +113,7 @@ public class Controller {
 	//TODO : Oldton
 	public void play() {
 		
-		enCours = true;
+		tamagotchi.setState(true);
 		
 		ExecutorService ex = Executors.newCachedThreadPool();
 		
@@ -198,19 +196,15 @@ public class Controller {
 		*/
 		
 		Runnable perte = () -> {
-			while(enCours == true) {
-				//System.out.println(enCours);
+			while(getState() == true) {
 				tamagotchi.decreaseStat();
 				if (tamagotchi.estMort() == true) {
-					//setState(false);
-					//tamagotchi = null;
-					//System.out.println(enCours);
+					setState(false);
+					tamagotchi = null;
 				}
 			}
-		};
-		System.out.println(enCours);
+		};	
 		ex.execute(perte);
-		//sauvegarde.sauvegarderV2(tamagotchi);
 	}
 	
 	//=================================================================================================================
@@ -222,14 +216,14 @@ public class Controller {
 	//=================================================================================================================
 	
 	//TODO : Oldton
-		public boolean getState() {
-			return enCours;
-		}
-		
-		//TODO : Oldton
-		public void setState(boolean b) {
-			enCours = b;
-		}
+	public boolean getState() {
+		return tamagotchi.getState();
+	}
+	
+	//TODO : Oldton
+	public void setState(boolean b) {
+		tamagotchi.setState(b);
+	}
 
 	
 	
