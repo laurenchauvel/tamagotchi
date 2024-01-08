@@ -10,7 +10,6 @@ import controller.Controller;
 public class View extends JFrame{
 	
 	private Controller controller ;
-	//private Sauvegarde sauvegarde ;
 	private CardLayout layout ;
 
 	private JPanel panel ;

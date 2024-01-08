@@ -18,6 +18,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 import modele.Action ;
 import modele.Maison.Piece;
@@ -35,15 +36,26 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
     
     
     //Label des attributs
+    private JProgressBar vie ;
+    private JProgressBar energie ;
+    private JProgressBar moral ;
+    private JProgressBar hygiene ;
+    private JProgressBar toilette;
+    private JProgressBar nourriture_batterie;
+    private JPanel attributs ;
+    
     private JLabel name ;
     private JLabel espece; 
+    
+    /*
     private JLabel vie ;
     private JLabel energie ;
     private JLabel moral ;
     private JLabel hygiene ;
     private JLabel toilette;
     private JLabel nourriture_batterie;
-    private JPanel attributs ;				//panel des attributs
+    private JPanel attributs ;	
+    */			//panel des attributs
     
     //Boutons des pieces
     private GradientButton salon;
@@ -219,15 +231,34 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
  
         name = new JLabel(/*"Nom : " + controller.getNom()*/) ;
         espece = new JLabel(/*"Espèce : " + controller.getEspece()*/) ;
-    	vie = new JLabel(/*"Vie : " + controller.getVie()*/) ;
-        energie = new JLabel(/*"Energie : " + controller.getEnergie()*/) ;
-        moral = new JLabel(/*"Moral : " + controller.getMoral()*/) ;
-        hygiene = new JLabel(/*"Hygiene : " + controller.getHygiene()*/) ;
-        toilette = new JLabel(/*"Toilettes : " + controller.getToilette()*/) ;
+    	vie = new JProgressBar(0,100/*"Vie : " + controller.getVie()*/) ;
+    	vie.setValue(view.getController().getVie());
+    	vie.setStringPainted(true);
+    	
+        energie = new JProgressBar(0,100/*"Energie : " + controller.getEnergie()*/) ;
+        energie.setValue(view.getController().getEnergie());
+    	energie.setStringPainted(true);
+    	
+        moral = new JProgressBar(0,100/*"Moral : " + controller.getMoral()*/) ;
+        moral.setValue(view.getController().getMoral());
+    	moral.setStringPainted(true);
+    	
+        hygiene = new JProgressBar(0,100/*"Hygiene : " + controller.getHygiene()*/) ;
+        hygiene.setValue(view.getController().getHygiene());
+    	hygiene.setStringPainted(true);
+    	
+        toilette = new JProgressBar(0,100/*"Toilettes : " + controller.getToilette()*/) ;
+        toilette.setValue(view.getController().getToilette());
+    	toilette.setStringPainted(true);
+    	
         if (view.getController().getEspece().equals("Robot")){
-        	nourriture_batterie = new JLabel(/*"Batterie : " + controller.getNourriture_Batterie()*/) ;
+        	nourriture_batterie = new JProgressBar(0,100/*"Batterie : " + controller.getNourriture_Batterie()*/) ;
+        	nourriture_batterie.setValue(view.getController().getNourriture_Batterie());
+        	nourriture_batterie.setStringPainted(true);
         }else {
-        	nourriture_batterie = new JLabel(/*"Nourriture : " + controller.getNourriture_Batterie()*/) ;
+        	nourriture_batterie = new JProgressBar(0,100/*"Nourriture : " + controller.getNourriture_Batterie()*/) ;
+        	nourriture_batterie.setValue(view.getController().getNourriture_Batterie());
+        	nourriture_batterie.setStringPainted(true);
         }
     		
       //Changement de la couleur et de la taille du texte des Label
@@ -515,51 +546,16 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
     	}
     }
     
-    public synchronized void eraseStat() {
-    	vie.setText(null) ;
-        energie.setText(null) ;
-        moral.setText(null) ;
-        hygiene.setText(null) ;
-        toilette.setText(null) ;
+    public synchronized void mettreAJour() {
+    	vie.setValue(view.getController().getVie()) ;
+        energie.setValue(+ view.getController().getEnergie()) ;
+        moral.setValue(view.getController().getMoral()) ;
+        hygiene.setValue(view.getController().getHygiene()) ;
+        toilette.setValue(view.getController().getToilette()) ;
         if (view.getController().getEspece().equals("Robot")){
-        	nourriture_batterie.setText(null) ;
+        	nourriture_batterie.setValue(view.getController().getNourriture_Batterie()) ;
         }else {
-        	nourriture_batterie.setText(null) ;
-        }
-    }
-    
-    public synchronized void resetStat() {
-    	eraseStat();
-    	name.setText("Nom : ") ;
-        espece.setText("Espèce : ") ;
-    	vie.setText("Vie : ") ;
-        energie.setText("Energie : ") ;
-        moral.setText("Moral : ") ;
-        hygiene.setText("Hygiene : ") ;
-        toilette.setText("Toilettes : ") ;
-        if (view.getController().getEspece().equals("Robot")){
-        	nourriture_batterie.setText("Batterie : ") ;
-        }else {
-        	nourriture_batterie.setText("Nourriture : ") ;
-        }
-    }
-    
-    
-    //TODO : Observateur
-	public synchronized void mettreAJour() {
-		Tamagotchi.wait(1);
-		//Changement de la valeur des attributs
-		name.setText("Nom : " + view.getController().getNom()) ;
-        espece.setText("Espèce : " + view.getController().getEspece()) ;
-    	vie.setText("Vie : " + view.getController().getVie()) ;
-        energie.setText("Energie : " + view.getController().getEnergie()) ;
-        moral.setText("Moral : " + view.getController().getMoral()) ;
-        hygiene.setText("Hygiene : " + view.getController().getHygiene()) ;
-        toilette.setText("Toilettes : " + view.getController().getToilette()) ;
-        if (view.getController().getEspece().equals("Robot")){
-        	nourriture_batterie.setText("Batterie : " + view.getController().getNourriture_Batterie()) ;
-        }else {
-        	nourriture_batterie.setText("Nourriture : " + view.getController().getNourriture_Batterie()) ;
+        	nourriture_batterie.setValue(view.getController().getNourriture_Batterie()) ;
         }      
 		
 	}

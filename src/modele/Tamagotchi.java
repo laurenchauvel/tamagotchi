@@ -123,7 +123,6 @@ public abstract class Tamagotchi implements Serializable {
 	}
 
 	public void setEnergie(int energie) {
-		System.out.println("Hereee");
 		this.energie = energie;
 	}
 	
@@ -443,7 +442,6 @@ public abstract class Tamagotchi implements Serializable {
         		} else {
         			majMoral(-1);
         		}
-        		System.out.println("moral : " + getMoral());
         	}
         	//perte hygiene
         	if (getMinuteur() % 90 == 0) {
