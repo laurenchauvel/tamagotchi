@@ -23,8 +23,6 @@ import view.View;
 @SuppressWarnings("serial")
 public class Sauvegarde implements Serializable {
 
-	private View view ;
-    
     //test Oldton
     private final String dir = "src/not-user-dir/";
     //test Oldton fin
@@ -40,7 +38,7 @@ public class Sauvegarde implements Serializable {
 
     public Sauvegarde(View view) {
     	try {
-    		this.view=view;
+    		//this.view=view;
 	    	if (!Files.exists(Paths.get(dir)) && !Files.isDirectory(Paths.get(dir))) {
 	        	Files.createDirectory(Paths.get(dir)); //creation du rep si il n'existe pas
 	        }
@@ -161,17 +159,6 @@ public class Sauvegarde implements Serializable {
     
     //=================================================================================================================
     
-    //methode pour fournir sous forme de string la liste des tamagotchis
-    public String[] showTamagotchiSauvegardes() {
-    	 String[] tamagotchisStrings = new String[tamagotchisSauvegardes.size()];
-    	 for (int i = 0; i < tamagotchisSauvegardes.size(); i++) {
-    	 tamagotchisStrings[i] = tamagotchisSauvegardes.get(i).getNom() + " | " + tamagotchisSauvegardes.get(i).getClass(); 
-    	 }
-    	 return tamagotchisStrings;
-	}
-    
-    //=================================================================================================================
-    
     //retourne le tamagotchi avec lequel la partie sera effectuée
     public Tamagotchi reprendrePartie(Tamagotchi t) {
     	return findTamagotchi(t);
@@ -209,27 +196,6 @@ public class Sauvegarde implements Serializable {
     	majSauvegarde();
     	//recuperation du dernier tamagotchi de la liste 
 		return reprendrePartie(tamagotchi);		
-    }
-    
-    //=================================================================================================================
-    
-    //retourne le tamagotchi choisi
-    public Tamagotchi equalsTamagotchi(String tamagotchi) {
-    	 String[] parts = tamagotchi.split(" \\| ");
-    	 String nom = parts[0];
-    	 String type = parts[1];
-    	 for(Tamagotchi t: tamagotchisSauvegardes) {
-	    	 if(t.getNom().equals(nom) && t.getEspece().equals(type)) {
-	    		 return t;
-	    	 }
-    	 }
-    	 return null;
-    }
-    
-    //=================================================================================================================
-    
-    public Tamagotchi equalsTamagotchi(int index) {
-    	return tamagotchisSauvegardes.get(index);
     }
     
     //=================================================================================================================
