@@ -61,7 +61,7 @@ public abstract class Tamagotchi implements Serializable {
     	}
     };
 
-	private ArrayList<Observateur> observateurs = new ArrayList<Observateur>();	//TODO : Observateur
+	private transient ArrayList<Observateur> observateurs = new ArrayList<Observateur>();	//TODO : Observateur
     
 	//attribut de l'espece
 	private Espece espece;
@@ -93,6 +93,9 @@ public abstract class Tamagotchi implements Serializable {
 	
 	//attribut pour sa piece courante
 	private Piece piece;
+	
+	//
+	private long minuteur;
 
 	//=================================================================================================================
 
@@ -107,6 +110,7 @@ public abstract class Tamagotchi implements Serializable {
 		setMoral(100);
 		setHygiene(100);
 		setToilette(100);
+		setMinuteur(180);
 		maison = new Maison();
 		piece = maison.getPiece();
 	}
@@ -114,6 +118,7 @@ public abstract class Tamagotchi implements Serializable {
 	//=================================================================================================================
 	//METHODES
 	//=================================================================================================================
+	
 	
 	public void ajouterObservateur(Observateur observateur) {
         observateurs.add(observateur);
@@ -129,8 +134,7 @@ public abstract class Tamagotchi implements Serializable {
             observateur.mettreAJour();
         }
     }
-	
-	
+    
 	
 	//=================================================================================================================
 
@@ -204,6 +208,17 @@ public abstract class Tamagotchi implements Serializable {
     }
     
     //=================================================================================================================
+    
+  	public long getMinuteur() {
+  		return minuteur;
+  	}
+
+  	public void setMinuteur(long m) {
+  		this.minuteur = m;
+  		//notifierObservateurs();	//TODO : Observateur (j'ai ajouyé cette ligne dans tous les setters)
+  	}
+  	
+  	//=================================================================================================================
 
     //getter cri
     public Cri getCri() {
@@ -259,10 +274,13 @@ public abstract class Tamagotchi implements Serializable {
     
     //definit si 2 tamagotchis soient egaux
     public boolean equals(Tamagotchi t) {
-    	if (t.getNom().equals(this.getNom()) && t.getEspece().equals(this.getEspece())) {
-    		return true;
+    	boolean result = false;
+    	if (t != null) {
+    		if (t.getNom().equals(this.getNom()) && t.getEspece().equals(this.getEspece())) {
+        		result = true;
+        	}
     	}
-    	return false;
+    	return result;
     }
 	
 	//=================================================================================================================
@@ -585,8 +603,83 @@ public abstract class Tamagotchi implements Serializable {
 			System.out.println(getNom() + " sens que sa vessie va exploser");
 		}
     }
-  
     
+    //=================================================================================================================
+    
+    public void decreaseMinuteur() {
+    	minuteur -= 1;
+    	if (getMinuteur() == 0) {
+    		setMinuteur(180);
+    	}
+    }
+    
+    //=================================================================================================================
+    
+    /*
+     * perte de vie si les autres attributs sont vides
+     */
+    public void decreaseStat() {
+		while (estMort() == false && this != null) {
+			decreaseMinuteur();
+			//perte de vie
+    		if (getMinuteur() % /*180*/ 2 == 0) {
+        		majVie(-1);	
+        	}
+    		//perte moral
+        	if (getMinuteur() % /*60*/ 5 == 0) {     		
+        		if (pasDeMoral() == true) {
+        			majVie(-1);
+        		} else {
+        			majMoral(-1);
+        		}
+        		System.out.println("moral : " + getMoral());
+        	}
+        	//perte hygiene
+        	if (getMinuteur() % 90 == 0) {
+        		if (estSale() == true) {
+        			majVie(-1);
+        		} else {
+        			majHygiene(-1);
+        		}
+        	}
+        	//perte toilette
+        	if (getMinuteur() % 20 == 0) {
+        		if (doitSeSoulager() == true) {
+        			majVie(-1);
+        		} else {
+        			majToilette(-1);
+        		}
+        	}
+        	//perte energie
+        	if (getMinuteur() % 30 == 0) {
+        		if (estFatigue() == true) {
+        			majVie(-1);
+        		} else {
+        			majEnergie(-1);
+        		}
+        	}
+        	//perte nourriture
+        	if (getMinuteur() % 45 == 0) {
+        		if (this instanceof Robot) {
+        			if (((Robot)this).estDecharge() == true) {
+        				majVie(-1);
+        			} else {
+        				((Robot)this).majBatterie(-1);
+        			}
+        		}
+        		if (this instanceof Animal) {
+        			if (((Animal)this).estAffame() == true) {
+        				majVie(-1);
+        			} else {
+        				((Animal)this).majNourriture(-1);
+        			}
+            	}
+        	}
+        	wait(1);
+    	}
+    }
+  
+	//=================================================================================================================
 	
 	//Linda
     public String getImageEspece() {

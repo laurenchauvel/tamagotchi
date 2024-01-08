@@ -15,7 +15,7 @@ import modele.Tamagotchi;
 import modele.Tamagotchi.Espece;
 
 @SuppressWarnings("serial")
-public class InterfaceJeuView extends JPanel implements Observateur {
+public class InterfaceJeuView extends JPanel implements Observateur  {
 	
 	private View view ;
 	private Controller controller ;
@@ -179,9 +179,33 @@ public class InterfaceJeuView extends JPanel implements Observateur {
         
       //Initialisation et ajout du bouton de retour au panel principal
         quitter = new GradientButton("Quitter");
-        quitter.addActionListener(e -> view.showStartScreen());
-        boutonsPieces.add(quitter);
-    }
+        quitter.addActionListener(e -> {
+
+        	 Options();
+
+        });
+    	 boutonsPieces.add(quitter);
+    	 }
+    	 private void Options() {
+        	 String[] options = {"Oui", "Non"};
+        	 
+        	 int response = JOptionPane.showOptionDialog(this, "Voulez vous quitter ?", "Options pour " ,
+        	 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null, options, options[0]);
+        	 
+        	 switch (response) {
+        	 case 0: // Oui
+        		 System.out.println(view.getController().getTamagotchi());
+        		 System.out.println(" /////////////////////");
+        		 //view.getController().getTamagotchi().majVie(-1000);
+        		 
+        		 view.getController().enregistrer();
+        		 
+        		 view.showMenu();
+        	 	break;
+        	 case 1: // Non
+        		 break;    	 
+    	 }
+	 }
     
     /*
      * Initialisation et affichage sur le panel (this) des attributs du Tamagotchi courant
@@ -517,6 +541,7 @@ public class InterfaceJeuView extends JPanel implements Observateur {
         }
     }
     
+    
     //TODO : Observateur
 	@Override
 	public void mettreAJour() {
@@ -540,5 +565,6 @@ public class InterfaceJeuView extends JPanel implements Observateur {
         }
 		
 	}
+	
 }
 

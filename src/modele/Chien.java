@@ -16,6 +16,7 @@ public class Chien extends Animal {
     public Chien(String n) {
         super(n);
         setCri(Cri.Aboyer);
+        setEspece(Espece.Chien);
     }
 
     //=================================================================================================================

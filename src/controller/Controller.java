@@ -72,19 +72,41 @@ public class Controller {
 			piece = tamagotchi.getPiece();
 			play();
 			//todo Linda
-			sauvegarde.sauvegarder(tamagotchi);
+			
 		} else {
 			System.out.println("ECHEC DE LA SAUVEGARDE");
 		}
 		
 	}
 	
-	public void demarerPartie(Tamagotchi t) {
+	//=================================================================================================================
+	
+	public void chargerPartie(Tamagotchi t) {
+		tamagotchi = sauvegarde.reprendrePartie(t);
+		
+		if (tamagotchi != null) {
+			System.out.println("SUCCESS DE LA SAUVEGARDE");
+			view.setGameView(new InterfaceJeuView(view));
+			if (view.getGameView() != null) {
+				System.out.println("VIEW NON NULL");
+				tamagotchi.ajouterObservateur(view.getGameView());
+			} else {
+				System.out.println("VIEW NULL");
+			}
+			play();
+			
+		} else {
+			System.out.println("ECHEC DE LA SAUVEGARDE");
+		}
+	}
+	
+	//=================================================================================================================
+	
+	public void demarrerPartie(Tamagotchi t) {
 		if (sauvegarde.findTamagotchi(t) == null) {
 			createTamagotchi();
-		}
-		else {
-			this.tamagotchi = sauvegarde.reprendrePartie(t);
+		} else {
+			chargerPartie(t);
 		}
 	}
 	
@@ -97,6 +119,7 @@ public class Controller {
 		
 		ExecutorService ex = Executors.newCachedThreadPool();
 		
+		/*
 		//lancer la perte de vie
 		Runnable pv = () -> {
 			while(enCours) {
@@ -172,9 +195,43 @@ public class Controller {
 			};
 			ex.execute(pb);
 		}
+		*/
+		
+		Runnable perte = () -> {
+			while(enCours == true) {
+				//System.out.println(enCours);
+				tamagotchi.decreaseStat();
+				if (tamagotchi.estMort() == true) {
+					//setState(false);
+					//tamagotchi = null;
+					//System.out.println(enCours);
+				}
+			}
+		};
+		System.out.println(enCours);
+		ex.execute(perte);
+		//sauvegarde.sauvegarderV2(tamagotchi);
 	}
-
+	
 	//=================================================================================================================
+	
+	public void enregistrer() {
+		sauvegarde.sauvegarderV2(tamagotchi);
+	}
+	
+	//=================================================================================================================
+	
+	//TODO : Oldton
+		public boolean getState() {
+			return enCours;
+		}
+		
+		//TODO : Oldton
+		public void setState(boolean b) {
+			enCours = b;
+		}
+
+	
 	
 	//todo Linda
 	public ArrayList<Tamagotchi> getTamagoSauvegardes() {
@@ -214,14 +271,11 @@ public class Controller {
 	
 	//=================================================================================================================
 	
-	//TODO : Oldton
-	public boolean getState() {
-		return enCours;
-	}
-	
+	/*
 	public Observateur getObservateur() {
 		return view.getGameView();
 	}
+	*/
 	
 	
 	//=================================================================================================================

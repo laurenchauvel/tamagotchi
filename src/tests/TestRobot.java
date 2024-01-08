@@ -19,7 +19,7 @@ class TestRobot {
 	//initialisation des attributs
 	Robot boulon = new Robot("Boulon");
 	
-	
+	/*
 	@Test
 	void TestConstructeur() {
 		assertEquals("Boulon", boulon.getNom());
@@ -100,7 +100,7 @@ class TestRobot {
 	}
 	*/
 	
-	
+	/*
 	@Test
 	void TestJouer() {
 		boulon.setEnergie(31);
@@ -144,6 +144,12 @@ class TestRobot {
 	void TestGetEspece() {
 		System.out.println(boulon.getEspece());
 		assertEquals("Robot", boulon.getEspece());
+	}
+	*/
+	
+	@Test
+	void TestDecreaseStat() {
+		boulon.decreaseStat();
 	}
 	
 

@@ -98,7 +98,7 @@ public class SauvegardesView extends JPanel {
 
         switch (response) {
             case 0: // Jouer
-                sauvegarde.reprendrePartie(tamagotchi);
+            	view.getController().demarrerPartie(tamagotchi);
                 view.showGameView();
                 break;
             case 1: // Supprimer

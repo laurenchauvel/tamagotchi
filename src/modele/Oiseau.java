@@ -15,6 +15,7 @@ public class Oiseau extends Animal {
     public Oiseau(String n) {
         super(n);
         setCri(Cri.Chanter);
+        setEspece(Espece.Oiseau);
     }
 
     //=================================================================================================================

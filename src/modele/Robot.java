@@ -17,6 +17,7 @@ public class Robot extends Tamagotchi{
         super(n);
         setBatterie(100);
         setCri(Cri.ORDI);
+        setEspece(Espece.Robot);
     }
 
     //=================================================================================================================
@@ -63,7 +64,7 @@ public class Robot extends Tamagotchi{
     }
     public void setBatterie(int n){
         batterie = n;
-        notifierObservateurs();	//TODO : Observateur
+        //notifierObservateurs();	//TODO : Observateur
     }
 
     //=================================================================================================================
