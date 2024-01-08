@@ -47,15 +47,15 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
     private JLabel name ;
     private JLabel espece; 
     
-    /*
-    private JLabel vie ;
-    private JLabel energie ;
-    private JLabel moral ;
-    private JLabel hygiene ;
-    private JLabel toilette;
-    private JLabel nourriture_batterie;
-    private JPanel attributs ;	
-    */			//panel des attributs
+    
+    private JLabel labelVie ;
+    private JLabel labelEnergie ;
+    private JLabel labelMoral ;
+    private JLabel labelHygiene ;
+    private JLabel labelToilette;
+    private JLabel labelNourriture_Batterie;
+   // private JPanel attributs ;	
+    			//panel des attributs
     
     //Boutons des pieces
     private GradientButton salon;
@@ -228,9 +228,18 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
      * Initialisation et affichage sur le panel (this) des attributs du Tamagotchi courant
      */
     public synchronized void affichageLabelsAttributs() {
- 
-        name = new JLabel(/*"Nom : " + controller.getNom()*/) ;
-        espece = new JLabel(/*"Espèce : " + controller.getEspece()*/) ;
+    	
+    	labelVie = new JLabel("Vie : ");
+        labelEnergie = new JLabel("Énergie : ");
+    	labelMoral = new JLabel("Moral : ");
+    	labelHygiene = new JLabel("Hygiène : ");
+    	labelToilette = new JLabel("Toilette : ");
+    	labelNourriture_Batterie = new JLabel(view.getController().getEspece().equals("Robot") ? "Batterie : " : "Nourriture : ");
+
+    	
+    	//=============================================================
+        name = new JLabel("Nom : " + view.getController().getNom()) ;
+        espece = new JLabel("Espèce : " + view.getController().getEspece()) ;
     	vie = new JProgressBar(0,100/*"Vie : " + controller.getVie()*/) ;
     	vie.setValue(view.getController().getVie());
     	vie.setStringPainted(true);
@@ -261,36 +270,72 @@ public class InterfaceJeuView extends JPanel /*implements Observateur*/  {
         	nourriture_batterie.setStringPainted(true);
         }
     		
-      //Changement de la couleur et de la taille du texte des Label
+      //Changement de la couleur et de la taille du texte des JProgressBar
 
         Font labelFont = new Font("Arial", Font.BOLD, 20);
 
-        name.setForeground(Color.WHITE);
+        name.setForeground(new Color(210, 119, 221));
         name.setFont(labelFont);
-        espece.setForeground(Color.WHITE);
+        espece.setForeground(new Color(210, 119, 221));
         espece.setFont(labelFont);
-        vie.setForeground(Color.WHITE);
+        vie.setForeground(new Color(108, 12, 119));
         vie.setFont(labelFont);
-        energie.setForeground(Color.WHITE);
+        energie.setForeground(new Color(108, 12, 119));
         energie.setFont(labelFont);
-        moral.setForeground(Color.WHITE);
+        moral.setForeground(new Color(108, 12, 119));
         moral.setFont(labelFont);
-        hygiene.setForeground(Color.WHITE);
+        hygiene.setForeground(new Color(108, 12, 119));
         hygiene.setFont(labelFont);
-        toilette.setForeground(Color.WHITE);
+        toilette.setForeground(new Color(108, 12, 119));
         toilette.setFont(labelFont);
-        nourriture_batterie.setForeground(Color.WHITE);
+        nourriture_batterie.setForeground(new Color(108, 12, 119));
         nourriture_batterie.setFont(labelFont);
+        
+      //Changement de la couleur et de la taille du texte des JLabel
 
+        labelVie.setForeground(Color.white);
+        labelVie.setFont(labelFont);
+     // Configuration de labelVie (déjà fait)
+        labelVie.setForeground(Color.white);
+        labelVie.setFont(labelFont);
+
+        // Configuration de labelEnergie
+        labelEnergie.setForeground(Color.white);
+        labelEnergie.setFont(labelFont);
+
+        // Configuration de labelMoral
+        labelMoral.setForeground(Color.white);
+        labelMoral.setFont(labelFont);
+
+        // ... Continuez avec les autres labels de la même manière
+        labelHygiene.setForeground(Color.white);
+        labelHygiene.setFont(labelFont);
+
+        labelToilette.setForeground(Color.white);
+        labelToilette.setFont(labelFont);
+
+        labelNourriture_Batterie.setForeground(Color.white);
+        labelNourriture_Batterie.setFont(labelFont);
+
+        // ... et ainsi de suite pour les autres labels que vous avez
+
+        
         attributs = new JPanel();
         attributs.setLayout(new BoxLayout(attributs, BoxLayout.Y_AXIS));
+        
         attributs.add(name);
         attributs.add(espece);
+        attributs.add(labelVie);
         attributs.add(vie);
+        attributs.add(labelEnergie);
         attributs.add(energie);
+        attributs.add(labelMoral);
         attributs.add(moral);
+        attributs.add(labelHygiene);
         attributs.add(hygiene);
+        attributs.add(labelToilette);
         attributs.add(toilette);
+        attributs.add(labelNourriture_Batterie);
         attributs.add(nourriture_batterie);
         attributs.setBackground(new Color(255, 255, 255, 0));
         
