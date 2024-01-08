@@ -7,7 +7,6 @@ import modele.Lion;
 import modele.Oiseau;
 import modele.Robot;
 import modele.Tamagotchi;
-import view.View;
 
 public class TestSauvegarde {
 

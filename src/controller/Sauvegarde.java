@@ -18,7 +18,6 @@ import modele.Lion;
 import modele.Oiseau;
 import modele.Robot;
 import modele.Tamagotchi;
-import view.View;
 
 @SuppressWarnings("serial")
 public class Sauvegarde implements Serializable {

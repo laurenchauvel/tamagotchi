@@ -1,7 +1,6 @@
 package controller;
 //betise
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,7 +13,6 @@ import modele.Oiseau;
 import modele.Robot;
 import modele.Tamagotchi;
 import view.InterfaceJeuView;
-import view.Observateur;
 import view.View;;
 
 public class Controller {
@@ -24,8 +22,6 @@ public class Controller {
 	private Sauvegarde sauvegarde ; //Le modele
 	
 	private Tamagotchi tamagotchi ; 	//Le Tamagotchi courant
-	
-	private boolean enCours;
 	
 	//=================================================================================================================
 	

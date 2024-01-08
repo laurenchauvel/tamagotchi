@@ -1,8 +1,10 @@
 package view;
 import java.awt.CardLayout;
-import javax.swing.*;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import controller.Controller;
-import controller.Sauvegarde;
 
 @SuppressWarnings("serial")
 public class View extends JFrame{

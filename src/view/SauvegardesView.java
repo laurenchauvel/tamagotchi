@@ -1,16 +1,21 @@
 package view;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import controller.Controller;
-import java.util.List;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.io.IOException;
+import java.util.List;
+
 import javax.imageio.ImageIO;
-import controller.Sauvegarde;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import modele.Tamagotchi;
 
 

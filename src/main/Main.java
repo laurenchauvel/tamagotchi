@@ -1,8 +1,8 @@
 package main;
 
-import view.View;
 import controller.Controller;
 import controller.Sauvegarde;
+import view.View;
 
 public class Main {
 
