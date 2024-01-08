@@ -95,7 +95,7 @@ public class CreateTamagotchiView extends JPanel {
 				
 				if(getName().equals("")) {
 					JOptionPane.showMessageDialog(CreateTamagotchiView.this, "Veuillez donner un nom au Tamagotchi.");
-				}else if(Pattern.compile("^[a-zA-Z]+$").matcher(getName()).matches()) {	
+				}else if(!Pattern.compile("^[a-zA-Z]+$").matcher(getName()).matches()) {	
 					JOptionPane.showMessageDialog(CreateTamagotchiView.this, "Le nom du Tamagotchi ne doit contenir que des lettres.");
 				
 				}else if(frame.getSauvegarde().compareNames(getName())) {
