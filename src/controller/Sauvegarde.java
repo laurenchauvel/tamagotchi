@@ -36,7 +36,7 @@ public class Sauvegarde implements Serializable {
 	 * constructeur
 	 */
 
-    public Sauvegarde(View view) {
+    public Sauvegarde() {
     	try {
 	    	if (!Files.exists(Paths.get(dir)) && !Files.isDirectory(Paths.get(dir))) {
 	        	Files.createDirectory(Paths.get(dir)); //creation du rep si il n'existe pas

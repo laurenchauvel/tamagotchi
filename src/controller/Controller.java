@@ -32,8 +32,6 @@ public class Controller {
 	public Controller(View v, Sauvegarde s) {
 		view = v;
 		view.setController(this);
-		view.setSauvegarde(s);
-		view.getSauvegardesView().setSauvegarde(s);
 		view.setVisible(true);
 		
 		//add Linda
@@ -119,7 +117,10 @@ public class Controller {
 		tamagotchi.setState(b);
 	}
 
-	
+	//
+	public Sauvegarde getSauvegarde() {
+		return sauvegarde;
+	}
 	
 	//todo Linda
 	public ArrayList<Tamagotchi> getTamagoSauvegardes() {
