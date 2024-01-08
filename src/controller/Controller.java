@@ -281,7 +281,7 @@ public class Controller {
 	 * manger pour un Animal
 	 * seRecharger pour un Robot
 	 */
-	public void manger_recharger() {
+	public synchronized void manger_recharger() {
 		if (getEspece().equals("Robot")) {
 			((Robot)tamagotchi).seRecharger();
 		}else {
@@ -294,7 +294,7 @@ public class Controller {
 	 * dormir pour un Animal
 	 * enVeille pour un Robot
 	 */
-	public void dormir_veille() {
+	public synchronized void dormir_veille() {
 		if (getEspece().equals("Robot")) {
 			((Robot)tamagotchi).enVeille();
 		}else {	
@@ -305,49 +305,49 @@ public class Controller {
 	/*
 	 * Execute la methode jouer
 	 */
-	public void jouer() {
+	public synchronized void jouer() {
 		tamagotchi.jouer();
 	}
 	
 	/*
 	 * Execute la methode regarderTV
 	 */
-	public void regarderTV() {
+	public synchronized void regarderTV() {
 		tamagotchi.regarderTV();
 	}
 	
 	/*
 	 * Execute la methode faireSport
 	 */
-	public void sport() {
+	public synchronized void sport() {
 		tamagotchi.faireSport();
 	}
 	
 	/*
 	 * Execute la methode jardinage
 	 */
-	public void jardiner() {
+	public synchronized void jardiner() {
 		tamagotchi.jardinage();
 	}
 	
 	/*
 	 * Execute la methode seLaver
 	 */
-	public void seLaver() {
+	public synchronized void seLaver() {
 		tamagotchi.seLaver();
 	}
 	
 	/*
 	 * Execute la methode brosserDent
 	 */
-	public void brosserDents() {
+	public synchronized void brosserDents() {
 		tamagotchi.brosserDent();
 	}
 	
 	/*
 	 * Execute la methode seSoulager
 	 */
-	public void toilettes() {
+	public synchronized void toilettes() {
 		tamagotchi.seSoulager();
 	}
 	
